@@ -1,0 +1,148 @@
+tabs:
+    fields:
+    
+        ####################################################
+        # Tab: Settings
+        ####################################################
+        section_settings:
+            tab: Header
+            label: Put Favicon And Site Names
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'
+        
+        settings_favicon:
+            tab: Header
+            label: Favicon Image
+            type: mediafinder
+            mode: image
+            span: left
+           
+        site_name:
+            tab: Header
+            label: Website Name
+            type: text
+            default: "" 
+            span: right 
+
+        site_phone:
+            tab: Header
+            label: Phone
+            type: text
+            default: "" 
+            span: right     
+        top_texts:
+            type: repeater
+            form:
+                fields:
+                    top_text:
+                        label: Text
+                        type: text
+                        default: "" 
+                        span: left 
+                    url:
+                        type: text
+                        label: Url
+                        span: right
+            tab: Header    
+                
+        ####################################################
+        # Tab: Footer 
+        #################################################### 
+        section_footer:
+            tab: Footer
+            label: Footer 
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'             
+        
+        footer_phone:
+            tab: Footer
+            label: Phone
+            type: text
+            default: "" 
+            span: left         
+
+        footer_description_site:
+            tab: Footer
+            label: Description
+            type: richeditor
+            default: "" 
+            span: right                 
+
+        footer_description_billing:
+            tab: Footer
+            label: Billing description
+            type: richeditor
+            default: "" 
+            span: left                     
+        
+        ####################################################
+        # Tab: Main Page Products Settings
+        #################################################### 
+        section:
+            tab: Main Page Settings
+            label: Popular categories
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'         
+        settings_name:
+            tab: Main Page Settings 
+            label: Title one
+            span: auto
+            type: text               
+        settings_name_sale:
+            tab: Main Page Settings 
+            label: Title two
+            span: auto
+            type: text               
+        settings_name_category:
+            tab: Main Page Settings 
+            label: Title three
+            span: auto
+            type: text                   
+
+        section_a:
+            tab: Main Page Settings
+            label: Carousel one
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'                 
+        settings_name_a:
+            tab: Main Page Settings 
+            label: Title
+            span: left
+            type: text               
+        settings_sort_product_a: 
+            tab: Main Page Settings
+            label: Sort Products 
+            type: dropdown
+            span: right
+            default: 'new'
+            options:
+                new: New
+                price|desc: Dear
+                price|asc: Cheap   
+                popularity|desc: Popular
+                rating|desc: High rating
+                rating|asc: Low Rating                
+
+        section_b:
+            tab: Main Page Settings
+            label: Carousel two
+            type: section
+            cssClass: 'p-a m-y control-scrollpanel'                 
+        settings_name_b:
+            tab: Main Page Settings 
+            label: Title
+            span: left
+            type: text               
+        settings_sort_product_b: 
+            tab: Main Page Settings
+            label: Sort Products 
+            type: dropdown
+            span: right
+            default: 'new'
+            options:
+                new: New
+                price|desc: Dear
+                price|asc: Cheap   
+                popularity|desc: Popular
+                rating|desc: High rating
+                rating|asc: Low Rating                

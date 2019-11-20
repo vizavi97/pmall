@@ -1,0 +1,38 @@
+[viewBag]
+==
+{% set obProductList = ProductList.make().sort(this.theme.settings_sort_product_b).active().take(15) %}
+
+<section>
+	<div class="container">
+		<div class="recommend-title d-block d-md-flex justify-content-between pt-3 pb-3">
+			<h3 class="">{{this.theme.settings_name_b}}</h3>
+			<a href="{{ 'categorie' | page }}"><button type="button" class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Смотреть все'|_}}</b></button></a>
+		</div>
+		<div class="carousel" data-flickity='{  "contain": true }'>
+			
+			{% for obProduct in obProductList %}
+				{% partial 'main-page/item-recomended-product' obProduct = obProduct %}
+			{% endfor %}
+			
+		</div>
+	</div>
+</section>
+
+{% put styles %}
+	<style>
+		.carousel-cell-recommend .check {
+			background-color: #ca3836;
+			position: absolute;
+			z-index: 666;
+			top: 1rem;
+			left: -.5rem;
+			
+		}
+		.product-name {
+			white-space: nowrap; /* Запрещаем перенос строк */
+		    overflow: hidden; /* Обрезаем все, что не помещается в область */
+		    text-overflow: ellipsis; /* Добавляем многоточие */
+		}
+	</style>
+
+{% endput %}

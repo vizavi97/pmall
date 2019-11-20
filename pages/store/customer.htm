@@ -1,0 +1,57 @@
+title = "Customer"
+url = "/customer/:slug?"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[StorePage]
+page = "{{ :slug }}"
+
+[CreateProduct]
+
+[resetPassword]
+paramCode = "code"
+
+[session]
+security = "user"
+redirect = "cabinet/favorite"
+
+[account]
+paramCode = "code"
+forceSecure = 0
+==
+<?php
+function onStart() {
+	$this['storeSlug'] = $this->param('slug');
+}
+?>
+==
+{% set obStore = StorePage.get() %}
+
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">	
+				<div class="col-md-3">
+					
+					{% partial 'cabinet/side-nav'  page='customer'%}
+					
+				</div>
+				<div class="col-md-9">
+					{% if user.store and user.is_store == true %}
+						<form class="row mt-3" data-request="onStoreUpdate" data-request-files data-request-success="$('#alertSuccess').removeClass('d-none').html('Изменения сохранены');$(document).ready(function() {setTimeout(function() {$('#alertSuccess').addClass('d-none');}, 3000);});">
+							{% partial 'store/store-info' obStore = obStore %}
+						</form>	
+					{% else %}
+						<form class="row mt-3" data-request="onUpdate" data-request-files>
+							{% partial 'cabinet/user-info' %}
+						</form>	
+					{%endif%}
+				</div>		
+			</div>	
+		</div>
+	</section>
+</div>

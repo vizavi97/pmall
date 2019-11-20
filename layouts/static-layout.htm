@@ -1,0 +1,129 @@
+description = "Static layout"
+
+[staticPage]
+useContent = 1
+default = 0
+
+[CategoryList]
+
+[Cart]
+
+[formSubscribe]
+urlToUnsubscribe = "unsubscribe"
+urlToProfile = "subscriber-profile"
+geo = "enabled"
+thanksMessage = "Thanks for subscribe!"
+errorMessage = "Email already exists!"
+==
+<?php
+function onStart() {
+	$this['parentCategory'] = $this->param('parent');
+}
+?>
+==
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title> {{this.theme.site_name}} </title>
+	
+	<link rel="stylesheet" href="{{[
+		'assets/css/bootstrap.css',
+		'assets/css/all.css',
+		'assets/css/slide-menu.css',
+		'assets/css/flickity.css',
+		'assets/css/rangeslider.css',
+		'assets/css/style.css',
+	]|theme}}">
+	<link src="{{ 'assets/css/slide-menu.css' | theme }}"></link>  
+	{% styles %}
+	<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
+	<link rel="shortcut icon" href="{{ this.theme.settings_favicon|media }}" type="image/x-icon">        
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="{{ 'assets/js/js_todo/jquery.repeatable.js' | theme }}"></script>  
+</head>
+<body class="menu-opened">
+	
+	
+	<div class="wrapper">
+	{% partial 'site/header' %}
+	
+		<div class="container py-5">
+			{% component 'staticPage' %}
+		</div>
+	</div>
+
+	
+	
+	<!-- our boutiques -->
+	<section class="our-boutique-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-12 text-center our-boutiques py-5">
+					<img class="img-none" src="{{ 'assets/img/briefcase.png' | theme }}" alt="">
+					<h3 class="text-danger w-50 mx-auto">{{ 'Кто мы такие' |_ }}</h3>
+					<p class="w-75 mx-auto p-3">{{ 'Работаем на рынке Узбекистана с 2019 года'|_ }}</p>
+					<div class="sot-seti">
+						<a href="#"><img src="{{ 'assets/img/Shape9.png' | theme }}" alt=""></a>
+						<a href="#"><img src="{{ 'assets/img/Shape10.png' | theme }}" alt=""></a>
+						<a href="#"><img src="{{ 'assets/img/Shape11.png' | theme }}" alt=""></a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 primus-mall">
+					<h4>{{ 'Primus Mall'|_ }}</h4>
+					
+					{% content 'main-footer' %}
+					
+					<a href="http://pmall.uz/about-us"><button type="button" class="btn btn-outline-danger podrobno mt-2 bg-white text-danger"><b>{{ 'Подробнее' |_ }}</b></button></a>
+				</div>
+				<div class="col-md-3 col-sm-12 our-boutiques-podpis">
+					<form name="form-subscribe-andradedev" id="form-subscribe-andradedev" data-request="{{ formSubscribe }}::onAddSubscriber" class="subscribe_form" data-request-update="'{{formSubscribe}}::alert': '#result'">
+						<h5 class="payk pt-4 pb-5">{{'Подписаться'|_}}</h5>
+						<div class="input-group input-header mb-3">
+						  <input type="text" class="form-control from-header ml-4" name="email" placeholder="{{ 'Введите ваш e-mail'|_ }}" aria-label="Username" aria-describedby="basic-addon1">
+						</div>
+						<div id="result"></div>
+						<button form="form-subscribe-andradedev" type="submit" class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Отправить'|_}}</b></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	{% partial 'site/footer' %}
+
+
+	
+	<!-- script -->
+	<script src="{{[
+		'assets/js/jquery-3.4.1.min.js',
+		'assets/js/bootstrap.min.js',
+		'assets/js/flickity.pkgd.min.js',
+		'assets/js/main.js',
+		'assets/js/slide-menu.js',
+		'assets/js/rangeslider.min.js',
+		'assets/js/app.js',
+		'assets/js/js.js',
+	]|theme}}">
+	</script>
+	<script src="{{ 'assets/js/slide-menu.js' | theme }}"></script>  
+	{% framework extras %}
+    {% scripts %}
+    
+    <!-- Yandex.Metrika counter -->
+<script type="text/javascript" >
+   (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+   m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+   (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+   ym(55775977, "init", {
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true
+   });
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/55775977" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</body>
+</html>

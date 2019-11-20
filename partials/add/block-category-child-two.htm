@@ -1,0 +1,16 @@
+[viewBag]
+==
+{% if obChild.children.count() %}
+	<select class="form-control" name="categoryChildThree_id"
+		data-request="onProperty" 
+		data-request-update="'add/block-property': '#block-property'"
+		data-request-success="$(this).parents('.categorySelect').next().show()">
+	    <option value selected><b>{{'Категория'|_}}</b></option>
+	    
+	    {% for child in obChild.children %}
+	    	<option value="{{child.id}}"><b>{{child.name}}</b></option>
+	    	
+	    {% endfor %}
+	    
+	</select>
+{% endif %}

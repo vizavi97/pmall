@@ -1,0 +1,32 @@
+[viewBag]
+==
+{% set banners = BannerBanners.load('1264x158', false) %}
+{% set obCategoryList = CategoryList.make().tree() %}
+{% if obCategoryList.isNotEmpty() %}
+<section class="seasons">
+	<div class="seasons-wrapper container">
+		<div class="seasons-container ">
+			{% for key, banner in banners if key < 1 %}
+			<div class="seasons-elements"
+			     style='background-image: url("{{ banner.image.path }}"); background-position: center center'>
+				<div class="seasons-year">
+					{{banner.subtitle|raw}}
+				</div>
+				<div class="seasons-headline">
+					{{banner.bottom_caption}}
+				</div>
+				<ul class="seasons-items">
+					{% for obCategory in obCategoryList %}
+					<li class="seasons-item">
+						<a href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}"><button type="button" class="btn btn-outline-{{obCategory.slug == 'zhenshchinam'?'danger'}}{{obCategory.slug == 'muzhchinam'?'dark'}}{{obCategory.slug == 'detyam'?'warning'}}  main-btn">{{  obCategory.name }}</button>
+						</a>
+					</li>
+					{% endfor %}
+
+				</ul>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
+{% endif %}

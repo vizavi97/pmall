@@ -1,0 +1,28 @@
+[viewBag]
+==
+{% if category %}
+	{% set obCategory = category %}
+{%endif%}	
+{% if obCategoryChild %}
+	{% set obCategory = obCategoryChild %}
+{%endif%}	
+{% if obChild %}
+	{% set obCategory = obChild %}
+{%endif%}	
+{#{% if child %}
+	{% set obCategory = child %}
+{%endif%}	#}
+
+
+<div class="row">
+	{% for obProperty in obCategory.product_property if obProperty.code != 'size' %}
+		<div class="col-md-3 mb-3">
+			<select class="form-control" name="property[{{obProperty.id}}]">
+				<option value selected><b>{{obProperty.name}}</b></option>
+				{% for obValue in obProperty.property_value %}     	
+					<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
+				{%endfor%}	
+			</select>
+		</div>	
+	{%endfor%}			
+</div>

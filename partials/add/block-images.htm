@@ -1,0 +1,48 @@
+[viewBag]
+==
+<script  type="text/template" id="product-images">
+<div class="col-md-4 ">
+	{% if obStore.logo.path  %}
+	<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
+		<input type="file" name="images[]" onchange="readURL(this);">
+	</label>
+	{% else %}
+	<label class="file-photo" style="background-position: center center;background-size: contain;background-repeat: no-repeat;">
+		<input type="file" name="images[]" onchange="readURL(this);">
+	</label>
+	{% endif %}
+	<div class="form-group my-3" style="text-align:center;">
+		<input type="button" value="{{'Удалить'|_}}" class="delete-images btn">
+	</div>
+</div>
+</script>
+
+
+
+
+<script>
+	$(function() {
+		$(".repeatable-image").repeatable({
+			addTrigger: ".product-images .add-images",
+			deleteTrigger: ".product-images .delete-images",
+			template: "#product-images",
+			startWith: 1,
+			max: 0
+		});
+	});
+	$(document).on('click','.delete-images',function(){
+	  $(this).parent().parent().remove();
+	});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>

@@ -1,0 +1,14 @@
+[viewBag]
+==
+<?php
+function onStart() { 
+	$this['obValueId'] = post('cart[0][valueId]');
+}
+?>
+==
+{% set obCartElementList = Cart.get() %}
+
+<a class="nav-link  pb-2 pr-3" href="{{ 'my-cart/cart' | page }}" >
+	<img src="{{ 'assets/img/basket.svg' | theme }}" alt="" height="27">
+	<span class="badge badge-danger badge-pill number">{{obCartElementList.count}}</span>
+</a>

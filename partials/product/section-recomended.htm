@@ -1,0 +1,41 @@
+[viewBag]
+==
+<div class="row d-block d-sm-flex">
+	<div class="col-md-3 p-2">
+		<div class="bg-white p-3" style="height: 100%">
+			<img class="py-5" src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/logocopy.png" alt="">
+			<h5 class="text-danger text-uppercase font-weight-bold py-3">{{'Вам могут понравиться'|_}}</h5>
+			<p class="basket-color-text">{{'лучшее :perenos_stroki из нашего магазина'|_({perenos_stroki: '<br>'})}}</p>
+		</div>	
+	</div>
+	{% if obProductList %}
+	{% for obProduct in obProductList %}
+	{% set productPrice = obProduct.offer.active.sort('new') %}
+	{% set price = (productPrice.count) ? productPrice.first : null %}
+	{% set obReviewList = obProduct.review %}
+		<div class="col-md-3 p-2">
+			<div class="card-main bg-white px-3">
+				<a href="{{obProduct.getPageUrl()}}"><p class="py-3 text-dark text-overflow">{{obProduct.name}}</p></a>
+				<div class="">
+				    <a href="{{obProduct.getPageUrl()}}"><img class="card-img-top  mx-auto pb-2" src="{{ obProduct.preview_image.getThumb(240, 233, {mode: 'crop'})}}" alt=""></a>
+				</div>
+			    <div class="price pb-3">
+		   	 		<h6 class="text-danger font-weight-bold">{{price.price_value}} {{'сум'|_}}</h6>
+		   	 		<p>
+		   	 			<div class="stars">
+					        {% for i in 1..5 %}
+					            {% if obProduct.rating >= i  %}
+					            	<i class="fal fa-star text-danger" style="font-size:0.8rem;font-weight: 500;"></i>
+					            {% else %}
+					            	<i class="fal fa-star" style="color:#dd0d2;font-size:0.7rem;"></i>
+					            {% endif %}
+					        {% endfor %}
+					        <span class="small ml-2" style="font-size: 70%;"><b>{{obReviewList.count}}</b> {{'отзывов'|_}}</span>
+					    </div>
+		   	 		</p>
+		   	 	</div>
+			</div>
+		</div>
+		{% endfor %}	
+	{% endif %}	
+</div>

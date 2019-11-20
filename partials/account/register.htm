@@ -1,0 +1,96 @@
+description = "Register"
+
+[viewBag]
+==
+<form role="form" data-request="onRegister" data-request-flash>
+
+	<div class="form-group">
+		<div class="input-group input-group-alternative mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-user"></i></span>
+			</div>
+			<input class="form-control" name="name" placeholder="{{'Имя'|_}} *" type="text">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="input-group input-group-alternative mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-user"></i></span>
+			</div>
+			<input class="form-control" name="surname" placeholder="{{'Фамилия'|_}} *" type="text">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="input-group input-group-alternative mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="fal fa-mobile-alt"></i></span>
+			</div>
+			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="text">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="input-group input-group-alternative mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-user"></i></span>
+			</div>
+			<input class="form-control" placeholder="{{'E-mail'|_}} *" name="email" type="email">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="input-group input-group-alternative mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-location"></i></span>
+			</div>
+			<input class="form-control" placeholder="{{'Address'|_}}" name="user_address" type="text">
+		</div>
+	</div>
+	
+	<div class="form-group">
+		<div class="input-group input-group-alternative">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-user"></i></span>
+			</div>
+			<input class="form-control" placeholder="{{'Password'|_}} *" type="password" name="password">
+		</div>
+	</div>
+	
+	<div class="my-4">
+		<div class="col-30">
+			<div class="custom-control custom-control-alternative custom-checkbox">
+				<input class="custom-control-input" id="customCheckRegister" type="checkbox" required>
+				<label class="custom-control-label" for="customCheckRegister">
+					<span class="text-dark">{{'I accept the terms'|_}} <a class="text-danger" target="_blank" href="{{'/publichnaya-oferta'}}"> {{'Публичная оферта'|_}} </a></span>
+				</label>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn bg-color hover border px-5"> {{"Pегистрация"|_}} </button>
+	</div>
+</form>
+
+<style>
+.hover {
+    background-color: #fff;
+    border-radius: 40px;
+    padding: 5px 5px 5px 5px;
+    color: #ae3b39;
+    border: none;
+    color: #000;
+    margin: 0 auto;
+	}
+.input-group-text {
+	background: none;
+	}
+.form-control {
+    border: 1px solid #ced4da;
+	}
+.hover:hover {
+    background-color: #dc0c08;
+    color: #fff;
+	}
+</style>

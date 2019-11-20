@@ -1,0 +1,145 @@
+[viewBag]
+==
+{% if user and user.is_store != 1 %}
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{'cabinet/orders'|page}}">
+				<div class="sidenav-item">
+				{% if page == "orders" %}
+				<img src="{{ 'assets/img/product-red.svg' | theme }}" width="35" alt="">
+				{% endif %}
+
+				{% if page != "orders" %}
+				<img src="{{ 'assets/img/product.svg' | theme }}" width="35" alt="">
+				{% endif %}
+				<span class="{{ page == "orders" ? "text-danger" }}">{{'Мои заказы'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+{%endif%}	
+<div class="main-right-block px-3">
+	<div class="custom-block border border-top-0 border-left-0 border-right-0">
+		<a class='sidenav-link' href="{{'cabinet/favorite'|page}}">
+			<div class="sidenav-item">
+			{% if page == "favorite" %}
+			<img src="{{ 'assets/img/Favorite-red.svg' | theme }}" width="35" alt="">
+			{% endif %}
+
+			{% if page != "favorite" %}
+			<img src="{{ 'assets/img/Favorite.svg' | theme }}" alt="">
+			{% endif %}
+			<span class="{{ page == "favorite" ? "text-danger" }}">{{'Избранное'|_}}</span>
+			</div>
+		</a>
+	</div>
+</div>
+{% if user.store and user.is_store == 1 %}
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{user.store.slug ? 'store/product-store'|page({slug: user.store.slug}) : '#'}}">
+				<div class="sidenav-item">
+				{% if page == "store" %}
+				<img src="{{ 'assets/img/flyer-red.svg' | theme }}" width="35" alt="">
+				{% endif %}
+				{% if page != "store" %}
+				<img src="{{ 'assets/img/flyer.svg' | theme }}" width="35" alt="">
+				{% endif %}
+				<span class="{{ page == "store" ? "text-danger" }}">{{'Мои товары'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{'cabinet/store-orders'|page({slug: user.store.slug})}}">
+				<div class="sidenav-item">
+				{% if page == "storeOrders" %}
+				<img src="{{ 'assets/img/product-red.svg' | theme }}" width="35" alt="">
+				{% endif %}
+				{% if page != "storeOrders" %}
+				<img src="{{ 'assets/img/product.svg' | theme }}" width="35" alt="">
+				{% endif %}
+				<span class=" {{ page == "storeOrders" ? "text-danger" }}"> {{'Заказы'|_}}</span>
+				</div></a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{user.store.slug ? 'store/index'|page({slug: user.store.slug}) : '#'}}">
+				<div class="sidenav-item"><img src="{{ 'assets/img/shop.svg' | theme }}" width="35" alt="">
+					<span class="">{{'Мой магазин'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{'add-product/create-product'|page}}">
+				<div class="sidenav-item">
+				{% if page == "add-product" %}
+				<img src="{{ 'assets/img/basket-red.svg' | theme }}" alt="">
+				{% endif %}
+				{% if page != "add-product" %}
+				<img src="{{ 'assets/img/basket.svg' | theme }}" alt="">
+				{% endif %}
+				<span class=" {{ page == "add-product" ? "text-danger" }}">{{'Добавить товар'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+{%endif%}
+{% if user %}
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+				<a class='sidenav-link' href="{{'store/customer'|page({slug: user.store.slug})}}">
+					<div class="sidenav-item">
+						{% if page == "customer" %}
+						<img src="{{ 'assets/img/enter-red.svg' | theme }}" alt="">
+						{% endif %}
+						{% if page != "customer" %}
+						<img src="{{ 'assets/img/enter.svg' | theme }}" alt="">
+						{% endif %}
+						<span class=" {{ page == "customer" ? "text-danger" }}">{{'Мои данные'|_}}</span>
+					</div>
+				</a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+				<a class='sidenav-link' href="#">
+					<div class="sidenav-item">
+					<img src="{{ 'assets/img/card.svg' | theme }}" alt="">
+					<span class="{{ page == "" ? "text-danger" }}">{{'Карта лояльности'|_}}</span>
+					</div>
+				</a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="#">
+				<div class="sidenav-item">
+				<img src="{{ 'assets/img/Bills.svg' | theme }}" alt="">
+				<span class="{{ page == "" ? "text-danger" }}">{{'Мои счета'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="#" tabindex="-1" data-request="onLogout" data-request-data="redirect: '/'">
+				<div class="sidenav-item">
+					<img src="{{ 'assets/img/Exit.svg' | theme }}" alt="">
+					<span class="{{ page == "" ? "text-danger" }}">{{'Выход'|_}}</span>
+				</div>
+			</a>
+		</div>
+	</div>
+{%endif%}
+{% if not user.store %}	
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0 pt-4">
+			<a class='sidenav-link' href="https://docs.google.com/forms/d/e/1FAIpQLSdM-ZSskqZbkNk49Fxdk7OcfiVepyx7N7Ea2gQx2okBITD3iA/viewform"><p class="btn btn-outline-success"><span>{{'Xотите открыть магазин' |_}}?</span></p></a>
+		</div>
+	</div>
+{%endif%}

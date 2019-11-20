@@ -1,0 +1,7 @@
+name: Primus-Mall
+description: ''
+author: ITmaker
+homepage: ''
+code: 'itmaker'
+form: config/fields.yaml
+require: '' 

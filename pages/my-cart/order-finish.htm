@@ -1,0 +1,24 @@
+title = "Order finish"
+url = "/order-finish/:slug"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[OrderPage]
+slug = "{{ :slug }}"
+slug_required = 1
+==
+{% set obOrder = OrderPage.get() %}
+
+<div class="container text-center py-5">
+	<div class="row">
+		<div class="col-md-12">
+			<h1>{{'Спасибо за покупку!'|_}}</h1>
+			<h4 class="my-4 px-5">{{'Мы уже начинаем обрабатывать ваш заказ, и скоро вы получите письмо с подтверждением заказа на электронную почту (mail)'|_}}</h4>
+			<p>{{'Номер вашего заказа'|_}}: <strong class="text-danger">{{obOrder.id}}</strong> </p>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,192 @@
+[viewBag]
+
+[shares]
+facebook = 1
+twitter = 1
+googleplus = 1
+tumblr = 0
+==
+<div class="row">
+	<div class="col-md-5">
+		<div class="main-card-slider d-block d-md-flex">
+			<div id="productCardSlider" class="carousel carousel-main card-carusel-main">
+				{% for image in obProduct.images %}
+					<div class="carousel-cell-card w-100">
+						<img class="mx-product" src="{{ image.path }}" alt="image">
+					</div>
+				{% endfor %}  
+				<div class="carousel-cell-card w-100">
+					<img src="{{ obProduct.preview_image.path }}" alt="image">
+				</div>
+			</div>
+			
+			<div class="carousel carousel-nav card-carusel" id="productCardSliderDocs" style="max-height: 500px !important; overflow: auto">
+				{% for image in obProduct.images %}
+				  <div class="carousel-cell-card m-1"><img class="w-100 mx-small-img" src="{{ image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
+				  </div>
+				{% endfor %}
+				<div class="carousel-cell-card m-1"><img class="w-100 mx-small-img" src="{{ obProduct.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
+				  </div>
+			</div>
+     	</div>
+	</div>
+	<div class="col-md-3">
+	    <div class="card-border">
+			<div class="card-info-block d-block d-md-flex">
+				
+                {% if obProduct.inWishList() %}
+                	<button
+                		class="btn btn-link px-0 text-decoration-none"
+                		data-request="ProductData::onRemoveFromWishList"
+                        data-request-data="product_id: {{obProduct.id}}"
+                        onclick="$('.fa-heart').addClass('text-muted');"  
+                        data-request-success="$('#alertSuccess').removeClass('d-none').html('Товар удален из избранное!');$(document).ready(function() {setTimeout(function() {$('#alertSuccess').addClass('d-none');}, 3000);});">
+                		
+                		<i class="fal fa-heart" aria-hidden="true" style="font-weight: 500;color: red;font-size:18px;"></i>
+                	</button>
+                {% else %}
+                	<button
+                		class="btn btn-link px-0 text-decoration-none"
+                		data-request="ProductData::onAddToWishList" 
+                        data-request-data="product_id: {{obProduct.id}}" 
+                        onclick="$('.fa-heart').addClass('text-danger');"
+                        data-request-success="$('#alertSuccess').removeClass('d-none').html('Товар добавлен в избранное!');$(document).ready(function() {setTimeout(function() {$('#alertSuccess').toggleClass('d-none');}, 3000);});">
+                		
+                		<i class="fal fa-heart" aria-hidden="true" style="font-weight: 500;color: darkgray;font-size:18px;"></i>
+                	</button>
+                {% endif %}
+				
+				<span class="basket-color-text  pl-4"><s>{{price.old_price_value}} {{'сум'|_}}</s></span>
+			</div>
+			
+			<div class="order_block card-info-block pt-2">
+				<span class="basket-color-text  pl-4 text-danger h5"><a href="#"><img class="" src="{{ 'assets/img/Shape2348.png' | theme }}" alt=""></a><b class="ml-2">{{price.price_value}} {{'сум'|_}}</b></span>
+				<div class="my-4">
+					<p class="basket-color-text m-0">{{'Ваша цена со всеми скидками'|_}}</p>
+					<p class="m-0 py-2"><span class="basket-color-text">{{'Артикул'|_}}:</span> {{obProduct.code}}</p>
+				</div>	
+				<div class="">
+					<a href="#table" class="parametri text-danger" data-toggle="collapse">{{'Выберите параметры'|_}} <i class="fas fa-chevron-down pl-2"></i></a>
+					<div id="table" class="collapse">
+						<div class="row" style="font-size: 0.8rem">
+						
+							{% set obListOffers = obProduct.offer.sort('price|asc') %}
+		                    {% set obOffer = obProduct.offer.sort('price|asc').first() %}
+		                    
+							<div class="col-md-6">
+								<div class="grams">
+									<div class="accordion" id="accordionExample">
+										<div class="card bg-transparent border-0 mt-1">
+											{% for obOfferItem in obListOffers %}			
+												<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body m-0"
+													data-data="{{{
+													'cart': [
+													{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}">{{obOfferItem.name}}</p>
+											{%endfor%}				
+										</div>
+									</div>
+								</div>	
+							</div>
+						</div>
+					</div> 
+				</div>
+				<div class="order_line">
+                    {% if user.is_store == 1 %}
+                    	<p class="mt-4">{{'Покупка товаров допустима только'|_}} <a href="{{"auth/register"|page}}">{{'физическим лицам'|_}}</a></p>
+                    {%else%}	
+                    	<a data-attach-loading class="btn btn-outline-danger bg-danger text-white card-btn mt-4"><img class="pr-2" src="{{ 'assets/img/Shape2copy.png' | theme }}" alt="">{{'Добавить в корзину'|_}}
+						</a>
+					{%endif%}	
+				</div>	
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		{% if ProductPage or ProductData %}
+		    {% set product = (post('product_id')) ? ProductData.get(post('product_id')) : ProductPage.get() %}  
+		    {% set productReviews = product.review %}    
+		    {% set ratingTotal = productReviews.count %}
+		    {% set productRatingPercent = product.rating > 0 ? (product.rating / 5) * 100 : 0 %}
+			
+			{#update: {'product/block-product': '#reviewsTab'}        #}
+			{{ form_ajax('MakeReview::onCreate', {
+                    data: {product_id: product.id}
+              }) }}
+              
+				 <div class="rating-stars mb-3 float-left">
+	                 <input type="hidden" name="rating" value="5">
+	                 
+	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 1 ? 'text-warning'}}"></i></a>
+	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 2 ? 'text-warning'}}"></i></a>
+	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 3 ? 'text-warning'}}"></i></a>
+	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 4 ? 'text-warning'}}"></i></a>
+	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 5 ? 'text-warning'}}"></i></a>
+	             </div>
+	             <div>
+	             	<input type="hidden" name="product_id" value="{{product.id}}">                     
+                     <button class="btn btn-danger bg-color hover p-0 ml-2" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+                     <span class="badge badge-pill badge-light card-badge">{{product.rating}}</span>
+                 </div>
+	        
+	        {{ form_close() }}     
+             
+	    {% endif %}
+	    <div style="clear: both;"></div>
+	   	<div class="card-info-block">
+			{#<p>2 человека купили этот товар</p>#}
+			<span class="text-dark h5 mb-3"><b>{{'О товаре'|_}}</b></span>
+		   	{% set obPropertyList = obProduct.property %}	
+		   	{% if obPropertyList.isNotEmpty() == true %}
+	            {% for obProperty in obPropertyList if obProperty.hasValue() %}
+	            	<p class="basket-color-text mt-3"><span class="">{{obProperty.name}}:&nbsp;&nbsp;</span> {{obProperty.property_value.getValueString()}}</p>
+	            {% endfor %}
+		    {% endif %}	
+	   		
+			<div class="card-butik border border-left-0 border-right-0 mt-3 py-2">
+				<p class="basket-color-text m-0 py-1">{{product.preview_text}}</p>
+				<p class="basket-color-text m-0 py-1">{{product.description|raw}}</p>
+			</div>
+			<div class="card-butik  d-flex mt-3 py-3">
+				<p>{{'Поделиться'|_}}</p>
+				<div class="card-cochl pl-4">
+			
+			      	{% if facebook %}
+			        <a class="btn btn-default btn-xs" target="_blank" title="On Facebook" href="https://www.facebook.com/sharer.php?u={{url}}">
+						<img src="{{ 'assets/img/Shape9.png' | theme }}" alt="">
+			        </a>
+			        {% endif %}
+			
+			        {% if googleplus %}
+			        <a class="btn btn-default btn-xs" target="_blank" title="On Google Plus" href="https://telegram.me/share/url?url={{url}}">
+			            <img src="{{ 'assets/img/Shape10.png' | theme }}" alt="">
+			        </a>
+			        {% endif %}
+			
+				</div>
+			</div>
+			<div>{{'Перейти в магазин'|_}} &nbsp;&nbsp;<a href="{{'store/index'|page({slug: productStore.slug})}}"> {{productStore.name}}</a></div>
+	    </div>
+	</div>
+
+</div>
+
+
+<style>
+.rating-stars a + a {padding-left:0.2rem;}
+.rating-stars a {color: #d0d0d2;}
+.rating-stars.selected a {color: #fed700;}
+.rating-stars.selected a.active ~ a {color: #d0d0d2;}
+.rating-stars:hover a {color:#fed700 !important;}
+.rating-stars a:hover ~ a {color:#d0d0d0 !important;}
+
+.grams p.active {color: #5b9724;font-weight: 700;font-size:16px;}
+.grams p {
+    padding: 0 5px;
+    line-height: 27px;
+    font-weight: 500;
+    font-size: 14px;
+    color: #737373;
+    cursor: pointer;}
+.card-border .order_line{cursor: pointer;}     
+
+</style>

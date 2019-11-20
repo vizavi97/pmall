@@ -1,0 +1,262 @@
+title = "Filter Products"
+url = "/list/:parent?/:slug?"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[Pagination]
+count_per_page = 28
+pagination_limit = 5
+active_class = "_act"
+first_button_name = "First"
+first_button_limit = 1
+first-more_button_name = "..."
+first-more_button_limit = 1
+prev_button_name = "Prev"
+prev_button_limit = 1
+prev-more_button_name = "..."
+prev-more_button_limit = 1
+next-more_button_name = "..."
+next-more_button_limit = 1
+next_button_name = "Next"
+next_button_limit = 1
+last-more_button_name = "..."
+last-more_button_limit = 1
+last_button_name = "Last"
+last_button_limit = 1
+
+[MakeOrder]
+mode = "ajax"
+flash_on = 1
+redirect_on = 1
+
+[CategoryPage ParentCategoryPage]
+slug = "{{ :parent }}"
+slug_required = 0
+smart_url_check = 0
+
+[CategoryPage]
+slug = "{{ :slug }}"
+slug_required = 0
+smart_url_check = 0
+
+[FilterPanel]
+
+[ProductList]
+sorting = "no"
+
+[BrandList]
+
+[CategoryList]
+==
+<?php
+function onInit()
+{
+    //Get category object
+    $obCategory = $this->CategoryPage->get();
+    if (empty($obCategory)) {
+        $obCategory = $this->ParentCategoryPage->get();
+    }
+    if (empty($obCategory)) {
+        $obCategoryList = $this->CategoryList->make()->tree();
+        foreach($obCategoryList as $category){
+        	if($category->slug == 'women'){
+        		$obCategory = $category;
+        	}	
+        }
+    }
+	
+    //Get active sorting and page number
+    $sActiveSorting = $this->ProductList->getSorting();
+    $iPage = $this->Pagination->getPageFromRequest();
+	
+    //Get brand list
+    $obBrandList = $this->BrandList->make()->sort()->active()->category($obCategory->id);
+
+    $bSaleFilter = (bool) input('sale');
+
+    //Get filter by brand from request
+    $arFilterBrandList = explode('|', input('brand'));
+    $arFilterBrandIDList = [];
+
+    //Get brand ID list for filter
+    if (!empty($arFilterBrandList)) {
+        foreach($obBrandList as $obBrand) {
+            if (in_array($obBrand->slug, $arFilterBrandList)) {
+                $arFilterBrandIDList[] = $obBrand->id;
+            }
+        }
+    }
+
+    //Get price filter
+    $arPriceFilterValue = explode('|', input('price'));
+    $fMinPriceFilterValue = array_get($arPriceFilterValue, 0);
+    $fMaxPriceFilterValue = array_get($arPriceFilterValue, 1);
+
+    //Get filter by properties
+    $arFilterValue = (array) input('property');
+
+    if (!empty($arFilterValue)) {
+        foreach($arFilterValue as $sKey => &$sValue) {
+            //$sValue = explode('|', $sValue);
+
+            // shox
+            $sValue = [$sValue];
+        }
+    }
+
+    $arFilterValueWithoutProperty = [];
+
+	//Get product list with filter by category
+    if (input('query')) {
+        $obCategoryProductList = $this->ProductList->make()->active()
+            ->search(input('query'))->sort($sActiveSorting)/*
+            ->category($obCategory->id)*/;
+    } elseif(input('brandid')) {
+    	$obCategoryProductList = $this->ProductList->make()->active()
+            ->brand(input('brandid'))->sort($sActiveSorting)/*
+            ->category($obCategory->id)*/;
+    } else {
+        $obCategoryProductList = $this->ProductList->make()->active()->sort($sActiveSorting)->category($obCategory->id);
+    }
+
+    /*//Get product list with filter by category
+    $obCategoryProductList = $this->ProductList->make()->active()->sort($sActiveSorting)->category($obCategory->id);*/
+
+    //Get property list for filter panel
+    $obProductPropertyList = $obCategory->product_filter_property;
+    $obOfferPropertyList = $obCategory->offer_filter_property;
+
+    foreach($obProductPropertyList->getIDList() as $iPropertyID) {
+        $arFilterValueTemp = $arFilterValue;
+        if (isset($arFilterValueTemp[$iPropertyID])) {
+            unset($arFilterValueTemp[$iPropertyID]);
+        }
+
+        $arFilterValueWithoutProperty[$iPropertyID] = $arFilterValueTemp;
+    }
+
+    foreach($obOfferPropertyList->getIDList() as $iPropertyID) {
+        $arFilterValueTemp = $arFilterValue;
+        if (isset($arFilterValueTemp[$iPropertyID])) {
+        unset($arFilterValueTemp[$iPropertyID]);
+        }
+
+        $arFilterValueWithoutProperty[$iPropertyID] = $arFilterValueTemp;
+    }
+
+    //Get product list with filter by brands and properties
+    $obFilteredProductList = $obCategoryProductList->copy()->filterByBrandList($arFilterBrandIDList)->filterByPrice($fMinPriceFilterValue, $fMaxPriceFilterValue);
+    if ($bSaleFilter) {
+        $obFilteredProductList->filterByDiscount();
+    }
+
+    $obProductList = $obFilteredProductList->copy()
+        ->filterByProperty($arFilterValue, $obProductPropertyList)
+        ->filterByProperty($arFilterValue, $obOfferPropertyList);
+
+    //Get product list for page
+    $arProductList = $obProductList->page($iPage, $this->Pagination->getCountPerPage());
+
+    //Get offers with min/max prices
+    $obOfferMinPrice = $obCategoryProductList->getOfferMinPrice();
+    $obOfferMaxPrice = $obCategoryProductList->getOfferMaxPrice();
+
+    //Get max page number
+    $iMaxPage = $this->Pagination->getMaxPage($obProductList->count());
+
+    //Init template variables
+    $this['obCategory'] = $obCategory;
+    $this['obBrandList'] = $obBrandList;
+
+    $this['obProductPropertyList'] = $obProductPropertyList;
+    $this['obOfferPropertyList'] = $obOfferPropertyList;
+    $this['arFilterValue'] = $arFilterValue;
+    $this['arFilterValueWithoutProperty'] = $arFilterValueWithoutProperty;
+
+    $this['arFilterBrandIDList'] = $arFilterBrandIDList;
+    $this['fMinPriceFilterValue'] = $fMinPriceFilterValue;
+    $this['fMaxPriceFilterValue'] = $fMaxPriceFilterValue;
+    $this['obOfferMinPrice'] = $obOfferMinPrice;
+    $this['obOfferMaxPrice'] = $obOfferMaxPrice;
+    $this['bSaleFilter'] = $bSaleFilter;
+
+    $this['sActiveSorting'] = $sActiveSorting;
+    $this['iMaxPage'] = $iMaxPage;
+    $this['iPage'] = $iPage;
+    $this['obCategoryProductList'] = $obCategoryProductList;
+    $this['obFilteredProductList'] = $obFilteredProductList;
+    $this['obProductList'] = $obProductList;
+    $this['arProductList'] = $arProductList;
+}
+?>
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+
+{% partial 'blocks/search-block' %}
+<div class="wrapper">
+	<section class="categoriy">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-2 bg-white category-bar">
+
+					{% partial 'list/category-bar' %}
+
+				</div>
+				<div class="col-md-10  position-relative">
+					<div class="ajax-filter-pc">
+						<div class="big-block d-block d-md-flex justify-content-between align-items-center">
+							<p><b>{{ 'Подобрать товар' | _ }}:</b></p>
+							<div class="filter-button-container">
+								<input type="checkbox" id="filter-button"/>
+								<label for="filter-button"  class="filter-button">
+									<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+									     width="165.000000pt" height="165.000000pt" viewBox="0 0 165.000000 165.000000"
+									     preserveAspectRatio="xMidYMid meet">
+
+										<g transform="translate(0.000000,165.000000) scale(0.100000,-0.100000)"
+										   fill="#000" stroke="none">
+											<path d="M773 1329 c-17 -5 -47 -27 -66 -49 l-34 -40 -231 0 -232 0 0 -54 0
+												-54 235 2 c129 1 235 -1 235 -5 0 -20 56 -70 96 -85 60 -23 115 -7 166 49 l38
+												40 230 1 230 1 0 53 0 52 -232 0 -233 0 -29 36 c-45 57 -101 74 -173 53z m96
+												-64 c74 -38 58 -150 -24 -171 -52 -13 -116 38 -115 93 1 28 25 64 51 79 31 17
+												54 17 88 -1z"/>
+											<path d="M1124 966 c-17 -8 -44 -30 -60 -50 l-29 -36 -412 0 -413 0 0 -55 0
+												-55 413 0 413 0 23 -31 c13 -17 43 -40 68 -51 66 -29 116 -18 170 38 39 40 47
+												44 93 44 l50 0 0 55 0 55 -52 0 c-49 0 -55 3 -82 36 -47 59 -117 78 -182 50z
+												m105 -61 c74 -38 58 -150 -24 -171 -52 -13 -116 38 -115 93 1 28 25 64 51 79
+												31 17 54 17 88 -1z"/>
+											<path d="M405 606 c-16 -7 -47 -32 -67 -55 -35 -39 -40 -41 -82 -37 l-46 3 0
+												-53 0 -54 52 0 c47 0 54 -3 85 -40 66 -77 159 -79 230 -4 l43 44 410 0 410 0
+												0 55 0 55 -411 -2 -411 -1 -31 38 c-49 60 -118 79 -182 51z m121 -80 c37 -37
+												42 -62 19 -105 -29 -56 -103 -64 -151 -16 -54 54 -6 153 75 155 13 0 37 -14
+												57 -34z"/>
+										</g>
+									</svg>
+									<p>фильтр</p>
+								</label>
+							</div>
+						</div>
+
+						{% partial 'list/ajax-filter'
+				            min_value=fMinPriceFilterValue
+				            max_value=fMaxPriceFilterValue
+				            currency=obOfferMinPrice.currency
+				            min=obOfferMinPrice.price
+				            max=obOfferMaxPrice.price%}
+				    </div>
+					<div id="products-ajaxList">
+						{% partial 'list/section-products-filter' %}
+					</div>
+
+					<div id="infinity-loader" class="text-center mt-5">
+						{% partial 'list/infinity-loader' %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

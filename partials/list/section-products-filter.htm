@@ -1,0 +1,136 @@
+[viewBag]
+==
+<div class="row">
+	{% if arProductList %}
+		{% for obProduct in arProductList %}
+		{% set productPrice = obProduct.offer.active.sort('new') %}
+		{% set price = (productPrice.count) ? productPrice.first : null %}
+		{% set productRatingPercent = product.rating > 0 ? (product.rating / 5) * 100 : 0 %}
+			
+			<div class="col-md-3 col-6">
+				<div class="main-categoriy-cell-recommend">
+					<div class="categoriy-cell-recommend">
+		  				<div class="card border-0 card-categoriy-mobil">
+			  				<a href="{{obProduct.getPageUrl()}}"><img class="card-img-top" src="{{obProduct.preview_image.getThumb(240, 233, {mode: 'crop'})}}" alt="Card image cap"></a>
+			  				
+			  				{% if obProduct.inWishList() %}
+								<a href="#"
+					        		data-request="ProductData::onRemoveFromWishList" 
+					                data-request-data="product_id: {{obProduct.id}}" 
+					                onclick="$(this).find('.like').toggleClass('text-muted')"
+		                			data-request-success="$('#alertSuccess').removeClass('d-none').html('Товар удален из избранное!');$(document).ready(function() {setTimeout(function() {$('#alertSuccess').addClass('d-none');}, 3000);});">
+									
+									<i class="fal fa-heart like" aria-hidden="true" style="font-weight:500;color:red;font-size:18px;"></i>
+								</a>
+							{% else %}	
+								<a href="#"
+					        		data-request="ProductData::onAddToWishList" 
+					                data-request-data="product_id: {{obProduct.id}}" 
+					                onclick="$(this).find('.like').toggleClass('text-danger')"
+		                			data-request-success="$('#alertSuccess').removeClass('d-none').html('Товар добавлен в избранное!');$(document).ready(function() {setTimeout(function() {$('#alertSuccess').toggleClass('d-none');}, 3000);});">
+									
+									<i class="fal fa-heart like" aria-hidden="true" style="font-weight:500;color:darkgray;font-size:18px;"></i>
+								</a>
+							{% endif %}	
+			  				
+						</div>
+						<div class="card-body categoriy-block">
+							<h5 class="text-danger font-weight-bold">{{ price.price_value}} сум</h5>
+			    			<p class="text-dark small">{{category.name}}</p>
+							<div class="number-red">
+				 				<a href="{{obProduct.getPageUrl()}}"><h6 class="font-weight-bold text-dark text-uppercase mx-title">{{obProduct.name|truncate(14)}}</h6></a>
+								
+								{% if price.old_price_value and price.old_price_value > price.price_value %}
+									<span class="text-color-border border-text pt-1">{{ price.old_price_value}}</span>
+								{%else%}
+									<span class="text-color-border border-text pt-1 text-white">{{ price.old_price_value}}</span>
+								{%endif%}	
+								
+							</div>
+							<div class="hover-block order_block">
+								{% set obListOffers = obProduct.offer.sort('price|asc') %}
+			                    
+								<div class="razmer pt-3">
+						  			<div class="grams razmer-text">
+						  				{% for obOfferItem in obListOffers %}			
+											<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body"
+												data-data="{{{
+												'cart': [
+												{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}">{{obOfferItem.name}}</p>
+										{%endfor%}				
+						  			</div>
+						  			{% if user.is_store != 1 %}
+							  			<div class="categoie-basket order_line mt-1">
+						  					<a class="btn btn-basket">
+					  							<span>В корзину</span>
+						  						<img src="{{ 'assets/img/Shape2copy.png' | theme }}" alt="">
+						  					</a>
+							  				
+							  			</div>
+							  		{%endif%}	
+								</div>
+					 		</div>
+		  	  			</div>
+			  		</div>
+			 	</div>
+			</div>
+		{% endfor %}
+	{%else%}
+		<div class="col-md-12">
+			<h3 class="text-muted text-center mt-5">{{'Товар не найдено'|_}}</h3>
+		</div>
+	{%endif%}	
+</div>
+
+
+<style>
+	.hover-block .none-block {align-items: center;}
+	.hover-block .none-block .caustem-colo {width: 18px;height: 18px;background-color: #F44336;border: 2px solid #9E9E9E;border-radius: 40px;}
+	.hover-block .none-block .caustem-colo-one {width: 18px;height: 18px;background-color: #FFEB3B;border: 2px solid #9E9E9E;border-radius: 40px;}
+	.hover-block .none-block .caustem-colo-twu {width: 18px;height: 18px;background-color: #00bcd4;border: 2px solid #9E9E9E;border-radius: 40px;}
+	.hover-block .none-block .caustem-colo-fre {width: 18px;height: 18px;background-color: #343a40;border: 2px solid #9E9E9E;border-radius: 40px;}
+	.btn-basket {background: none;border: none;margin-top: -8px; color:#fff;}
+	.grams p.active {color: #5b9724;font-weight: 700;font-size:16px;}
+	.grams p {padding: 0 5px;line-height: 13px;font-weight: 500;font-size: 14px;color: #737373;cursor: pointer; border:none;}
+	.font-weight-bold {
+		font-size: 16px;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	    overflow: hidden;
+	}
+	.card-body {
+		padding: 8px 8px;
+	    background-color: #fff;
+	    margin-bottom: 15px;
+	}
+	.text-color-border {
+		font-size: 16px;
+	}
+	.mx-title {
+		margin-top: -8px;
+		font-size: 13px;
+	}
+	.btn-basket  {
+		display: flex;
+		padding-left: 28px;
+	}
+	.btn-basket span {
+	    display: block;
+	    padding-right: 30px;
+	    padding-top: 5px;
+	    padding-bottom: 5px;
+	}
+	.btn-basket img {
+		margin-top: 5px;
+	}
+	.card-img-top {
+		border: 1px solid #ddd;
+	}
+	a:not([href]):not([tabindex]) {
+		color: #fff !important;
+	    width: 100%;
+	    height: 100%;
+	    text-align: center;
+	    margin: 0 auto;
+	}
+</style>

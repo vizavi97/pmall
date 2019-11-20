@@ -1,0 +1,306 @@
+title = "Add-product"
+url = "/add-product"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[CreateProduct]
+
+[CategoryList]
+
+[BrandList]
+
+[CategoryPage]
+slug = "{{ :slug }}"
+slug_required = 0
+smart_url_check = 0
+==
+<?php
+use Lovata\PropertiesShopaholic\Models\PropertyValue;
+use Lovata\PropertiesShopaholic\Models\Property;
+use Lovata\Shopaholic\Models\Offer;
+use Lovata\Shopaholic\Models\Category;
+
+
+function onStart() {
+	$list = Property::where('code', 'size')->get();
+	$this['properties'] = $list;
+}
+
+function onProperty(){
+	$user = Auth::getUser();
+	$categoryId = post('category_id');
+	$obCategoryChildId = post('categoryChildOne_id');
+	$obChildId = post('categoryChildTwo_id');
+	$childId = post('categoryChildThree_id');
+
+	$category = Category::where('id', $categoryId)->first();
+	$obCategoryChild = Category::where('id', $obCategoryChildId)->first();
+	$obChild = Category::where('id', $obChildId)->first();
+	$child = Category::where('id', $childId)->first();
+
+	$this['category'] = $category;
+	$this['obCategoryChild'] = $obCategoryChild;
+	$this['obChild'] = $obChild;
+	$this['child'] = $child;
+	$this['user'] = $user;
+}
+?>
+==
+{% put scripts %}
+
+<!--    <script src="https://cdn.tiny.cloud/1/iaz9vrj7iikhezrfdql3cyk2c23dec99r7wzgnvsash2jt6b/tinymce/5/tinymce.min.js"></script>-->
+<!--  	<script>tinymce.init({selector:'textarea'});</script>-->
+
+{% endput %}
+
+{% set obCategoryList = CategoryList.make().tree() %}
+{% set brands = BrandList.make().active().random(100) %}
+
+{% if user.is_store == true %}
+	<div class="mainwrapper">
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+
+						{% partial 'cabinet/side-nav' page = 'add-product'%}
+
+					</div>
+					<div class="col-md-9">
+						<form data-request="onCreateProduct" data-request-success="toastr.success('Успешно')" data-request-files data-request-flash>
+							<input type="text" name="active" hidden value="0">
+							<h4>{{'Добавляем товар'|_}}</h4>
+							<p class="text-danger">{{'Будьте внимательны при заполнении товара это скажется на
+								фильтрации товара'|_}}
+							</p>
+							<div class="add-product-number">
+								<div class="form-group row col d-flex ">
+									<div class="col-6 add-product-input checkout-block mb-3">
+										<input type="text" name="name" class="form-control input-css" placeholder="{{'Название'|_}}">
+										<div class="input-group-append">
+											<span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
+										</div>
+									</div>
+
+									<div class="col-6 add-product-input checkout-block  mb-3 ">
+										<input type="text" class="form-control input-css" name="code" placeholder="{{'Артикул товара'|_}}" aria-label="Amount (to the nearest dollar)">
+										<div class="input-group-append">
+											<span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="bredn pt-4 d-block d-md-flex">
+								<!-- Product categories  -->
+								<div class="add-product-number mr-4">
+									<div class="form-group">
+										<select class="form-control" name="categoryChildOne_id" data-request="onProperty" data-request-update="'add/block-property': '#block-property', 'add/block-category': '#block-category'">
+											<option value selected><b>{{'Категория'|_}}</b></option>
+
+											{% for obCategory in obCategoryList %} {% if obCategory.slug != 'magaziny'%}
+											<option value="{{obCategory.id}}"><b>{{obCategory.name}}</b></option>
+											{%endif%} {% endfor %}
+
+										</select>
+									</div>
+								</div>
+								<!-- Category children -->
+								<div class="mr-4">
+									<div class="form-group" id="block-category">
+
+										{% partial 'add/block-category' %}
+
+									</div>
+								</div>
+								<!-- Category children -->
+								<div class="mr-4">
+									<div class="form-group" id="block-category-child-one">
+
+										{% partial 'add/block-category-child-one' %}
+
+									</div>
+								</div>
+								<!-- Category children -->
+								<div class="mr-4">
+									<div class="form-group" id="block-category-child-two">
+
+										{% partial 'add/block-category-child-two' %}
+
+									</div>
+								</div>
+								<!-- Brand List  -->
+								<div class="form-group mr-4">
+									<select class="form-control" id="sel1" name="brand_id" value="1">
+										<option value selected>{{'Бренд'|_}}</option>
+										{% for obBrand in brands %}
+										<option value="{{obBrand.id}}">{{obBrand.name}}</option>
+										{% endfor %} </select>
+								</div>
+
+							</div>
+							<div class="add-border mt-4">
+								<div class="row">
+									<div class="propertyBlock">
+									</div>
+
+									<div class="col-md-12" id="block-property">
+										{% partial 'add/block-property' %}
+									</div>
+									<div class="col-md-12">
+										<label for="">{{'Описание'|_}}</label>
+										<textarea class="form-control d-flex" name="description"  id="exampleFormControlTextarea1" rows="5"></textarea>
+									</div>
+								</div>
+							</div>
+							<h5 class="py-5"><b>{{'Добавляем фото'|_}}</b></h5>
+							<div class="add-container-image row repeatable-image">
+								<div class="col-md-4">
+									{% if obStore.logo.path  %}
+									<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
+										<input type="file" name="preview_image" onchange="readURL(this);">
+									</label>
+									{% else %}
+									<label class="file-photo" style="background-position: center center;background-size: contain;background-repeat: no-repeat;">
+										<input type="file" name="preview_image" onchange="readURL(this);">
+									</label>
+									{% endif %}
+									<fieldset class="product-images">
+										<div class=""></div>
+										<div class="form-group my-3" style="text-align:center;">
+											<input type="button" value="{{'Добавить'|_}}" class="btn btn-success add-images" align="center">
+										</div>
+									</fieldset>
+								</div>
+							</div>
+
+							<div class="">
+								{% partial 'add/block-images' %}
+							</div>
+
+							<div class="row alienware py-5">
+								<div class="col-md-4">
+									<div class="basket-button pt-4">
+										<button type="submit" class="btn btn-outline-danger add-btn-danger text-white man-btn">
+											{{'Отправить на модерацию'|_}}<i class="fas fa-chevron-right pl-4"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+	</div>
+{%endif%}
+
+<style>
+	.file-photo{
+		overflow: hidden;
+	    display: block;
+	    padding-bottom: 100%;
+	    position: relative;
+	    -webkit-background-size: cover;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: 50% 50%;
+	    border-radius: 4px;
+	    -webkit-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    cursor: pointer;
+	    margin: 0;
+	}
+	.file-photo input{visibility: hidden;}
+
+	/* The container */
+	.checkboxList {
+	  display: block;
+	  position: relative;
+	  padding-left: 35px;
+	  margin-bottom: 12px;
+	  cursor: pointer;
+	  font-size: 14px;
+	  -webkit-user-select: none;
+	  -moz-user-select: none;
+	  -ms-user-select: none;
+	  user-select: none;
+	}
+
+	/* Hide the browser's default checkbox */
+	.checkboxList input {
+	  position: absolute;
+	  opacity: 0;
+	  cursor: pointer;
+	  height: 0;
+	  width: 0;
+	}
+
+	/* On mouse-over, add a grey background color */
+	.checkboxList:hover input ~ .checkmark {
+	  background-color: #ccc;
+	}
+
+	/* When the checkbox is checked, add a blue background */
+	.checkboxList input:checked ~ .checkmark {
+	  background-color: #2196F3;
+	}
+
+	/* Show the checkmark when checked */
+	.checkboxList input:checked ~ .checkmark:after {
+	  display: block;
+	}
+
+	/* Style the checkmark/indicator */
+	.checkboxList .checkmark:after {
+	  left: 9px;
+	  top: 5px;
+	  width: 5px;
+	  height: 10px;
+	  border: solid white;
+	  border-width: 0 3px 3px 0;
+	  -webkit-transform: rotate(45deg);
+	  -ms-transform: rotate(45deg);
+	  transform: rotate(45deg);
+	}
+
+</style>
+
+{%put scripts%}
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+<script src="{{ 'assets/js/js_todo/jquery.repeatable.js' | theme }}"></script>
+
+<script>
+
+	//and script
+    $(document).on('click','.modal-filter-window-close-item',function(){
+      $(document).find('.modal-filter-window').css("z-index","-10000");
+    });
+    $(document).ready(function() {
+      var max_fields      = 8;
+      var wrapper         = $(".add-photos-container");
+      var add_button      = $(".add-photos-button");
+      var x = 1;
+
+      $(add_button).click(function(){
+        if(x < max_fields){
+          x++;
+          $(wrapper).append('<div><img src="({{obStore.logo.path}})" onchange="readURL(this)" alt=""/>' +
+            '<a href="#" class="delete">Delete</a></div>'); //add input box
+          z = document.getElementsByName('file-file');
+        }
+        else
+        {
+          alert('You Reached the limits')
+        }
+      });
+      $(wrapper).on("click",".delete", function(e){
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+      })
+    });
+</script>
+
+{%endput%}

@@ -1,0 +1,48 @@
+[viewBag]
+==
+<section class="popular-goods">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2 col-sm-12 p-0 bg-white">
+				<div class="popular-bootstrap-block" style="height: auto">
+					<h3 class="text-danger py-3">{{this.theme.settings_name_a}}</h3>
+					<a href="#"><img class="py-3" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
+					<p class="pb-3">{{'любимые товары покупателей'|_}}</p>
+					<div class="button-group">
+					  <button class="button button--previous"><i class="fas fa-chevron-left"></i></button>
+					  <button class="button button--next"><i class="fas fa-chevron-right"></i></button>
+					</div>
+					<div class="py-3 font-weight-bold">
+						<span class="productCurrentActive text-danger"></span>
+						<sup>	
+							/
+							<span class="productCount"></span>
+						</sup>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-10 col-sm-12 goods-slider pl-1">
+				{% set obProductList = ProductList.make().sort(this.theme.settings_sort_product_a).active().take(15) %}
+					<div id="popularGoodsSlider" class="carousel">
+				        {% for key, obProduct in obProductList %}
+				        	{% partial 'main-page/item-popularity-product' obProduct=obProduct  key=key %}
+				        {% endfor %}
+				    </div>
+				    
+				    
+				    
+				    {% put scripts %}
+				    	<script>
+				    		$(document).ready(function () {
+				    			var popCar = $('#popularGoodsSlider.carousel .carousel-cell-goonds');
+				    			$('.productCount').text(popCar.length);
+				    			$('.productCurrentActive').text(1);
+				    		});
+				    	</script>
+				    {% endput %}
+
+			</div>
+		</div>
+	</div>
+</section>

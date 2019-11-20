@@ -1,0 +1,47 @@
+title = "Store orders"
+url = "/store-orders/:slug"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[StorePage]
+page = "{{ :slug }}"
+==
+<?php
+function onStart(){
+	$this['storeSlug'] = $this->param('slug');
+}
+?>
+==
+{% set obStore = StorePage.get() %}
+
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+				
+					{% partial 'cabinet/side-nav'  page='storeOrders'%}
+					
+				</div>
+				<div class="col-md-9">	
+					{% if not user or user.is_store == 0 or storeSlug != user.store.slug %}
+						<h3 class="mt-5 text-center text-muted">{{'Страница не найдена'|_}}</h3>
+					{%else%}	
+						<h5 class="pb-3"><b>{{'Заказы'|_}}</b></h5>
+						<div class="row">
+							<div class="col-md-12" id="cabinet-wishlist">
+							
+								{% partial 'cabinet/store-orders' obStore=obStore %}
+								
+							</div>
+						</div>
+					{%endif%}
+				</div>
+			</div>	
+		</div>	
+	</section>
+</div>

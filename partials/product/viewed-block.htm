@@ -1,0 +1,39 @@
+[viewBag]
+==
+{% set obViewedProductList = ProductList.make().viewed().active() %}
+{% if obViewedProductList.isNotEmpty() %}
+	<section>
+		<div class="container py-5">
+			<div class="recommend-title d-block d-md-flex justify-content-between pt-3 pb-3">
+				<h3 class="">{{'Вы недавно просматривали'|_}}</h3>
+				<a href="/list"><button class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Смотреть все'|_}}</b></button></a>
+			</div>
+			<div class="carousel" data-flickity='{  "contain": true }'>
+				
+				{% for obProduct in obViewedProductList %}
+					{% partial 'product/viewed-products' obProduct = obProduct %}
+				{% endfor %}
+				
+			</div>
+		</div>
+	</section>
+{% endif %}
+
+{% put styles %}
+	<style>
+		.carousel-cell-recommend .check {
+			background-color: #ca3836;
+			position: absolute;
+			z-index: 666;
+			top: 1rem;
+			left: -.5rem;
+			
+		}
+		.product-name {
+			white-space: nowrap; /* Запрещаем перенос строк */
+		    overflow: hidden; /* Обрезаем все, что не помещается в область */
+		    text-overflow: ellipsis; /* Добавляем многоточие */
+		}
+	</style>
+
+{% endput %}

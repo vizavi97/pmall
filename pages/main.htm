@@ -1,0 +1,82 @@
+title = "Главная"
+url = "/"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[BrandList]
+
+[formSubscribe]
+urlToUnsubscribe = "unsubscribe"
+urlToProfile = "subscriber-profile"
+geo = "enabled"
+thanksMessage = "Спасибо за подписку!"
+errorMessage = "Email already exists!"
+==
+{% partial 'blocks/search-block' page = 'main' %}
+<!-- section-slider-skidka -->
+
+
+{% partial 'main-page/home-slider' %}
+
+<!-- section-discount -->
+{% partial 'main-page/popular-categories' %}
+
+<!-- popular goods -->
+{% partial 'main-page/popularity-block' %}
+
+<!-- New banner -->
+
+{% partial 'main-page/new-banner' %}
+
+
+<!-- section spring-summer -->
+{% partial 'main-page/spring-summer' %}
+
+<!-- section-recommend  -->
+{% partial 'main-page/recomended-block' %}
+
+<!-- our boutiques -->
+<section class="border border-bottom-0 border-right-0 border-left-0 pb-5">
+	<div class="container">
+		{% partial 'main-page/brands-carousel' %}
+	</div>
+</section>
+
+<!-- our boutiques -->
+<section class="our-boutique-section">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-3 col-sm-12 text-center our-boutiques py-5">
+				<img class="img-none" src="{{ 'assets/img/briefcase.png' | theme }}" alt="">
+				<h3 class="text-danger w-50 mx-auto">{{ 'Кто мы такие' |_ }}</h3>
+				<p class="w-75 mx-auto p-3">{{ 'Работаем на рынке Узбекистана с 2019 года'|_ }}</p>
+				<div class="sot-seti">
+					<a href="https://www.fb.me/primusmall" target="_blank"><img src="{{ 'assets/img/Shape9.png' | theme }}" alt=""></a>
+					<a href="https://www.t.me/primusmall" target="_blank"><img src="{{ 'assets/img/Shape10.png' | theme }}" alt=""></a>
+					<a href="https://www.instagram.com/primus.mall" target="_blank"><img src="{{ 'assets/img/Shape11.png' | theme }}" alt=""></a>
+				</div>
+			</div>
+			<div class="col-md-6 col-sm-12 primus-mall">
+				<h4>{{ 'Primus Mall'|_ }}</h4>
+				
+				{% content 'main-footer' %}
+				
+				<a href="http://pmall.uz/about-us"><button type="button" class="btn btn-outline-danger podrobno mt-2 bg-white text-danger"><b>{{ 'Подробнее' |_ }}</b></button></a>
+			</div>
+			<div class="col-md-3 col-sm-12 our-boutiques-podpis">
+				<form name="form-subscribe-andradedev" id="form-subscribe-andradedev" data-request="{{ formSubscribe }}::onAddSubscriber" class="subscribe_form" data-request-update="'{{formSubscribe}}::alert': '#result'">
+					<h5 class="payk pt-4 pb-5">{{'Подписаться'|_}}</h5>
+					<div class="input-group input-header mb-3">
+					  <input type="text" class="form-control from-header ml-4" name="email" placeholder="{{ 'Введите ваш e-mail'|_ }}" aria-label="Username" aria-describedby="basic-addon1">
+					</div>
+					<div id="result"></div>
+					<button form="form-subscribe-andradedev" type="submit" class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Отправить'|_}}</b></button>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

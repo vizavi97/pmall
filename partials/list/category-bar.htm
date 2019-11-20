@@ -1,0 +1,144 @@
+[viewBag]
+==
+{% set obCategoryParent = ParentCategoryPage.get() %}
+{% set obCategory = CategoryPage.get() %}
+{% set obListProduct = ProductList.make().sort(ProductList.getSorting()).active().category(obCategory.id) %}
+
+
+<div class="side-menu" id="accordion">
+	<div>
+		<P><b>{{obCategory.name}}</b></P>
+		{% for obChildCategory in obCategoryParent.children %}
+		<div class="card categoriy-collapse">
+			<div class="card-header" id="heading{{loop.index}}">
+				<h5 class="mb-0">
+					<button class="btn btn-link text-dark" data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+						<b>{{obChildCategory.name}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
+					</button>
+				</h5>
+			</div>
+			<div id="collapse{{loop.index}}" class="collapse {{obChildCategory.slug == obCategory.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.parent.slug ? 'show'}} {{ loop.first == true ? 'show':''}}" aria-labelledby="heading{{key}}" data-parent="#accordion">
+
+				{% for obChildreen in obChildCategory.children %}
+				<div class="btn-kategorie">
+					<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
+					</a>
+				</div>
+
+				<div class="card-body link-jq categoriy-block my-0 accordion-{{loop.index}} {{obChildreen.slug == obCategory.slug ? 'd-block'}} {{obChildreen.slug == obCategory.parent.slug ? 'd-block'}}">
+					<ul class="mx-padding">
+						{% for obChild in obChildreen.children %}
+						<li class="p-0">
+							<a class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}">{{obChild.name}}<span class="basket-color-text"> {{obChild.product_count}}</span>
+							</a>
+						</li>
+						{% endfor %}
+					</ul>
+				</div>
+				{% endfor %}
+
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+
+	<div class="side-banner">
+		<img src="{{ 'assets/img/11061458-1422376632-829116copy2.png' | theme }}" alt="banner"/>
+		<p>Здесь будет баннер</p>
+	</div>
+</div>
+
+
+<!-- Mobile -->
+<nav class="navbar navbar-expand-md navbar-dark category-bar-mobile d-none">
+
+	<!-- Toggler/collapsibe Button -->
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbarCategory"
+		onclick="$('.category-bar-mobile .fa-caret-down').toggleClass('d-none');$('.category-bar-mobile .fa-caret-up').toggleClass('d-inline-block');">
+		<span class="mr-2">{{obCategoryParent.name}}</span>
+		<i class="fas fa-caret-down"></i>
+		<i class="fas fa-caret-up"></i>
+	</button>
+
+	<!-- Navbar links -->
+	<div class="collapse navbar-collapse" id="collapsibleNavbarCategory">
+
+		<P class="text-white"><b>{{obCategory.name}}</b></P>
+		<div id="">
+
+			{% for obChildCategory in obCategoryParent.children %}
+				<div class="card categoriy-collapse">
+			    	<div class="card-header" id="heading{{loop.index}}">
+				      <h5 class="mb-0">
+				        <button class="btn btn-link text-dark" data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
+				           <b class="text-white">{{obChildCategory.name}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
+				        </button>
+				      </h5>
+			    	</div>
+			    	<div id="collapse{{loop.index}}" class="collapse {{obChildCategory.slug == obCategory.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.parent.slug ? 'show'}} {{ loop.first == true ? 'show':''}}" aria-labelledby="heading{{key}}" data-parent="#accordion">
+
+						{% for obChildreen in obChildCategory.children %}
+							<div class="btn-kategorie">
+								<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
+								</a>
+							</div>
+
+							<div class="link-jq categoriy-block my-0 accordion-{{loop.index}} {{obChildreen.slug == obCategory.slug ? 'd-block'}} {{obChildreen.slug == obCategory.parent.slug ? 'd-block'}}">
+							  	<ul class="mx-padding">
+									{% for obChild in obChildreen.children %}
+										<li class="p-0">
+											<a class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}">{{obChild.name}}<span class="basket-color-text"> {{obChild.product_count}}</span>
+											</a>
+										</li>
+									{% endfor %}
+								</ul>
+							</div>
+						{% endfor %}
+
+			    	</div>
+			  	</div>
+			{% endfor %}
+		</div>
+
+	</div>
+</nav>
+<!-- End mobile -->
+<!-- Mobile -->
+<nav class="ajax-filter-mobile navbar navbar-expand-md navbar-dark d-none mobile-filter-right">
+
+	<!-- Toggler/collapsibe Button -->
+	<button class="navbar-toggler mobile-filter-button" type="button" data-toggle="collapse" data-target="#collapsibleNavbar" onclick="$('.ajax-filter-mobile .fa-caret-down').toggleClass('d-none');$('.ajax-filter-mobile .fa-caret-up').toggleClass('d-inline-block');">
+		<span class="mr-2">фильтр</span>
+<!--		<i class="fas fa-caret-down"></i>-->
+<!--		<i class="fas fa-caret-up"></i>-->
+	</button>
+	<!-- Navbar links -->
+	<div class="modal-filter-window">
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<div class="big-block d-block d-md-flex justify-content-between">
+				{#<p><b>{{ 'Подобрать товар' | _ }}:</b></p>#}
+				<div class="viwe-categorie"></div>
+			</div>
+			{% partial 'list/ajax-filter'
+			min_value=fMinPriceFilterValue
+			max_value=fMaxPriceFilterValue
+			currency=obOfferMinPrice.currency
+			min=obOfferMinPrice.price
+			max=obOfferMaxPrice.price%}
+		</div>
+		<div class="modal-filter-window-close">
+			<div class="modal-filter-window-close-item">
+				<span>X</span>
+			</div>
+		</div>
+	</div>
+</nav>
+<!-- End mobile -->
+
+
+<style>
+	.link-jq  {display: none;padding: 0;}
+	.mx-padding {padding-left: 60px;}
+	.small {background: none;border: none;}
+	.btn-kategorie {padding-left: 20px;}
+</style>

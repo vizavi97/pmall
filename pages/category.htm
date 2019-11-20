@@ -1,0 +1,441 @@
+title = "category"
+url = "/category"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+<div class="wrapper">
+<section>
+		<div class="container">
+			{% partial 'blocks/search-block' %}
+		</div>
+</section>
+
+	<section class="second">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4 col-sm-12 mb-3 shorts-img" >
+					<div class="d-flex  align-items-end  h-100">
+						<div class="shorts bg-light mx-auto px-5 py-2">
+							<h4 class="bolt-text"><b>{{ 'Шорты' | _ }}</b></h4>
+							<p>{{ 'счастливый скидос' | _  }}</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-12 mb-3 w-100">
+					<div class="carousel" data-flickity='{ "wrapAround": true}'>
+						<div class="carousel-cell-trend"></div>
+						<div class="carousel-cell-trend">
+							<div class="d-flex  align-items-end align-items-end justify-content-end  h-100">
+								<div class="shorts bg-light  px-5 py-2">
+									<p>{{ 'счастливый скидос' | _ }}</p>
+									<ol class="flickity-page-dots">
+										<li class="dot" aria-label="Page dot 1"></li>
+										<li class="dot is-selected" aria-label="Page dot 2" aria-current="step"></li>
+										<li class="dot" aria-label="Page dot 3"></li><li class="dot" aria-label="Page dot 4"></li>
+										<li class="dot" aria-label="Page dot 5"></li><li class="dot" aria-label="Page dot 6"></li>
+									</ol>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-cell-trend"></div>
+						<div class="carousel-cell-trend"></div>
+						<div class="carousel-cell-trend"></div>
+						<div class="carousel-cell-trend"></div>
+					</div>
+				</div>
+				<div class="col-md-8 col-sm-12 girl-img mb-3 pr-3">
+					<div class="d-flex  align-items-end  h-100">
+						<div class="nice-wuman bg-light  px-3 py-1">
+							<p class="p-0 m-0">{{ 'Итальянское' | _ }}</p>
+							<h4 class="bolt-text"><b>{{ 'Нижнее белье' | _ }}</b></h4>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 col-sm-12 shorts-i mb-3">
+						<div class="d-flex  align-items-end  h-100">
+						<div class="dras bg-light mx-auto px-4 py-1">
+							<p class="p-0 m-0">{{ 'по 100 0000 сум' | _ }}</p>
+							<h4 class="bolt-text"><b>{{ 'Платья' | _ }}</b></h4>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="popular-goods">
+		<div class="container">
+
+
+			<div class="row">
+				<div class="col-md-2 col-sm-12 popular-bootstrap-block">
+					<h3 class="text-danger py-5 regular-text"><b>{{ 'Актуально в этом сезоне' | _ }}</b></h3>
+					<div class="button-group pt-2 pb-5">
+					  <button class="button button--previous"><i class="fas fa-chevron-left"></i></button>
+					  <button class="button button--next"><i class="fas fa-chevron-right"></i></button>
+					</div>
+				</div>
+
+				<div class="col-md-10 col-sm-12 goods-slider">
+					<div id="popularGoodsSlider" class="carousel">
+					  <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">{{ 'Толстовка' | _ }}</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+						 <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">{{'Толстовка'|_}}</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					   <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">{{ 'Толстовка'|_ }}</p>
+							   	 	</div>
+							  </div>
+						</div>
+					 </div>
+					  <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">{{ 'Толстовка' | _ }}</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					    <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">Толстовка</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					    <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">Толстовка</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					    <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">Толстовка</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					    <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">Толстовка</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					    <div class="carousel-cell-goonds">
+					  	<div class="card">
+							  <div class="card-body">
+							   	 <img class="card-img-top  mx-auto" src="{{ 'assets/img/Layer1200.png' | theme }}" alt="">
+							  </div>
+							  
+							    <div class="card-body text-center">
+							   	 	<div class="price">
+							   	 	
+							   	 		<p class="text-secondary">Толстовка</p>
+							   	 	</div>
+							  </div>
+						</div>
+					  </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="pb-5">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-12 ">
+					<div class="new-block bg-danger text-white text-center py-3 px-3 mb-4">
+						<h1 class="big-text">NEW</h1>
+					<p class="text-size">Найди свое</p>
+					<h4 class="ubuntu-regular">Весна - лето</h4>
+					<a class="text-white border border-left-0 border-right-0 border-top-0" href="#">Смотерть товары</a>
+					</div>
+					<div class="new-dopolnenie text-center border py-5 px-3">
+						<h4>Новое поступление</h4>
+						<a class="text-danger" href="#" style="font-size=18px;" >Любимые товары</a>
+					</div>
+			</div>
+					
+			
+				<div class="col-md-6 col-sm-12 lux-block text-center pt-3">
+					<h4>Get the look</h4>
+					<h2>LUXE</h2>
+					<h4>The latest style</h4>
+				</div>
+				<div class="col-md-3 col-sm-12">
+					<div class="new-collection text-white px-3 py-3 mb-4">
+						<h2>new collecion</h2>
+						<p>Белье для любимой</p>
+					</div>
+					<div class="bikini text-center border px-5 py-3">
+						<a href="#"><img src="{{ 'assets/img/Shape8copy5.png' | theme }}" alt=""></a>
+						<h3>Sexy bikini</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	</section>
+		<section>
+		<div class="container">
+			<div class="recommend-title d-flex justify-content-between pt-3 pb-3">
+				<h3 class="">Рекомендуем</h3>
+				<button type="button" class="btn btn-outline-danger recommend-loock"><b>Смотреть все</b></button>
+			</div>
+				<div class="carousel"
+				  data-flickity='{ "wrapAround": true }'>
+				  <div class="carousel-cell-recommend">
+				  	<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+					  <img class="card-img-top" src="{{ 'assets/img/Terrapro.png' | theme }}" alt="Card image cap">
+					  	<a href="#"><img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
+					  <div class="card-body recommend-block">
+					 	<h5 class="font-weight-bold m-0">Nike SB Zoom Air Oneshot</h5>
+					    <p class=" small text-color-border mb-2">Мужские</p>
+						<div class="number-red d-flex">
+							<span class="text-color-border">2 685 000</span>
+							<h6 class="text-danger pl-4 mb-0"><b>2 685 000 CУМ</b></h6>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <div class="carousel-cell-recommend">
+				  		<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+					  <img class="card-img-top" src="{{ 'assets/img/Nike.png' | theme }}" alt="Card image cap">
+					  <img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt="">
+					  <div class="card-body recommend-block">
+					 	<h5 class="font-weight-bold m-0">Nike SB Zoom Air Oneshot</h5>
+					    <p class=" small text-color-border mb-2">Мужские</p>
+							<div class="number-red d-flex">
+							<span class="text-color-border">2 685 000</span>
+							<h6 class="text-danger pl-4 mb-0"><b>2 685 000 CУМ</b></h6>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <div class="carousel-cell-recommend">
+				  		<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+					  <img class="card-img-top" src="{{ 'assets/img/Terrapro.png' | theme }}" alt="Card image cap">
+					  <img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt="">
+					  <div class="card-body recommend-block">
+					 	<h5 class="font-weight-bold m-0">Nike SB Zoom Air Oneshot</h5>
+					    <p class=" small text-color-border mb-2">Мужские</p>
+						<div class="number-red d-flex">
+							<span class="text-color-border">2 685 000</span>
+							<h6 class="text-danger pl-4 mb-0"><b>2 685 000 CУМ</b></h6>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <div class="carousel-cell-recommend">
+				  		<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+					  <img class="card-img-top" src="{{ 'assets/img/Terrapro.png' | theme }}" alt="Card image cap">
+					  <img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt="">
+					  <div class="card-body recommend-block">
+					 	<h5 class="font-weight-bold m-0">Nike SB Zoom Air Oneshot</h5>
+					    <p class=" small text-color-border mb-2">Мужские</p>
+						<div class="number-red d-flex">
+							<span class="text-color-border">2 685 000</span>
+							<h6 class="text-danger pl-4 mb-0"><b>2 685 000 CУМ</b></h6>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				  <div class="carousel-cell-recommend">
+				  		<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+					  <img class="card-img-top" src="{{ 'assets/img/Terrapro.png' | theme }}" alt="Card image cap">
+					  <img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt="">
+					  <div class="card-body recommend-block">
+					 	<h5 class="font-weight-bold m-0">Nike SB Zoom Air Oneshot</h5>
+					    <p class=" small text-color-border mb-2">Мужские</p>
+						<div class="number-red d-flex">
+							<span class="text-color-border">2 685 000</span>
+							<h6 class="text-danger pl-4 mb-0"><b>2 685 000 CУМ</b></h6>
+						</div>
+					  </div>
+					</div>
+				  </div>
+				</div>
+
+		</div>
+		<style>
+			.flickity-prev-next-button {
+				top: 27%;
+			}
+			.news-poject-col {
+				color: #8c8484;
+			}
+			.card-text {
+				font-size: 15px;
+    			margin: 0;
+    			line-height: 11px;
+    			padding: 0;
+			}
+			
+		</style>
+	</section>
+	<section class="border border-left-0 border-right-0 border-bottom-0">
+		<div class="container">
+			<div class="recommend-title d-flex justify-content-between pt-3 pb-3">
+				<h3 class="">Рекомендуем</h3>
+				<button type="button" class="btn btn-outline-danger recommend-loock"><b>Смотреть все</b></button>
+			</div>
+			<div class="row">
+				<div class="col-md-4 col-sm-12">
+					<div class="card">
+						   <img class="card-img-top" src="{{ 'assets/img/Layer506.png' | theme }}" alt="">
+					</div>
+					 <div class="card-body text-center">
+						  	<h5><b>Banana Republic</b></h5>
+						    <p class="card-text text-danger">Летнее настроение</p>
+					 </div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+						<div class="card">
+						   <img class="card-img-top" src="{{ 'assets/img/Layer506.png' | theme }}" alt="">
+					</div>
+					 <div class="card-body text-center">
+						  	<h5><b>Banana Republic</b></h5>
+						    <p class="card-text text-danger">Летнее настроение</p>
+					 </div>
+				</div>
+				<div class="col-md-4 col-sm-12">
+						<div class="card">
+						   <img class="card-img-top" src="{{ 'assets/img/Layer506.png' | theme }}" alt="">
+					</div>
+					 <div class="card-body text-center">
+						  	<h5><b>Banana Republic</b></h5>
+						    <p class="card-text text-danger">Летнее настроение </p>
+					 </div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="border border-bottom-0 border-right-0 border-left-0 pb-5">
+		<div class="container">
+			<div class="recommend-title d-flex justify-content-between py-5">
+				<h3 class="">Наши Бутики</h3>
+				<button type="button" class="btn btn-outline-danger recommend-loock"><b>Смотреть все</b></button>
+			</div>
+			<div class="carousel"
+			  data-flickity='{ "wrapAround": true }'>
+			  <div class="carousel-cell-boutiques w-100">
+			  	<img class="mx-auto d-block" src="{{ 'assets/img/Layer655.png' | theme }}" alt="">
+			  </div>
+			  <div class="carousel-cell-boutiques w-100">
+			  	<img class="mx-auto d-block" src="{{ 'assets/img/Layer655.png' | theme }}" alt="">
+			  </div>
+			  <div class="carousel-cell-boutiques w-100">
+			  	<img class="mx-auto d-block" src="{{ 'assets/img/Layer655.png' | theme }}" alt="">
+			  </div>
+			  <div class="carousel-cell-boutiques w-100">
+			  	<img class="mx-auto d-block" src="{{ 'assets/img/Layer655.png' | theme }}" alt="">
+			  </div>
+			  <div class="carousel-cell-boutiques w-100">
+			  	<img class="mx-auto d-block" src="{{ 'assets/img/Layer655.png' | theme }}" alt="">
+			  </div>
+			</div>
+		</div>
+	</section>
+
+	<!-- our boutiques-->
+	<section class="our-boutique-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-12 text-center our-boutiques py-5">
+					<img class="img-none" src="{{ 'assets/img/briefcase.png' | theme }}" alt="">
+					<h3 class="text-danger w-50 mx-auto pt-3">Кто мы такие</h3>
+					<p class="w-75 mx-auto p-3">Работаем на рынке Узбекистана с 2019 года</p>
+					<div class="sot-seti">
+						<a href="#"><img src="{{ 'assets/img/Shape9.png' | theme }}" alt=""></a>
+						<a href="#"><img src="{{ 'assets/img/Shape10.png' | theme }}" alt=""></a>
+						<a href="#"><img src="{{ 'assets/img/Shape11.png' | theme }}" alt=""></a>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12 primus-mall">
+					<h4><b>Primus Mall</b></h4>
+					<p class="news-poject-col">Вас интересует бытовая техника, компьютеры, софт или товары для активного отдыха? Все это вы можете купить прямо сейчас, сэкономив уйму времени! Интернет-магазин Primus Mall с радостью поможет вам избежать необходимости посещать десятки магазинов.</p>
+
+					<p class="news-poject-col">Вы можете заказать любой товар, не вставая со своего кресла, а наш курьер вовремя доставит покупку по указанному адресу. Интернет магазин (Узбекистан) Primus Mall действует на территории всей страны. Жители Ташкента могут без лишних хлопот посетить наш интернет-магазин</p>
+					<button type="button" class="btn btn-outline-danger podrobno"><b>Подробнее</b></button>
+				</div>
+				<div class="col-md-3 col-sm-12 our-boutiques-podpis">
+					<h5 class="pl-5 pt-4 pb-5">Подписаться</h5>
+					<p class="pl-5">Введите ваш e-mail</p>
+					<button type="button" class="btn btn-outline-danger recommend-loock"><b>Отправить</b></button>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>

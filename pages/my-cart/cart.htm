@@ -1,0 +1,83 @@
+title = "Your basket"
+url = "/cart"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[MakeOrder]
+mode = "ajax"
+flash_on = 1
+redirect_on = 1
+==
+<?php
+use Lovata\Shopaholic\Models\Offer;
+use Lovata\OrdersShopaholic\Classes\Collection\CartPositionCollection;
+
+function onUpdateOffer() {
+/*	$data = Input::only('offerId');	*/
+	/*$this['offer'] = Offer::find($data);*/
+	/*$obList  = CartPositionCollection::get();*/
+	
+	
+	/*dump($obList->count() );*/
+}
+?>
+==
+
+<div class="wrapper">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			  <div class="main-basket d-block justify-content-between border border-right-0 border-left-0 border-top-0 pb-3 mb-3">
+			  	<div class="row">
+			  		<div class="col-md-3 col-sm-6 col-6">
+						<div class="basket-header d-flex align-items-center">
+							<div class="basket-number bg-danger pt-1">
+								<h3 class="text-center text-white">1</h3>
+							</div>
+								<span class="pl-3">{{'Корзина'|_}}</span>
+						</div>
+					</div>	
+					<div class="col-md-3 col-sm-6 col-12">	
+						<div class="basket-header d-flex align-items-center">
+							
+							<div class="basket-number border pt-1">
+								<h3 class="text-center text-dark">2</h3>
+							</div>
+						
+							<span class="pl-3">{{'Авторизоваться'|_}}</span>
+						</div>
+					</div>	
+					<div class="col-md-3 col-sm-6 col-12">	
+						<div class="basket-header d-flex align-items-center">
+							<div class="basket-number border pt-1">
+								<p class="text-center text-dark h3">3</p>
+							</div>
+							<span class="pl-3">{{'Оформление заказа'|_}}</span>
+						</div>
+					</div>	
+					<div class="col-md-3 col-sm-6 col-12">	
+						<div class="btn-clear">
+							<button type="button" class="btn btn-outline-dark man-btn"
+									data-request="Cart::onClear" 
+		        					data-request-update="'cart/section-cart': '#section-cart'"
+		        					data-request-success="toastr.info('Вы удалили всех товаров из корзины')">
+								<img class="pr-2 hugo" src="{{ 'assets/img/RoundedRectangle3copy5.png' | theme }}" alt="">{{'Очисть'|_}}</button>
+						</div>
+					</div>	
+				</div>	
+			  </div>
+			</div>
+			<div class="col-md-12">
+				<div class="row" id="section-cart">
+					{% set register = user ? null : true %}
+					{% partial 'cart/section-cart' register = register %}	  	
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

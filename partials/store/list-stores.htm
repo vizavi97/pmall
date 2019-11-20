@@ -1,0 +1,14 @@
+[viewBag]
+==
+{% for store in stores %}
+	{% if store.user.is_store == 1 %}
+		<div class="col-md-3 col-6 market-card">
+			<div class="bg-white p-3">
+				<h4 class="text-overflow"><a class="text-dark" href="{{'store/index'|page({slug: store.slug})}}">{{store.name|truncate(16)}}</a></h4>
+		  		<div class="card border-0 card-categoriy-mobil">
+		  			<a href="{{'store/index'|page({slug: store.slug})}}"><img class="card-img-top" src="{{store.logo ? store.logo.getThumb(240, 233, {mode: 'crop'}) : 'http://pmall.uz/themes/primusmall/assets/images/default-img.jpg'}} " alt="Store image"></a>
+				</div>
+			</div>	
+		</div>
+	{%endif%}	
+{%endfor%}

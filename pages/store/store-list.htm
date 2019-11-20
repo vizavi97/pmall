@@ -1,0 +1,37 @@
+title = "Store list"
+url = "/store-list"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+<?php
+use Shohabbos\Stores\Models\Store;
+
+function onStart() {
+	$stores = Store::get();
+	$this['stores'] = $stores;
+}
+?>
+==
+{% set obStoreList = StoreList.get() %}
+
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12 px-5">	
+					<h5 class="pb-3"><b>{{'Mагазины'|_}}</b></h5>
+					
+					<div class="row ">
+						
+						{% partial 'store/list-stores' stores=stores%}
+							
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</section>
+</div>

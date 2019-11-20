@@ -1,0 +1,7 @@
+[viewBag]
+==
+{% if obProductList.isNotEmpty() %}
+	<a class="nav-link" href="{{'cabinet/favorite'|page}}"><img src="{{ 'assets/img/imagebot.svg' | theme }}" alt="" class="mr-2"></a>
+{% else %}	
+	<a class="nav-link" href="{{'cabinet/favorite'|page}}"><img src="{{ 'assets/img/Favorite.svg' | theme }}" alt="" class="mr-2"></a>
+{% endif %}

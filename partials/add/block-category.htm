@@ -1,0 +1,24 @@
+[viewBag]
+==
+<select class="form-control" name="category_id"
+	data-request="onProperty" 
+	data-request-update="'add/block-property': '#block-property','add/block-category-child-one': '#block-category-child-one'"
+	data-request-success="$(this).parents('.categorySelect').next().show()">
+    {% if obProduct %}
+    	<option value="{{obProduct.category.id}}" selected><b>{{obProduct.category.name}}</b></option>
+    {%else%}	
+    	<option value selected><b>{{'Категория'|_}}</b></option>
+    {%endif%}
+    
+    {% for obCategoryChildren in obCategoryChild.children %}
+    	{% if obCategoryChildren.name != 'Новинки' %}
+    		<option value="{{obCategoryChildren.id}}"><b>{{obCategoryChildren.name}}</b></option>
+    	{%endif%}
+    {% endfor %}
+    
+</select>
+{% for obCategoryChildren in obCategoryChild.children %}
+	{% if obCategoryChildren.name == 'Новинки' %}
+		<input type="text" name="categoryChildFour_id" value="{{obCategoryChildren.id}}" hidden="">
+	{%endif%}
+{% endfor %}

@@ -1,0 +1,31 @@
+[viewBag]
+==
+{% if BannerBanners %}
+{% set banners = BannerBanners.load('430x350', false) %}
+{% set obCategoryList = CategoryList.make().tree() %}
+
+	<section>
+		<div class="container">
+			<div class="row mt-3 pb-5 position-relative">
+			
+				{% for key, banner in banners if key < 3 %}
+					<div class="col-md-4 col-sm-12">
+						<div class="mans p-3" style="background-image: url('{{ banner.image.path }}'); background-position: center center">
+							<div class="discount-main">
+								<a href="{{'categorie'|page({parent: banner.url})}}" class="text-dark"><h3>{{ banner.title|raw }}</h3></a>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			
+				<div class="info-block">
+					<div class="info-border py-2">
+						<span>{{this.theme.settings_name}}</span>
+						<h4 class="text-danger">{{this.theme.settings_name_sale}}</h4>
+						<span>{{this.theme.settings_name_category}}</span>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</section>
+{% endif %}

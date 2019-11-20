@@ -1,0 +1,127 @@
+title = "My data"
+url = "/my-data"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+				
+					{% partial 'cabinet/side-nav' page = 'my-data'%}
+					
+				</div>
+				<div class="col-md-9">	
+				
+					<h5 class="pb-3"><b>{{'Данные о компании'|_}}</b></h5>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="input-group input-group-sm mb-3">
+								  <input type="text" class="form-control sellect-input" placeholder="{{'Название фирмы'|_}}" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+							 </div>
+							 <div class="input-group input-group-sm mb-3">
+								  <input type="text" class="form-control sellect-input" placeholder="{{'Примерное поле'|_}}" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+							 </div>
+							 <div class="input-group input-group-sm mb-3">
+								  <input type="text" class="form-control sellect-input" placeholder="Примерное поле" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+							 </div>
+							 <div class="input-group input-group-sm mb-3">
+								  <input type="text" class="form-control sellect-input" placeholder="Примерное поле" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+							 </div>
+							 <div class="input-group input-group-sm mb-3 border-0">
+								  <input type="text" class="form-control sellect-input sellect-block" placeholder="Примерное поле" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+							 </div>
+						</div>
+					</div>
+					<h5 class="pt-5"><b>Данные для покупателя</b></h5>
+					<p class="basket-color-text">Второй этап, это данные для покупателя которые он будет видеть при просмотре магазина</p>
+					<div class="row align-items-center pt-5 pb-2">
+						<div class="col-md-2 main-magazin">
+							<div class="main-magazin">
+								<div class="magazin-logo">
+									<a href="{{ 'm' | page }}"><img src="{{ 'assets/img/just-logo.png' | theme }}" alt=""></a>
+								</div>
+								<div class="foto-logo">
+									<a href=""><img src="{{ 'assets/img/Shape24.png' | theme }}" alt=""></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-10">
+							<span class="basket-color-text">Название вашего магазина</span>
+							<div class="input-group my-2">
+							  <input type="text" class="form-control name-magazine" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+							</div>
+						</div>
+					</div>
+					<p class="basket-color-text">Текст о магазине</p>
+					<div class="just-info mb-5">
+						На сегодняшний день ‘JUST! хорошо зарекомендовал себя и имеет уже имеет уже 23 фирменных магазина в городах и регионах Узбекистана. ‘JUST! – популярная торговая марка с сформированными ориентирами и заслуженной репутацией. Имеет высокий уровень узнаваемости и лояльность постоянных клиентов, а так же растущий авторитет у целевой аудитории.
+					</div>
+					<div class="dowload-images d-block d-md-flex pt-5">
+						<h5><b>Контактнные данные</b></h5>
+						<sapn class="basket-color-text basket-font pl-3">эти контакты будут отображаться на старнице магазина </sapn>
+					</div>
+					<p class="basket-color-text">Впишите телефоны</p>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group checkout-block  mb-3">
+								  <div class="input-group-prepend">
+								      <span class="input-group-text  input-css"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/Shape15.png" alt=""></span>
+								  </div>
+								  <input type="text" class="form-control  input-css" aria-label="Amount (to the nearest dollar)">
+								  <div class="input-group-append">
+								      <span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
+								  </div>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group checkout-block  mb-3">
+								  <div class="input-group-prepend">
+								    <span class="input-group-text  input-css p-0 mp-0"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/Location2.svg" alt=""></span>
+								  </div>
+								  <input type="text" class="form-control  input-css" aria-label="Amount (to the nearest dollar)">
+								  <div class="input-group-append">
+								    <span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
+								    <a class="input-group-text  input-css" href="{{ 'main' | page }}"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/RoundedRectangle33copy.png" alt=""></a>
+								  </div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4 pt-4">
+						<p class="basket-color-text">Социальные сети</p>
+						<div class="link-inetrnet d-block d-md-flex align-items-center">
+							<a href="http://primus-mall.itmaker.uz"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/Facebook.png" alt=""></a>
+							<a href="http://primus-mall.itmaker.uz"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/Google.png" alt=""></a>
+							<a href="http://primus-mall.itmaker.uz"><img src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/Facebook.png" alt=""></a>
+							<div class="btn-clear">
+								<button type="button" class="btn btn-outline-dark bg-dark text-white man-delet">Удалить</button>
+							</div>
+						</div>
+					</div>
+					<div class="row border border-right-0 border-left-0 border-bottom-0 mt-5">
+						<div class="form-check">
+						    <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+						    <label class="form-check-label" for="inlineRadio1"></label>
+					        <form action="#">
+							    <p>
+							      <label>
+							        <input type="checkbox">
+							        <span><span class="text-danger">Согласен с условиями </span>пользования и с условиями конфиденциальности</span>
+							      </label>
+							    </p>
+							</form>
+						</div>
+					</div>
+					<div class="custom-button mt-2 mb-5">
+						<button type="button" class="btn btn-outline-danger bg-danger text-white man-btn">Сохранить</button>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</section>
+</div>

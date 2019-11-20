@@ -1,0 +1,144 @@
+title = "Update store page"
+url = "/update-store-page"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+{% set obStore = StorePage.get() %}
+{% set obStoreProductList = ProductList.make().sort(ProductList.getSorting()).active().store(obStore.id) %}
+
+<section>
+	<div class="container">
+		<div class="categoriy-menu bg-dark d-flex align-items-end">
+			<div>
+				<label class="file-photo" 
+			        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+					<input type="file" name="preview_image" onchange="readURL(this);">
+			    </label>
+			</div>
+		</div>
+		<div class="row pt-4">
+			<div>
+				<label class="file-photo" 
+			        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+					<input type="file" name="preview_image" onchange="readURL(this);">
+			    </label>
+			</div>
+			<div>
+				<label class="file-photo" 
+			        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+					<input type="file" name="preview_image" onchange="readURL(this);">
+			    </label>
+			</div>
+		</div>
+		<div class="row pt-4">
+			<div class="col-md-4">
+				<div>
+					<label class="file-photo" 
+				        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+						<input type="file" name="preview_image" onchange="readURL(this);">
+				    </label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div>
+					<label class="file-photo" 
+				        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+						<input type="file" name="preview_image" onchange="readURL(this);">
+				    </label>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div>
+					<label class="file-photo" 
+				        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+						<input type="file" name="preview_image" onchange="readURL(this);">
+				    </label>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+	<section>
+		<div class="container">
+			<div class="recommend-title d-block d-sm-flex justify-content-between pt-3 pb-3">
+				<h3 class="">{{'Рекомендуем'|_}}</h3>
+				<button type="button" class="btn btn-outline-danger recommend-loock"><b>{{'Смотреть все'|_}}</b></button>
+			</div>
+			<div class="carousel"
+			  data-flickity='{ "wrapAround": true }'>
+			  
+			{% for obStoreProduct in obStoreProductList %}  
+			{% set productPrice = obStoreProduct.offer.active.sort('new') %}
+			{% set price = (productPrice.count) ? productPrice.first : null %}	
+			
+			  <div class="carousel-cell-recommend">
+			  	<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+				  <img class="card-img-top" src="{{obStoreProduct.preview_image.getThumb(230, 180, {mode: 'crop'})}}" alt="Card image cap">
+				  	<a href="#"><img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
+				  <div class="card-body recommend-block">
+				 	<h5 class="">{{obStoreProduct.name }}</h5>
+				    <p class="small basket-color-text">{{'Мужские'|_}}</p>
+					<div class="number-red d-flex">
+						<span class="text-color-border pt-2">{{price.old_price_value}}</span>
+						<h4 class="text-danger pl-4">{{price.price_value}}</h4>
+					</div>
+				  </div>
+				</div>
+			  </div>
+			{%endfor%}  
+			</div>
+		</div>
+	</section>
+	<section>
+		<div class="container">
+			<h3 class="pt-5 pb-3">{{'Немного о нас'|_}}</h3><div class="d-flex text-secondary store-products-text">
+				{% content 'store-products/text-1' %}
+			</div>
+		</div>
+	</section>
+</div>
+
+<style>
+	.categoriy-menu{
+		background-image: url({{obStore.header_image.path}});
+	    background-repeat: no-repeat;
+	    background-size: 100% 100%;
+	    height: 500px;
+	}
+	.file-photo{
+		overflow: hidden;
+	    display: block;
+	    background-color: #ebedf1;
+	    padding-bottom: 85%;
+	    position: relative;
+	    -webkit-background-size: cover;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: 50% 50%;
+	    border-radius: 4px;
+	    -webkit-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    cursor: pointer;
+	    margin: 0;
+	}
+	.file-photo input{visibility: hidden;}
+	
+	.store-products-text p {
+		padding: 0 .05rem;
+	}
+</style>
+
+
+
+
+<div class="col-md-4">
+	<label class="file-photo" 
+        style="background-image: url({{obStore.logo.path}});background-size:100%;font-size: 7px;">
+		<input type="file" name="preview_image" onchange="readURL(this);">
+    </label>
+</div>

@@ -1,0 +1,32 @@
+[viewBag]
+==
+<?php
+function onStart() {
+	$offerId = post('offerId');
+	$obProduct = $this->ProductPage->get();
+	$obListOffers = $obProduct->offer->sort('price|asc');
+	foreach ($obListOffers as $obOfferItem) {
+		if($obOfferItem->id == $offerId) {
+			$this['obOfferItem'] = $obOfferItem;
+		}
+	}
+}
+?>
+==
+{% set obProperty = obOfferItem.property.getByCode('size') %}
+<input type="hidden" name="cart[0][offer_id]" value="{{obOfferItem.id}}" class="custom-control-input">
+{% for obValue in obProperty.property_value %}
+
+	<div class="col-md-12 custom-control custom-radio custom-control-inline">
+		<input type="radio" id="customRadioInline2-{{loop.index}}" name="cart[0][valueId]" value="{{obValue.id}}" class="custom-control-input">
+  		<label data-data="{{{
+  				'cart': [{'offer_id': obOfferItem.id, 
+  				'quantity': 1, 
+  				'property': {'size': obProperty.property_value.getValueString()} },]}|json_encode() }}"
+            {#onclick="$('.card-item-value-{{obProperty.id}}').html('{{obValue.value}}'); "
+  			style="cursor: pointer;" #}
+  			class="custom-control-label" 
+  			for="customRadioInline2-{{loop.index}}">
+  			{{obValue.value}}</label>
+  	</div>	
+{%endfor%}

@@ -1,0 +1,235 @@
+[viewBag]
+==
+<?php
+function onStart() {
+	$this['parentCategory'] = $this->param('parent');
+}
+?>
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+{% if obCategoryList.isNotEmpty() %}
+
+<header>
+	<div class="main-wrapper">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg menu-main header-menu">
+				<div class="menu__toggle">
+				</div>  
+				<div class="collapse navbar-collapse justify-content-between" id="navbarNavDropdown">
+					<ul class="navbar-nav navbar-menu">
+						
+						{% for text in this.theme.top_texts %}
+							<li class="nav-item">
+								<a class="nav-link" href="{{text.url}}">{{text.top_text}} <span class="sr-only">(current)</span></a>
+							</li>
+						{%endfor%}	
+						
+						<li class="nav-item">
+							<a class="nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							</a>
+						</li>							
+					</ul>
+					<div class="delivery text-white d-flex pl-5">
+						<div class="marker-header"><span><img src="{{ 'assets/img/Location.svg' | theme }}" alt="" height="24" width="24"></span></div>
+						<span class="text-c3c3c3">
+							{{'Доставка в'|_}}:<br>
+							<b class="text-white">{{'Ташкент'|_}}</b>
+						</span>
+					</div>
+					<div class="delivery text-white d-flex pl-5">
+						<div class="marker-header"><span><img src="{{ 'assets/img/Phone-header.svg' | theme }}" alt="" height="24" width="24"></span></div>
+						<span class="text-c3c3c3">
+							{{'Call-центр'|_}}:<br>
+							<a href="tel: (+998) 71 202-22-22"><b class="text-white">{{this.theme.site_phone}}</b></a>
+						</span>
+					</div>
+					<div class="languages d-flex">
+						<ul class="navbar-nav mobil-ul-menu">
+							
+							{% for code, name in locales %}
+					            <li class="nav-item">
+					            	<a class="nav-link {{ code == activeLocale ? 'text-danger' }}" value="{{ code }}" href="{{''|app}}{{ '/' ~ code ~ localeLinks[code] }}">{{ code }}</a>
+								</li>
+					        {% endfor %}
+					        
+						</ul>
+					</div>
+				</div>
+			</nav>
+			
+			<!-- mobile-menu -->
+			<nav class="navbar navbar-expand-lg menu-main-mobil">
+				<div class="justify-content-between" id="">
+					<div id="nav" class="navigation">
+  						<div class="navigation__inner">
+    						<nav class="mobile-link slide-menu" id="test-menu-right">
+    						 	<div class="slider">
+	    							<ul>
+	    								{% for obCategory in obCategoryList %}
+											<li><a href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{obCategory.name}}</a>
+												{% if obCategory.slug != 'magaziny' %}	
+													<ul>
+														{% for obChildCategory in obCategory.children %}
+															<li><a href="{{'categorie' | page({parent: obCategory.slug, slug: obChildCategory.slug})}}">{{obChildCategory.name}}</a></li>
+														{%endfor%}
+													</ul>
+												{%endif%}		
+											</li>
+										{%endfor%}	
+									</ul>
+								</div>
+    						</nav>
+	    					<div class="small-link"></div>
+	  					</div>
+					</div>
+					<div class="nav-cover" style="display:none"></div>
+				</div>
+			</nav>
+
+			<div class="mobile-menu">
+				<div class="delivery text-white d-flex">
+					<div class="marker-header"><span><i class="fal fa-map-marker-alt marker py-2 pr-3"></i></span></div>
+					<span>{{'Доставка в'|_}}:<br><b>{{'Ташкент'|_}}</b></span>
+				</div>
+				<nav class="navbar navbar-expand-lg mobil-menu">
+					{#<div class="languages d-flex">
+						<ul class="navbar-nav mobil-ul-menu">
+							<li class="nav-item active">
+								<a class="nav-link" href="#">Uz<span class="sr-only">(current)</span></a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">Ru</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link" href="#">En</a>
+							</li>
+						</ul>
+					</div>#}
+					<div class="menu" id="show" data-target="slideMenu" data-action="toggle">
+						<div class="hambergerIcon item">
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
+	<!-- mobile-menu -->
+
+	<div class="wrapper">
+		<div class="container">
+			<nav class="navbar navbar-expand-lg py-4 justify-content-around sections none-block">
+				<div class="navbar-collapse justify-content-between navbar-tu-menu web-menu">
+					<div class="main-block-tomenu">
+						<ul class="navbar-nav d-flex text-dark">
+							
+						{% for obCategory in obCategoryList %}	
+							<li class="nav-item main-activ-link">
+								<a class="nav-link text-dark {{ parentCategory == obCategory.slug ? 'active'}} {{ this.page.url == '/store-list' and obCategory.slug == 'magaziny' ? 'active'}}" href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{  obCategory.name }}
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
+						{% endfor %}	
+						
+						</ul>
+					</div>
+					<div class="logo-main">
+						<a href="{{ 'main' | page }}"><img src="{{'assets/img/avatarprimp.primus.png' | theme }}" alt=""></a>
+					</div>
+					<div class="current">
+						<ul class="navbar-nav">
+							<li class="nav-item text-center" id="click-block">
+								{% if user and user.is_store == 1 %}
+									<a href="{{'store/product-store'|page({slug: user.store.slug})}}" class="nav-link">
+										<img src="{{'assets/img/shop.svg' | theme }}" width="25" alt="">
+										<p>{{user.store.name}}</p>
+									</a>
+								{% elseif user and user.is_store == 0 %}
+									<a href="{{'cabinet/orders'|page({slug: user.store.slug})}}" class="nav-link">
+										<img src="{{'assets/img/user.svg' | theme }}" width="25" alt="">
+										<p>{{user.name}}</p>
+									</a>
+								{%endif%}
+								{% if not user %}
+		                            <a href="{{"auth/login"|page}}"><i class="flaticon-avatar"></i></a>
+		                            <span class="d-lg-block">
+		                            	<div id="none-block-link" class="">
+		                            		<ul class="p-0">
+		                            			<li>
+		                            				<a class="py-2" href="{{"auth/login"|page}}"> {{"Войти"|_}} </a>
+		                            			</li>
+		                            			<li>
+		                            				<a class="py-2" href="{{"auth/register"|page}}"> {{"Регистрация"|_}} </a>
+		                            			</li>
+		                            		</ul>
+		                                </div>
+		                            </span>
+		                        {% endif %}
+							</li>
+							<li class="nav-item active">
+								{% set obProductList = ProductList.make().wishList().active() %}
+								{% if obProductList.isNotEmpty() %}
+									{% partial 'cabinet/favorite-icon' obProductList=obProductList %}
+								{%else%}
+									<a class="nav-link" href="/"><img src="{{ 'assets/img/Favorite.svg' | theme }}" alt="" class="mr-2"></a>
+								{%endif%}
+							</li>
+							<li class="nav-item" id="block-header-cart">
+								
+								{% partial 'cart/block-header-cart' %}
+								
+							</li>
+						</ul>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<div class="mobil-header ">
+			<div class="navbar-collapse justify-content-around navbar-tu-menu container ">
+<!--				<a class="nav-link p-0" href="#"><i class="fal fa-search"></i></a>-->
+				<div class="d-flex col-4">
+				{% if user.is_store == 1 %}
+					<a class="nav-link p-0"  href="{{'store/product-store'|page({slug: user.store.slug})}}"><i class="far fa-user pr-3"></i></a>
+				{% elseif user.store.is_store == 0 and user %}
+					<a class="nav-link p-0"  href="{{"cabinet/orders"|page}}"><i class="far fa-user pr-3"></i></a>	
+				{%else%}	
+					<a class="nav-link p-0"  href="{{"auth/login"|page}}"><i class="far fa-user pr-3"></i></a>
+				{%endif%}
+				</div>
+				<div class="logo-main col-4">
+					<a href="/"><img src="{{'assets/img/avatarprimp.primus.png' | theme }}" alt=""></a>
+				</div>
+				<div class="d-flex flex-row col-4 justify-content-end">
+					<a class="nav-link p-0" style="margin-right: 20px" href="{{'cabinet/favorite'|page}}"><i class="far fa-heart"></i><span class="sr-only">(current)</span></a>
+					<li class="nav-item d-block" id="block-header-cart">
+						{% set obCartElementList = Cart.get() %}
+						<a class="pb-2 pr-3" href="{{ 'my-cart/cart' | page }}" >
+							<img src="{{ 'assets/img/basket.svg' | theme }}" alt="" height="27">
+							<span class="d-block badge badge-danger badge-pill number">{{obCartElementList.count}}</span>
+						</a>
+					</li>
+				</div>
+
+			</div>
+			<div class="main-block-tomenu">
+				{% for obCategory in obCategoryList %}	
+					
+					<a class="nav-link text-dark p-2  
+						{{ parentCategory == obCategory.slug ? 'active'}} 
+						{{ not parentCategory and this.page.url == '/store-list' and obCategory.slug == 'magaziny' ? 'active'}} " 
+						href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{  obCategory.name }}</a>
+				
+				{% endfor %}	
+			</div>
+		</div>
+	</div>
+</header>
+{% endif %}
+
+<div id="alertSuccess" class="alert d-none alert-success alert-dismissible" style="position: fixed;z-index: 999;top: 0px;right: 0px;">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Success!</strong>
+</div>
+<div id="alertInfo" class="alert d-none alert-info alert-dismissible" style="position: fixed;z-index: 999;top: 0px;right: 0px;">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <strong>Success!</strong>
+</div>

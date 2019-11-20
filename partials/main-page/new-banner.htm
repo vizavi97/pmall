@@ -1,0 +1,23 @@
+[viewBag]
+==
+{% if BannerBanners %}
+{% set banners = BannerBanners.load('431x351', false) %}
+{% set obCategoryList = CategoryList.make().tree() %}
+
+	<section class="banner">
+		<div class="banner-container container">
+			<div class="banner-headline row">
+				<h2>Актуально</h2>
+			</div>
+			<ul class="banner-items row">
+				{% for key, banner in banners if key < 3 %}
+					<li class="banner-item flex-column col-lg-4 col-sm-12">
+						<img src="{{ banner.image.path }}" alt="img"/>
+						<b>{{banner.pretitle}}</b>
+						<p>{{banner.title|raw}}</p>
+					</li>
+				{%endfor%}
+			</ul>
+		</div>
+	</section>
+{%endif%}

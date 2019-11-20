@@ -1,0 +1,71 @@
+[viewBag]
+==
+<script type="text/template" id="todos_labels">
+	<div class="field-group row">
+	  	<div class="col-lg-3">
+	  	<label for="task_{?}" class="text-muted small">{{'Размер'|_}}</label>
+		  	<select class="form-control" name="offers[{?}][name]" required>
+				<option value selected>{{'Размер'|_}}</option>
+				{% for obProperty in properties %}
+					{% for property in obProperty.property_value %}
+						{% if property.slug != 'bezrazmera'  %}
+							<option value="{{property.value}}">{{property.value}}</option>
+						{%endif%}	
+					{% endfor %}		
+				{% endfor %}	
+			</select>
+		  	
+		  	<input type="hidden" value="1" name="offers[{?}][active]">
+	  	</div>
+	  	<div class="col-lg-2">
+		  	<label class="text-muted small" for="duedate_{?}">{{'Цена со скидкой'|_}}</label>
+		  	<input type="text" class="span2 form-control" name="offers[{?}][price]" value="{duedate}" id="price" required>
+		</div>
+		<div class="col-lg-2">
+		  	<label class="text-muted small" for="duedate_{?}">{{'Цена без скидки'|_}}</label>
+		  	<input type="text" class="span2 form-control" name="offers[{?}][old_price]" value="{duedate}" id="duedate_{?}">
+		</div>
+		<div class="col-lg-1">
+		  	<label class="text-muted small" for="duedate_{?}">{{'Кол-во'|_}}</label>
+		  	<input type="text" class="span2 form-control" name="offers[{?}][quantity]" value="{duedate}" id="duedate_{?}" required>
+		</div>
+		<div class="col-lg-2">
+		  	<label class="text-white d-block">{{user.store.commission}}%</label>
+		  	<label id="resultPrice" for="duedate" class="text-muted small">{{'Комиссия'|_}}{{user.store.commission}}%</label>
+		</div>
+		<div class="col-lg-2">
+			<label for="duedate" class="text-white d-block">III</label>
+		  	<input type="button" style="font-size: 10px;" class="btn btn-danger span-2 delete" value="Удалить" />
+		</div>
+    </div>
+</script>
+
+<script>
+	$(function() {
+		$(".todos_labels .repeatable").repeatable({
+			addTrigger: ".todos_labels .add",
+			deleteTrigger: ".todos_labels .delete",
+			template: "#todos_labels",
+			startWith: 1,
+			max: 5
+		});
+	});
+</script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+<script>
+	function removeFile(object) {
+	    object.parent().removeClass('has-file').attr('style', '');
+	    object.remove();
+	}
+</script>

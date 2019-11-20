@@ -1,0 +1,146 @@
+[viewBag]
+==
+<?php
+function onStart ()
+{
+	$user = Auth::getUser();
+	
+	$this['register'] = $user ? null : true;
+}
+?>
+==
+{% set obCartElementList = Cart.get() %}
+
+<div class="col-md-9">
+	{% for obCartElement in obCartElementList %}
+		{% set obOffer = obCartElement.offer %}
+		{% set obProperty = obCartElement.property %}
+		
+		<form class="bg-white">
+		    <div class="row border pb-3 border-top-0 border-left-0 border-right-0">
+		  	  <div class="col-md-4 pl-4">
+		 	  	  <a href="{{ obOffer.product.getPageUrl() }}"><span class="basket-color-text">{{obOffer.product.name}}</span></a>
+		  		  <div class="main-basket-katalog d-flex pt-3">
+		  		  	  <div class="basket-tovar">
+		  			  <a href="#" class="basket-like"><img src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
+		  			  <a href="{{ obOffer.product.getPageUrl() }}"><img src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" width="100"></a>
+		  		  </div>
+		  	
+		  		  <div class="basket-info pl-3">
+		  			<a href="#" class="badge badge-pill badge-danger">New!</a>
+		  			{#<a href="#" class="badge badge-pill badge-warning text-white">Sale!</a>
+		  			<a href="#" class="badge badge-pill badge-success">-39%</a>#}
+		  			<a href="{{ obOffer.product.getPageUrl() }}"><h5><b>{{obOffer.product.name}}</b></h5></a>
+		  			<p>G19 Sport Non Stop</p>
+		  			<a href="#demo-{{loop.index}}" class="parametri text-danger show" data-toggle="collapse">{{'Размер'|_}} <i class="fas fa-chevron-down pl-2"></i></a>
+				    <div id="demo-{{loop.index}}" class="collapse">
+				    	{% for obProperty in obOffer.product.property %}
+				    		{% if obProperty.property_value.getValueString() %}
+				    			<p class="basket-color-text small"><b>{{obProperty.name}} :</b> {{obProperty.property_value.getValueString()}}</p>
+				    		{%endif%}	
+				    	{%endfor%}
+				    	
+				    	<div class="grams collapse-text d-flex py-2">
+				    		<div class="grams">
+								<div class="accordion" id="accordionExample">
+									<div class="card bg-transparent border-0 mt-1">
+										{% for key, offer in obOffer.product.offer %}
+											<p class="offer-item-id {{offer.name == obOffer.name ? 'active'}} card-body m-0"
+												onclick="$('.add').removeClass('d-block');$('.offer-{{key}}').addClass('d-block');"
+												data-data="{{{
+												'cart': [
+												{'offer_id': offer.id, 'quantity': 1 }] }|json_encode() }}">{{offer.name}}</p>
+											<span class="add offer-{{key}} btn btn btn-danger d-none mb-2"><b>{{'Add cart'|_}}</b></span>	
+										{%endfor%}				
+									</div>
+								</div>
+							</div>	
+				    	</div>
+				    </div>
+		  		  </div>
+		 	   </div>
+		      </div>
+		  	  <div class="col-md-2  col-sm-6 text-center bootstrap-pt">
+		  		<span class="basket-color-text">{{'Цена'|_}}</span>
+		  		<h5 class="pt-4">{{ obOffer.old_price_value }}<span class="basket-color-text">{{'сум'|_}}</span></h5>
+		  		<h5 class="text-danger">{{'Со скидкой'|_}}</h5>
+		  		<h6>{{ obOffer.price_value }} <span class="basket-color-text">{{'сум'|_}}</span></h6>
+		  	  </div>
+		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+		  		<span class="basket-color-text">{{'Кол-во'|_}}</span>
+			  	<div class="button-basket d-flex justify-content-center pt-4">
+			  		<button class="btn text-danger dobavlenye-tovara mr-2" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 0)">-</button>
+			  		<input type="hidden"  name="cart[0][offer_id]" value="{{ obOffer.id }}">
+		                <input 
+		                    data-request="Cart::onUpdate" 
+		                    data-request-update="'cart/section-cart': '#section-cart'"
+		                    data-track-input="1000"
+		                    class="btn bg-dark number-tovar text-white" 
+		                    id="productQuantity-{{obOffer.id}}" 
+		                    name="cart[0][quantity]" 
+		                    type="text" 
+		                    value="{{ obCartElement.quantity }}">
+			  		<button class="text-danger dobavlenye-tovara ml-2" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 1)">+</button>
+			  	</div>
+		   	  </div>
+		   	  
+		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+		  		<span class="basket-color-text">{{'Сумма'|_}}</span>
+		  		<h5 class="pt-4">{{ obCartElement.price_value }}<span class="basket-color-text">{{'сум'|_}}</span></h5>
+		   	  </div>
+		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+		  		<span class="basket-color-text">{{'Удалить'|_}}</span>
+		  		<div class="basket-udalit pt-4">
+		  		<a  data-request="Cart::onRemove"
+		                data-request-data="cart: [{{obOffer.id}}]"
+		                data-request-update="'cart/section-cart': '#section-cart'"
+		                data-request-success="toastr.info('Товар удален из корзины')"
+		                href="#" class="btn btn-sm btn-link mb-n1"><img src="{{ 'assets/img/Shape8copy3.png' | theme }}" alt=""></a>
+		  		</div>
+		      </div>
+		  </div>
+		</form>
+	{% endfor %}
+</div>
+<div class="col-md-3">
+	<div class="main-right-block bg-white px-3">
+		<div class="transfer pt-3 pb-5">
+			<a class="text-danger border-transfer" href="">{{'Перечислить'|_}}</a><img class="pl-2" src="{{ 'assets/img/Shape7.png' | theme }}" alt="">	
+		</div>
+		<div class="summa d-flex border border-right-0 border-top-0 border-left-0 justify-content-between">
+			<h6>{{'Сумма'|_}}</h6>
+			<h6>{{ obCartElementList.getTotalPriceValue() }}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+		</div>
+		<div class="summa d-flex  justify-content-between pt-3">
+			<h6>{{'Скидка'|_}} <a class="" href=""><img class="pl-2" src="{{ 'assets/img/_.png' | theme }}" alt=""></a></h6>
+			<h6>{{ obCartElementList.getDiscountTotalPrice ()}}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+		</div>
+		<div class="summa d-flex  justify-content-between pt-3">
+			<h6>{{'Итоги'|_}}</h6>
+			<h6>{{obCartElementList.getTotalPriceValue()}}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+		</div>
+		<div class="basket-button py-5 mb-5">
+			{% if obCartElementList.isNotEmpty() and user.is_store == 0 %}
+				<a href="{{ register == null ? 'my-cart/purchase'|page : '/register'}}" class="btn btn-outline-danger man-btn bg-danger text-white">{{'Оформить заказ'|_}} <i class="fas fa-chevron-right pl-4"></i></a>
+			{%else%}	
+				<b>{{'Покупка товаров допустима только физическим  лицам'|_}}</b>
+			{%endif%}	
+		</div>
+	</div>
+</div>
+
+
+<style>
+	.grams p.active {color: #5b9724;font-weight: 700;font-size:16px;}
+	.grams p {
+	    padding: 0 5px;
+	    line-height: 27px;
+	    font-weight: 500;
+	    font-size: 14px;
+	    color: #737373;
+	    cursor: pointer;}
+	#accordionExample span.add{ 	    
+	    font-size: 10px;
+    	padding: 2px;
+	}	
+</style>

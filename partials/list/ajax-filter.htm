@@ -1,0 +1,81 @@
+[viewBag]
+==
+<form id="ajaxFilterForm"  class="none">
+	<div class="row">
+		<div class="col-md-3 col-sm-12">
+			<select class="browser-default custom-select categoriy-select mt-1" name="sort">
+				<option value selected>{{"Сортировать по"|_}}</option>
+				<option value="new">{{"По новинкам"|_}}</option>
+				<option value="price|desc">{{"По возрастанию цены"|_}}</option>  
+				<option value="price|asc">{{"По убыванию цены"|_}}</option>  
+				<option value="popularity|desc">{{"По популярности"|_}}</option>  
+				<option value="rating|desc">{{"По высокий рейтинг"|_}}</option>  
+				<option value="rating|asc">{{"По низкий рейтинг"|_}}</option>  
+			</select>
+		</div>
+		<div class="col-md-3 col-sm-12">
+			<select class="browser-default custom-select categoriy-select mt-1" name="brand" >
+				<option value selected>{{'Бренд'|_}}</option>
+				{% for obBrand in obBrandList %}
+					<option value="{{obBrand.slug}}">{{obBrand.name}}</option>
+				{%endfor%}
+			</select>
+		</div>
+		
+		{% if obProductPropertyList.isNotEmpty == true %}
+		    {% for obProeprty in obProductPropertyList %}
+		    
+		        {# Get filter type #}
+		        {% set sFilterType = obProductPropertyList.getFilterType(obProeprty.id) %}
+		        {# Get proeprty value list #}
+		        {% set obPropertyValueList = obProeprty.property_value.sort() %}
+		        {# Render filtre with type == select #}
+		        {% if sFilterType == 'select' %}
+		        	{% if obPropertyValueList.isNotEmpty() %}
+						<div class="col-md-3 col-sm-12">
+							<select class="browser-default custom-select categoriy-select mt-1"  name="property[{{obProeprty.id}}]">
+								<option value selected>{{obProeprty.name}}</option>
+								
+								{% for obValue in obPropertyValueList %}
+									<option value="{{ obValue.slug }}">{{ obValue.value }}</option>  
+								{% endfor %}  
+								
+							</select>
+						</div>
+					{% endif %}
+				{% endif %}	
+			{% endfor %}
+		{% endif %}	
+	</div>
+	
+	<div class="scroll-slider d-block d-md-flex justify-content-between align-items-center my-4">
+		<div class="slider-nimber">
+			<P class="m-0 p-0">{{min}}</P>
+			<span class="basket-color-text">{{'Цена от'|_}}</span>
+		</div>
+		<div class="slider-container">
+			<input id="slider" type="range" class="js-range-slider bg-white" name="price" value="{{min}}"
+               data-type="double"
+               min="{{min}}"
+               max="{{max}}"
+               data-from="{{fMinPriceFilterValue}}"
+               data-to="{{fMaxPriceFilterValue}}"
+               data-force-edges="true"
+               data-grid="false"
+            />
+	    	<div class="fill"></div>
+		</div>
+		<div class="slider-nimber">
+			<P class="m-0 p-0 ">{{max}}</P>
+			<span class="basket-color-text">{{'Цена до'|_}}</span>
+		</div>
+		<div class="btn-slider d-block d-flex">
+			<div class="custom-button">
+				<button type="submit" class="btn btn-outline-danger categoriy-button">{{'Искать'|_}}</button>
+			</div>
+			<div class="custom-button">
+				<button type="submit" class="btn btn-outline-danger categoriy-button">{{'Сбросить'|_}}</button>
+			</div>
+		</div>
+	</div>
+</form>

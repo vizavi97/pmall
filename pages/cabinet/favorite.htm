@@ -1,0 +1,33 @@
+title = "Favorite list"
+url = "/favorites"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+				
+					{% partial 'cabinet/side-nav'  page='favorite'%}
+					
+				</div>
+				<div class="col-md-9">	
+					<h5 class="pb-3"><b>{{'Mои избранное'|_}}</b></h5>
+					
+					<div class="row">
+						<div class="col-md-12" id="cabinet-wishlist">
+						
+							{% partial 'cabinet/my-favorites' %}
+							
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</section>
+</div>

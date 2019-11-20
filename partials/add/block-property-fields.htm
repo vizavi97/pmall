@@ -1,0 +1,113 @@
+[viewBag]
+==
+<div class="col-md-12 d-none" id="template">
+	<div id="todos_labels">
+		<div class="field-group row">
+			<div class="col-lg-4 col-md-4">
+				{% for obProperty in obCategory.product_property if obProperty.code == 'size' %}
+					<label for="task" class="text-muted small">{{ obProperty.name }}</label>
+					<select class="form-control" name="offers[{?}][name]">
+						<option value selected><b>{{obProperty.name}}</b></option>
+						{% for obValue in obProperty.property_value %}     	
+							<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
+						{%endfor%}	
+					</select>	
+				{% else  %}
+					<label for="task" class="text-muted small">{{'Размер'|_}}</label>
+					<select class="form-control" name="offers[0][name]" required>
+						<option value selected>{{'Размер'|_}}</option>
+						{% for obProperty in properties %} 
+							{% for property in obProperty.property_value %} 
+								{% if property.slug != 'bezrazmera' %}
+									<option value="{{property.value}}">{{property.value}}</option>
+								{%endif%} 
+							{% endfor %} 
+						{% endfor %} 
+					</select>
+				{% endfor %}
+				<input type="hidden" value="1" name="offers[{?}][active]">
+			</div>
+			<div class="col-lg-2 col-md-4">
+				<label for="duedate_{?}" class="text-muted small">{{'Цена со скидкой'|_}}</label>
+				<input type="text" maxlength="10" class="span2 form-control" name="offers[{?}][price]" value="" id="duedate_{?}" onkeyup="calcPrice(this)" onkeypress="return isNumberKey(this)" required>
+			</div>
+			<div class="col-lg-2 col-md-4">
+				<label for="duedate{?}" class="text-muted small">{{'Цена без скидки'|_}}</label>
+				<input type="text" maxlength="10" class="span2 form-control" name="offers[{?}][old_price]" value="" id="duedate_{?}" onkeypress="return isNumberKey(this)">
+			</div>
+			<div class="col-lg-1 col-md-2">
+				<label for="duedate{?}" class="text-muted small">{{'Кол-во'|_}}</label>
+				<input type="text" maxlength="3" class="span2 form-control quantity" name="offers[{?}][quantity]" value="" id="duedate_{?}" onkeypress="return isNumberKey(this)" required>
+			</div>
+			<div class="col-lg-2 col-md-3">
+	
+				<label for="duedate{?}" class="text-muted small">{{'Комиссия'|_}}{{user.store.commission}}%</label>
+				<input type="hidden" class="percent" value="{{user.store.commission}}"/>
+				<input type="text" class="span2 form-control calc-value" name="" value="" disabled>
+			</div>
+			<div class="col-lg-1 col-md-2">
+	
+				<label for="duedate{?}" class="text-white d-block">{{'III'|_}}</label>
+				<input type="button" style="font-size: 10px;"  class="btn btn-danger span-2 delete" value="--" />
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		let i = 1;
+		let maxItems = 3;
+		let item = 1;
+		let repeatable, template, button, remBtn;
+		function addFields(e) {
+			button = $(e);
+			if (item >= maxItems) {
+				button.attr('disabled', 'disabled');
+				return;
+			}
+			repeatable = $(e).parents('.todos_labels').find('.repeatable');
+			template = $('#todos_labels').html();
+			template = template.replace(/{\?}/g, "new" + i);
+			$(repeatable).append(template);
+			i = i + 1;
+			item = item + 1;
+		}
+		
+		
+		function removeFields(e) {
+			$(e.).parents('.field-group').remove();
+			button.removeAttr('disabled');
+			item = item - 1;
+		}
+	</script>
+	
+	
+	<!-- <script>
+	  $(function() {
+	    $(".todos_labels .repeatable").repeatable({
+	      addTrigger: ".todos_labels .add",
+	      deleteTrigger: ".todos_labels .delete",
+	      template: "#todos_labels",
+	      startWith: 1,
+	      max: 5
+	    });
+	  });
+	</script>
+	<script type="text/javascript">
+	  var _gaq = _gaq || [];
+	  _gaq.push(['_setAccount', 'UA-36251023-1']);
+	  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+	  _gaq.push(['_trackPageview']);
+	
+	  (function() {
+	    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+	    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+	    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+	  })();
+	</script>
+	<script>
+	  function removeFile(object) {
+	    object.parent().removeClass('has-file').attr('style', '');
+	    object.remove();
+	  }
+	</script> -->
+</div>

@@ -1,0 +1,47 @@
+title = "Purchase"
+url = "/purchase"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[PaymentMethodList]
+
+[ShippingTypeList]
+
+[MakeOrder]
+mode = "ajax"
+flash_on = 1
+redirect_on = 1
+redirect_page = "my-cart/order-finish"
+==
+<?php
+function onStart(){
+    $offers = array_keys(Cookie::get('wishlist', []));
+    $this['offers'] = $offers;
+}
+?>
+==
+{% set obCartElementList = Cart.get() %}
+{% if obCartElementList.isNotEmpty() %}
+	<div class="wrapper">
+		<section>
+			{% partial 'blocks/search-block' %}
+		</section>
+	<section>
+		<div class="container">
+			 <div id="form-makeorder">
+			 	
+			 	{% partial 'cart/form-makeorder' %}
+			 	
+			 </div>
+		</div>
+	</section>
+{%else%}
+	<div class="container text-center my-5 py-5">
+		<h4 class="">{{'У вас нет определенных продуктов'|_}}</h4>
+		<a href="{{'categorie'|page}}" class="text-danger">{{'Xотите выбрать ?'|_}}</a>
+	</div>	
+{%endif%}

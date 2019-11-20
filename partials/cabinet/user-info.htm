@@ -1,0 +1,182 @@
+[viewBag]
+==
+<div class="col-md-9">
+	<div class="custom-title d-block d-md-flex">
+		<h5 class="pr-3">{{'Мои данные'|_}}</h5>
+		<p>{{'Добро пожаловать в'|_}}<span class="text-danger pl-2">{{'Primus Mall'|_}}</span></p>
+	</div>
+	<div class="row custom-text d-block d-md-flex align-items-center">
+		<div class="col-md-8 col-sm-8">
+			<span>{{'Из главной страницы аккаунта вы можете посмотреть ваши данные и адрес доставки, а также изменить пароль и основную информацию.'|_}}</span>	
+		</div>
+		<div class="col-md-2 col-sm-2">
+			<label class="file-photo" 
+	            style="background-image: url({{user.avatar.path}});font-size: 13px;border-radius:50%;">
+	            <input type="file" accept="image/*" name="avatar" onchange="readURL(this);">
+	        </label>
+		</div>
+	</div>
+	<p class="pb-3 basket-color-text">{{'Ф.И.О'|_}}</p>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="input-group checkout-block  mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text p-0 input-css"><img src="{{ 'assets/img/enter.svg' | theme }}" alt=""></span>
+			  </div>
+			  <input type="text" name="surname" value="{{user.surname}}" class="form-control input-css" placeholder="{{user.surname}}" aria-label="Amount (to the nearest dollar)">
+			  <div class="input-group-append">
+			    <span class="input-group-text input-css"><i class="fas fa-pencil"></i></span>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="input-group checkout-block  mb-3">
+				<div class="input-group-prepend">
+				    <span class="input-group-text p-0 input-css"><img src="{{ 'assets/img/enter.svg' | theme }}" alt=""></span>
+				</div>
+				<input type="text" name="name" class="form-control input-css" value="{{user.name}}" placeholder="{{user.name}}" aria-label="Amount (to the nearest dollar)">
+				<div class="input-group-append">
+				    <span class="input-group-text input-css"><i class="fas fa-pencil"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<p class="basket-color-text pt-3 mb-4">{{'Контактные данные'|_}}</p>
+	<div class="row">
+		<div class="col-md-4">
+			<div class="input-group checkout-block  mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text  p-0 input-css"><img src="{{ 'assets/img/Phone.png' | theme }}" alt=""></span>
+			  </div>
+			  <input type="number" name="phone" class="form-control input-css" value="{{user.phone}}" placeholder="{{user.phone}}" aria-label="{{'Amount (to the nearest dollar)'|_}}">
+			  <div class="input-group-append">
+			    <span class="input-group-text   input-css"><i class="fas fa-pencil"></i></span>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="input-group checkout-block  mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text p-0  input-css"><img src="{{ 'assets/img/Shape14.png' | theme }}" alt=""></span>
+			  </div>
+			  <input type="mail" name="email" class="form-control input-css" value="{{user.email}}" placeholder="{{user.email}}" aria-label="{{'Amount (to the nearest dollar)'|_}}">
+			  <div class="input-group-append">
+			    <span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
+			  </div>
+			</div>
+		</div>
+		<div class="col-md-8 mt-3">
+			<p class="basket-color-text pt-3 mb-4">{{'Адрес'|_}}</p>
+			<div class="input-group checkout-block mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text p-0 input-css"><i class="far fa-compass"></i></span>
+			  </div>
+			  <input type="mail" name="user_address" class="form-control input-css" value="{{user.user_address}}" placeholder="{{user.user_address}}" aria-label="{{'Amount (to the nearest dollar)'|_}}">
+			  <div class="input-group-append">
+			    <span class="input-group-text input-css"><i class="fas fa-pencil"></i></span>
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="row pt-5">
+		<div class="form-check">
+		    <input class="form-check-input position-static" type="radio" name="blankRadio" id="blankRadio1" value="option1" aria-label="...">
+		    <label class="form-check-label" for="inlineRadio1"></label>
+	        <form action="#">
+			    <p>
+			      <label>
+			        <input type="checkbox" required/>
+			        <span><span class="text-danger">{{'Согласен с условиями'|_}} </span>{{'пользования и с условиями конфиденциальности'|_}}</span>
+			      </label>
+			    </p>
+			</form>
+		</div>
+		<div class="col-md-4">
+			<div class="custom-button mb-5">
+				<button type="sub" class="btn btn-outline-danger bg-danger text-white man-btn">{{'Сохранить'|_}}</button>
+			</div>
+		</div>
+		<div class="col-md-4">
+			<div class="basket-button">
+				<p onclick="$('.right').removeClass('d-none').addClass('d-block');$('.password').removeClass('d-block').addClass('d-none');"
+					class="btn btn-outline-danger bg-danger text-white man-btn" style="cursor: pointer;"
+						>{{'Изменить пароль'|_}} <i class="fas fa-pencil pl-4"></i></p>
+			</div>
+		</div>
+	</div>
+	<div class="row pb-5">
+		<div class="right d-none mb-5">
+       
+                <div class="col">
+                	<div class="input-group mb-3">
+                		<label class="mr-4">{{'Старый пароль'|_}}</label>
+                    	<input class="form-control" type="password" name="password" placeholder="">	
+                	</div>
+                    <div class="input-group mb-3">
+                    	<label class="mr-4">{{'Новый пароль'|_}}</label>
+                    	<input class="form-control" type="password" name="password" placeholder="">
+                    </div>
+                    <div class="input-group mb-3">
+                    	<label class="mr-4">{{'Повторить пароль'|_}}</label>
+                    	<input class="form-control" type="password" name="password_confirmation" placeholder="">
+                    </div>
+                    <button class="btn btn-outline-success mr-3">{{'Применить'|_}}</button>
+                    <p onclick="$('.password').removeClass('d-none').addClass('d-block');$('.right').removeClass('d-block').addClass('d-none');" class="d-inline-block forgot text-danger" style="cursor: pointer;">{{'Забыли пароль?'|_}}</a>
+                </div>
+       
+        </div>
+		<div class="password d-none" id="partialUserResetForm">
+	        {% if resetPassword.code == null %}
+	            {% partial resetPassword ~ '::restore' %}
+	        {% else %}
+	            {% partial resetPassword ~ '::reset' %}
+	        {% endif %}
+	    </div>
+	</div>
+</div>
+
+
+
+<style>
+	.file-photo{
+		overflow: hidden;
+	    display: block;
+	    background-color: #ebedf1;
+	    padding-bottom: 70%;
+	    position: relative;
+	    -webkit-background-size: cover;
+	    background-size: cover;
+	    background-repeat: no-repeat;
+	    background-position: 50% 50%;
+	    border-radius: 4px;
+	    -webkit-border-radius: 4px;
+	    -moz-border-radius: 4px;
+	    cursor: pointer;
+	    margin: 0;
+	}
+	.file-photo input{visibility: hidden;}
+</style>
+
+{% put scripts %}
+<script>
+function removeFile(object) {
+    object.parent().removeClass('has-file').attr('style', '');
+    object.remove();
+}
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            var data = e.target.result;
+            var file = $(input);
+            file.parent().addClass('has-file');
+            file.parent().css("background-image", 'url("'+data+'")');
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+</script>
+{%endput%}

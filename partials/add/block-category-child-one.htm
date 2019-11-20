@@ -1,0 +1,16 @@
+[viewBag]
+==
+{% if category.children %}
+	<select class="form-control" name="categoryChildTwo_id"
+		data-request="onProperty" 
+		data-request-update="'add/block-property': '#block-property','add/block-category-child-two': '#block-category-child-two', 'add/block-offer': '.propertyBlock'"
+		data-request-success="$(this).parents('.categorySelect').next().show()">
+	    <option value selected><b>{{'Категория'|_}}</b></option>
+	    
+	    {% for obChildren in category.children %}
+	    	<option value="{{obChildren.id}}"><b>{{obChildren.name}}</b></option>
+	    	
+	    {% endfor %}
+	    
+	</select>
+{% endif %}

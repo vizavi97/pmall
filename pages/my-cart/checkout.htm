@@ -1,0 +1,159 @@
+title = "checkout"
+url = "/checkout"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+{% set obCartElementList = Cart.get() %}
+
+<form data-request="MakeOrder::onCreate" data-request-flash data-request-1update1="'cart/form-makeorder': '#form-makeorder'">
+	<div class="row">
+		<div class="col-md-9">
+		 	  <div class="main-basket d-block d-md-flex justify-content-between border border-right-0 border-left-0 border-top-0 pb-3 mb-5">
+				<div class="basket-header d-flex align-items-center">
+					<div class="basket-number bg-danger pt-1">
+						<h3 class="text-center text-white">1</h3>
+					</div>
+					<span class="pl-3">{{'Корзина'|_}}</span>
+				</div>
+				<div class="basket-header d-flex align-items-center">
+					<div class="basket-number border pt-1 {{user ? 'bg-danger'}}">
+						<h3 class="text-center {{user ? 'text-white' : 'text-dark'}}">2</h3>
+					</div>
+					<span class="pl-3">{{'Авторизоваться'|_}}</span>
+				</div>
+				<div class="basket-header d-flex align-items-center">
+					<div class="basket-number border pt-1">
+						<h3 class="text-center text-dark">3</h3>
+					</div>
+					<span class="pl-3">{{'Оформление заказа'|_}}</span>
+				</div>
+			  </div>
+			  <div class="row">
+			  	<div class="col-md-6">
+		  			<div class="input-group checkout-block mb-5">
+					  <div class="input-group-prepend">
+				    	<span class="input-group-text input-css" id="basic-addon1"><i class="fas fa-user"></i></span>
+					  </div>
+			  	  	  <input type="text" class="form-control input-css" placeholder="{{user.name ? user.name : 'Имя'}}" aria-label="Username" aria-describedby="basic-addon1" name="user[name]" value="{{ user.name }}">
+					</div>
+					<div class="input-group checkout-block mb-5">
+					  <div class="input-group-prepend">
+					    	<span class="input-group-text input-css" id="basic-addon1"><i class="fas fa-mail-bulk"></i></span>
+					  </div>
+					  <input type="email" class="form-control input-css" placeholder="{{user.email ? user.email : 'Почта'}}" aria-label="E-mail" aria-describedby="basic-addon1" name="user[email]" value="{{ user.email }}">
+					</div>
+					<div class="input-group checkout-block mb-5">
+					  <div class="input-group-prepend">
+					    	<span class="input-group-text input-css" id="basic-addon1"><i class="fas fa-map-marker-alt"></i></span>
+					  </div>
+					  	<input type="text" class="form-control input-css" placeholder="В городе" aria-label="siti" aria-describedby="basic-addon1">
+					</div>
+					<div class="form-check pb-3 p-0">
+						<p>
+					      <label>
+					        <input class="with-gap" name="group1" type="radio">
+					        <span>{{'Подписаться'|_}}</span>
+					      </label>
+					    </p>
+					</div>
+			  	</div>
+			  	<div class="col-md-6">
+		  			<div class="input-group checkout-block mb-5">
+					    <div class="input-group-prepend">
+					    	<span class="input-group-text input-css" id="basic-addon1"><i class="fas fa-user"></i>
+					    	</span>
+					    </div>
+					  	<input type="text" class="form-control input-css" placeholder="{{user.surname ? user.surname : 'Фамилия'|_}}" aria-label="Username" aria-describedby="basic-addon1" name="user[last_name]" value="{{ user.surname }}">
+					</div>
+					<div class="input-group checkout-block mb-5">
+					    <div class="input-group-prepend">
+				    		<span class="input-group-text input-css" id="basic-addon1"><i class="far fa-mobile-android-alt"></i></span>
+				   	    </div>
+					  	<input type="number" class="form-control input-css" placeholder="{{user.phone ? user.phone : '+998()---'}}" aria-label="Username" aria-describedby="basic-addon1" name="user[phone]" value="{{ user.phone }}">
+					</div>
+					<div class="input-group checkout-block mb-5">
+					  <div class="input-group-prepend">
+				    	<span class="input-group-text input-css" id="basic-addon1"><i class="far fa-compass"></i></span>
+					  </div>
+				  	  <input type="text" required="required" class="form-control input-css" placeholder="{{'Адрес'|_}}" aria-describedby="basic-addon1" name="user[property][billing_address]" data-group="shipping_address">
+				  	  {#<input type="text" id="person-address" name="order[property][shipping_address1]" class="input__field _shopaholic-order-field" data-was-change="false" required="" maxlength="100" minlength="1" data-bouncer-target=".cart__input-error_address" data-group="shipping_address">#}
+					</div>	
+			  	</div>
+			  	<div class="col-md-6">
+		  			<h3 class="pb-3">{{'Доставка'|_}}</h3>
+					<div class="form-check pb-3 p-0">
+						
+						{% set obShippingTypeList = ShippingTypeList.make().sort().active() %}
+		        		{% if obShippingTypeList.isNotEmpty() %}
+						{% for obShippingType in obShippingTypeList %}
+							<p>
+						      <label>
+						      	<input class="with-gap" {{ loop.first ? 'checked' }} type="radio" name="order[shipping_type_id]" value="{{ obShippingType.id }}">
+						        <span class="form-check-label">{{ obShippingType.name }} {% if obShippingType.price %}-  <span class="badge badge-pill badge-danger bg-color">{{ obShippingType.price }}sum</span>{% endif %} </span>
+						        
+						      </label>
+						    </p>
+						{% endfor %}
+						{% endif %}	
+						
+					</div>
+			  	</div>
+			  	<div class="col-md-6">
+					<h3 class="pb-3">{{'Способ оплаты'|_}}</h3>
+					<div class="form-check pb-3 p-0">
+						
+						{% set obPaymentMethodList = PaymentMethodList.make().sort().active() %}
+		        		{% if obPaymentMethodList.isNotEmpty() %}
+						{% for obPaymentMethod in obPaymentMethodList %}
+							<p>
+						      <label>
+						      	<input class="with-gap" {{ loop.first ? 'checked' }} type="radio" name="order[payment_method_id]" id="payment-method-{{ obPaymentMethod.id }}" value="{{ obPaymentMethod.id }}">
+						        <span>{{ obPaymentMethod.name }}</span>
+						      </label>
+						    </p>
+						{% endfor %}    
+						{% endif %}
+				
+					</div>
+			  	</div>
+			  </div>
+		  </div>
+		  <div class="col-md-3">
+			<div class="main-right-block bg-white px-3">
+				<div class="checkout-block-right">
+					<h4 class="text-danger pt-3">{{'Ваш Заказ'|_}}</h4>
+					<span>Итоги: {{ obCartElementList.getTotalPriceValue() }}</span>
+					<div class="checkout-mol-block">
+					
+						{% for obCartElement in obCartElementList %}
+						{% set obOffer = obCartElement.offer %}
+							<div class="mal-block pb-3 d-flex">
+								<div class="checkout-img">
+									<img class="h-100" src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
+								</div>
+								<div class="checkout-text pl-4">
+									<h6 class="p-0 m-0">{{obOffer.product.name}}</h6>
+									{% for item in obCartElement.property %}
+					    				<span class="small"><b>{{obOffer.name}}</b> {{item}}</span><br>
+					    			{%endfor%}
+									<span class="text-danger">{{'Цена'|_}}</span><br>
+									<p class="m-0 p-0">{{ obOffer.price_value }} <span class="basket-color-text">{{'сум'|_}}</span></p>
+								</div>
+										
+							</div>
+						{% endfor%}
+						
+						<div class="basket-button py-4 mb-5">
+							<button type="submit" class="btn btn-outline-danger man-btn bg-danger text-white">{{'Оформить заказ'|_}}<i class="fas fa-chevron-right pl-4"></i></button>
+						</div>
+							
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>	
+</form>

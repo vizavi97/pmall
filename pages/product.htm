@@ -1,0 +1,92 @@
+title = "product"
+url = "/product/:parent/:slug"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[ShippingTypeList]
+
+[MakeReview]
+mode = "ajax"
+flash_on = 1
+
+[FilterPanel]
+
+[MakeOrder]
+mode = "ajax"
+flash_on = 1
+redirect_on = 1
+
+[CategoryPage ChildCategoryPage]
+slug = "{{ :category }}"
+slug_required = 0
+smart_url_check = 0
+
+[CategoryPage ParentCategoryPage]
+slug = "{{ :parent }}"
+slug_required = 1
+smart_url_check = 0
+
+[ProductPage]
+slug = "{{ :slug }}"
+slug_required = 1
+smart_url_check = 0
+==
+<?php
+use Lovata\Shopaholic\Models\Product as ProductModel;
+
+function onStart(){
+	$productId = $this->ProductPage->get();
+	$obProduct = ProductModel::where('id', $productId->id)->first();
+	$this['productStore'] = $obProduct->store;
+}
+function onPropertyValue() {
+	$this['property'] = Input::only('property');
+}
+?>
+==
+{% set obProduct = ProductPage.get() %}
+{% set productPrice = obProduct.offer.active.sort('new') %}
+{% set price = (productPrice.count) ? productPrice.first : null %}
+{# Get product list collection#}
+{% set obProductList = ProductList.make().active() %}
+
+{% partial 'blocks/search-block' %}
+
+
+<div class="wrapper">
+	<section class="pt-3 pb-5">
+		<div class="container">
+			<h2 class="font-weight-bold my-dark text-dark mb-0">{{obProduct.name}}</h2>
+			<p class="basket-color-text">{{obProduct.name}}</p>
+			
+			{% partial 'product/block-product' price=price obProduct=obProduct %}
+			
+		</div>	
+	</section>
+	<section>
+		<div class="container">
+			{% set obProductList = ProductList.make().sort('new').active().take(11)%}
+			
+			{% partial 'product/section-recomended' obProductList=obProductList %}
+			
+		</div>	
+	</section>
+	<!-- section-recommend  -->  
+	{% partial 'product/viewed-block' %}
+</div>
+
+
+<style>
+	.carousel-cell {
+	  width: 100%; /* full width */
+	  height: 160px; /* height of carousel */
+	  margin-right: 10px;
+	}
+	.card-info-block .text-prvki {
+		padding-left: 38px;
+	}
+</style>

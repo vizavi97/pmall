@@ -1,0 +1,56 @@
+[viewBag]
+==
+{% if BannerBanners %}
+    {% set banners = BannerBanners.load('1256x350', false) %}
+	<section>
+
+		<div class="container">
+			<div class="carousel" data-flickity='{ "autoPlay": true }'>
+				
+				{% for banner in banners %}
+				
+					<div class="carousel-cell">
+						<div class="mx-slider" style="background-image: url({{ banner.image.path }});">
+							<a href="{{banner.url}}" class="btn  recommend-loock  lock-more bg-danger text-white mx-btn"><b>{{banner.pretitle}}</b></a>
+						</div>
+					</div>
+				
+				{% endfor %}
+				
+				
+			</div>
+		</div>
+	<style>
+		.mx-btn{
+			background-color: #fff !important;
+			color: #ae3b39 !important;
+		}
+		.mx-btn {
+			padding: 17px 25px 17px 25px !important;
+		}
+		.mx-btn:hover {
+			color: #fff;
+		}
+		.mx-slider {
+			min-height: 100%;
+			width: 100%;
+			position: relative;
+			background-size: cover;
+		}
+		.carousel-cell .recommend-loock {
+			position: absolute;
+			bottom: 6px;
+			right: 5px;
+		}
+		@media screen and (max-width:550px) {
+			.banner-header {
+				width: 100%;
+				height: auto;
+			}
+			.flickity-slider {
+				height: 100%;
+			}
+		}
+	</style>
+	</section>
+{% endif %}

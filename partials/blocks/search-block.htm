@@ -1,0 +1,132 @@
+description = "prinimayet odin parametr. (page) yesli on raven 'main'u to budet pokazivatsya tol'ko poiskovik"
+
+[viewBag]
+==
+<?php
+function onStart() {
+	$this['parentCategory'] = $this->param('parent');
+}
+?>
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+{% set obCategory = ParentCategoryPage.get() %}
+
+{% if obCategoryList.isNotEmpty() %}
+	<div class="container">
+		{% if page == 'main' %}
+
+			<form class="form-inline" action="{{"categorie"|page({category: obCategoryList[0].slug})}}">
+				<div class="input-group w-100 input-group-style">
+					<input type="text" name="query" class="form-control input-control border-0" placeholder="Поиск по категориям" aria-label="Username" aria-describedby="basic-addon1">
+					<button class="input-button-style" type="submit">
+						<span id="#basic-addon1"><i class="far fa-search"></i></span>
+					</button>
+				</div>
+			</form>
+
+		{% else %}
+		<div class="row">
+			<div class="col-md-12 mobil-block">
+				<nav class="navbar navbar-expand-lg bg-white"   >
+					<ul class="navbar-collapse bg-white menu-collapse brend-navigation navbar-block-man p-0">
+					{% if parentCategory == obCategory.slug %}
+						{% for obChildCategory in obCategory.children %}
+							<li class="dropdown hover">
+								<a href="{{'categorie' | page({category: obCategory.slug, slug: obChildCategory.slug})}}" class="dropdown-toggle dropdown-link text-dark text-decoration-none"
+								   id="dropdownMenuButton"
+								   aria-haspopup="true"
+								   aria-expanded="false">
+									<span>{{obChildCategory.name}}</span>
+								</a>
+								<ul class="dropdown-menu-brend transition3">
+									<li class="menu-leftSide">
+										<ul>
+											{% for children_id_list in obChildCategory.children %}
+											<li class="block-one">
+												<em class="add-collapse-block-bg mr-1"></em>
+												<a class="add-color text-overflow" href="{{'categorie' | page({category: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name}}</b></a>
+											</li>
+											{% endfor %}
+										</ul>
+									</li>
+									<li class="menu-rightSide">
+										<div class="menu-banner d-flex flex-column justify-content-center align-items-center ">
+											<img src="{{'assets/img/11061458-1422376632-829116copy2.png' | theme }}" alt="будущий баннер"/>
+											<b>Здесь будет баннер</b>
+										</div>
+									</li>
+								</ul>
+							</li>
+						{% endfor %}
+					{% endif %}
+					{% for obCategory in obCategoryList %}
+						{% if not parentCategory %}
+							{% if obCategory.slug == 'women' %}
+								{% for obChildCategory in obCategory.children %}
+									<li class="dropdown hover">
+										<a href="{{'categorie' | page({parent: obCategory.slug, slug: obChildCategory.slug})}}" class="dropdown-toggle dropdown-link text-dark text-decoration-none"
+							   id="dropdownMenuButton"
+							   aria-haspopup="true"
+							   aria-expanded="false">
+								<span>{{obChildCategory.name}}</span>
+							</a>
+										<ul class="dropdown-menu-brend transition3">
+								            <li class="menu-leftSide">
+												<ul>
+										{% for children_id_list in obChildCategory.children %}
+													<li class="block-one">
+														<em class="add-collapse-block-bg mr-1"></em>
+														<a class="add-color text-overflow" href="{{'categorie' | page({parent: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name}}</b></a>
+													</li>
+										{% endfor %}
+												</ul>
+											</li>
+											<li class="menu-rightSide">
+									<div class="menu-banner d-flex flex-column justify-content-center align-items-center ">
+										<img src="{{'assets/img/11061458-1422376632-829116copy2.png' | theme }}" alt="будущий баннер"/>
+										<b>Здесь будет баннер</b>
+									</div>
+								</li>
+										</ul>
+									</li>
+									<!--<div class="dropdown">
+										<a href="{{'categorie' | page({category: obCategory.slug, slug: obChildCategory.slug})}}" class="dropdown-toggle dropdown-link  text-dark"
+										   id="dropdownMenuButton"
+										   aria-haspopup="true"
+										   aria-expanded="false">
+											<span>{{obChildCategory.name}}</span>
+										</a>
+
+										<div class="dropdown-menu-brend transition3" id="">
+											<div class="smapl-dropdown-menu d-flex">
+												{% for children_id_list in obChildCategory.children %}
+													<div class="block-one">
+														<div class="main-add-block d-flex">
+															<div class="add-collapse-block-bg mr-1"></div>
+															<a class="add-color" href="{{'categorie' | page({category: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name}}</b></a>
+														</div>
+													</div>
+												{% endfor %}
+											</div>
+										</div>
+									</div>-->
+								{% endfor %}
+							{% endif %}
+						{% endif %}
+					{% endfor %}
+				</ul>
+					<div class="col-md-4 list-search">
+						<nav class="navbar navbar-light dropdown-menu-header justify-content-end">
+						  <form class="form-inline from-css" action="{{"categorie"|page({slug: ''})}}">
+						    <div class="input-group search">
+						    <input type="text" class="from-style" name="query" placeholder="Поиск по котегориям" aria-describedby="basic-addon1"><button class="btn btn-outline-secondary search-btn" type="button" onclick="$( 'form' ).first().submit();"><i class="fal fa-search "></i></button>
+						    </div>
+						  </form>
+						</nav>
+					</div>
+				</nav>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+{% endif %}

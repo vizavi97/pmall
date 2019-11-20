@@ -1,0 +1,89 @@
+description = "signin"
+
+[viewBag]
+==
+<form role="form" data-request="onSignin" data-request-flash>
+
+	<div class="form-group mb-3">
+		<div class="input-group input-group-alternative">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-user"></i></span>
+			</div>
+			<input class="form-control" placeholder="{{'Email'|_}}" type="email" name="login">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group input-group-alternative">
+			<div class="input-group-prepend">
+				<span class="input-group-text"><i class="far fa-lock"></i></span>
+			</div>
+			<input class="form-control" placeholder="{{'Пароль'|_}}" type="password" name="password">
+		</div>
+	</div>
+	<div class="btn-come">
+			<button type="submit" data-attach-loading class="btn btn-outline-danger login-btn">{{'Войти'|_}}</button>
+	</div>
+
+	<div class="login-pasword">
+		<div class="col-md-16 col-25">
+			<a href="{{'auth/restore-password'|page}}" class="login-btn-restore text-dark"><p> {{'Восстановить пароль'|_}} </p></a>
+		</div>
+		<div class="text-right ml-md-2 ml-5">
+			<a href="{{'auth/register'|page}}" class="login-btn-restore text-dark"><p> {{"Регистрация"|_}} </p></a>
+		</div>
+	</div>	
+</form>
+<style>
+	.input-group-text {
+		background: none;
+	}
+	.form-control {
+		    border: 1px solid #ced4da;
+	}
+	.login-btn {
+		    background-color: #fff;
+    border-radius: 40px;
+    padding: 10px 25px 10px 25px;
+    color: #ae3b39;
+    width: 50%;
+  
+    margin: 0 auto;
+    display: block;
+    margin-bottom:10px;
+	}
+	.login-pasword {
+		display: flex;
+		    justify-content: space-between;
+		        align-items: flex-end;
+    height: 55px;
+	}
+	.login-btn-restore {
+		   background-color: #fff;
+    border-radius: 40px;
+    padding: 1px 5px 1px 5px;
+    color: #ae3b39;
+    border: none;
+    margin: 0 auto;
+    display: block;
+	}
+	.hover {
+		    background-color: #fff;
+    border-radius: 40px;
+    padding: 5px 5px 5px 5px;
+    color: #ae3b39;
+    border: none;
+    margin: 0 auto;
+	}
+	.btn-come {
+		  align-items: flex-end;
+		  height: 100px;
+		  display: flex;
+	}
+		.login-btn-restore  p {
+			margin: 0;
+			padding: 0;
+		}
+		.card-body {
+			height: 365px;
+		}
+</style>

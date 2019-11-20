@@ -1,0 +1,29 @@
+title = "Register"
+url = "/register"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+==
+<div class="container">
+    <div class="row">
+        <div class="col-md-30 mx-auto my-5">
+    		<div class="card shadow border-0">
+    			
+    			<div class="card-body">
+    				<div class="text-center text-dark mb-4">
+    					 <h2> {{"Регистрация"|_}} </h2>
+    					<p>
+    					    <small> {{"Введите свою имя и фамилию. :perenos_stroki Ваша конфиденциальность гарантирована."|_({perenos_stroki: '<br>'})}} </small>
+    					</p>
+    				</div>
+    				
+    				{% partial account ~ '::register' %}
+    				
+    			</div>
+    		</div>
+    	</div>
+    </div>
+</div>

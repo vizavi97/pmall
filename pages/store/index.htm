@@ -1,0 +1,173 @@
+title = "Store main page"
+url = "/:slug"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[StorePage]
+page = "{{ :slug }}"
+
+[ProductList]
+sorting = "no"
+
+[CategoryList]
+==
+<?php
+use Shohabbos\Stores\Models\Banner;
+use Shohabbos\Stores\Models\Store;
+
+function onStart() {
+	$this['banners'] = Banner::get();
+	$storeId = $this->StorePage->get();
+	if(!$storeId){
+		return response('Page not found');
+	}
+	$store = Store::where('id', $storeId->id)->first();
+	
+	
+	$this['isCategories'] = $store->is_category;
+}
+?>
+==
+{% set obCategoryList = CategoryList.make().tree() %}
+{% set obStore = StorePage.get() %}
+{% set obStoreProductList = ProductList.make().sort(ProductList.getSorting()).active().store(obStore.id) %}
+
+{% if this.param.slug != 'default' %}
+	<section>
+		<div class="container">
+			<div class="categoriy-menu bg-dark d-flex align-items-end flex-column">
+				<div class="categories-img">
+					{% if obStore.header_image.path == null %}
+						<img src="{{'assets/images/store-banner.jpg'|theme}}" alt=""/>
+					{%else%}	
+						<img src="{{obStore.header_image.path}}" alt=""/>
+					{%endif%}	
+				</div>
+				<div class="categoriy-link">
+					<ul class="nav nav-tabs">
+						{% for obCategory in obCategoryList %}	  
+							{% for isCategory in isCategories %}	  
+								{% if isCategory == obCategory.slug and obCategory.slug != 'magaziny' %}
+									<li class="nav-item">
+										<a class="nav-link" href="{{'store/collection'|page({store: this.param.slug, category: obCategory.slug, slug:''})}}"aria-haspopup="true" aria-expanded="false">{{obCategory.name}}</a>
+									</li>
+								{%endif%}	
+							{%endfor%}	  	
+						{%endfor%}	  
+					</ul>
+				</div>
+			</div>
+			<div class="row pt-4">
+				{% if banners %}
+					{% for banner in banners %}
+						{% if banner.store_id == obStore.id and banner.banner_size == 'big' %}
+							<div class="col-md-6 mb-4">
+								<div class="new-kolection" style="background-image: url({{banner.image.path}})">
+									<div class="text-categorie bg-dark">
+										<h2 class="text-danger py-3 font-weight-bold">{{banner.name}}</h2>
+										<h6 class="text-white py-3 font-weight-bold">{{banner.type}}</h6>
+										<a href="{{banner.link}}" class="small link-secondary">{{'Перейти к коллекции'|_}}</a>
+									</div>
+								</div>
+							</div>
+						{%endif%}
+					{%endfor%}		
+				{%endif%}	
+			</div>
+			<div class="row pt-4">
+				{% if banners %}
+					{% for banner in banners %}
+						{% if banner.store_id == obStore.id and banner.banner_size == 'small'%}
+							<div class="col-md-4">
+								<div class="mal-block-categoriy" style="background-image: url({{banner.image.path}})">
+									<div class="mal-text-categorie bg-dark">
+										<a href="{{banner.link}}"><h4 class="text-danger font-weight-bold">{{banner.name}}</h4></a>
+										<p class=" text-white"><b>{{banner.type}}</b></p>
+									</div>
+								</div>
+							</div>
+						{%endif%}
+					{%endfor%}		
+				{%endif%}
+			</div>
+		</div>
+	</section>
+		
+	<section>
+		<div class="container">
+			<div class="recommend-title d-block d-md-flex justify-content-between pt-3 pb-3">
+				<h3 class="">{{'Рекомендуем'|_}}</h3>
+				<a href="{{ 'categorie' | page }}"><button type="button" class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Смотреть все'|_}}</b></button></a>
+			</div>
+			<div class="carousel" data-flickity='{  "contain": true }'>
+				
+				{% for obProduct in obStoreProductList %}
+					{% set productPrice = obProduct.offer.active.sort('new') %}
+					{% set price = (productPrice.count) ? productPrice.first : null %}
+					{% set reviews = obProduct.review %}
+					{% set raitingsCount = reviews.count %}
+					
+						<div class="carousel-cell-recommend">	
+							{#<div class="check"><span class="font-weight-bold text-white p-1 px-3">sale</span></div>#}
+							<div class="card border-0" style="width: 15rem; margin-right: 10px;">
+								{% if obProduct.preview_image is not empty %}
+									<a href="{{obProduct.getPageUrl()}}"><img class="card-img-top" src="{{ obProduct.preview_image.getThumb(240, 233, {mode: 'crop'}) }}" alt="{{ obProduct.name }}" style="height: 233px; object-fit: contain;"></a>
+								{% endif %}
+								
+								{% if obProduct.inWishList() %}
+									<a href="#"
+						        		data-request="ProductData::onRemoveFromWishList" 
+						                data-request-data="product_id: {{obProduct.id}}" 
+						                data-request-success="$(this).find('.like').toggleClass('text-muted')">
+										
+										<i class="fal fa-heart like" aria-hidden="true" style="font-weight:500;color:red;font-size:18px;"></i>
+									</a>
+								{% else %}	
+									<a href="#"
+						        		data-request="ProductData::onAddToWishList" 
+						                data-request-data="product_id: {{obProduct.id}}" 
+						                data-request-success="$(this).find('.like').toggleClass('text-danger')">
+										
+										<i class="fal fa-heart like" aria-hidden="true" style="font-weight:500;color:darkgray;font-size:18px;"></i>
+									</a>
+								{% endif %}	
+								
+								<div class="card-body recommend-block">
+									<a href="{{obProduct.getPageUrl()}}" class="text-dark"><h5 class="product-name">{{ obProduct.name }}</h5></a>
+									{% if obProduct.category.parent.parent.isNotEmpty() %}
+										<p class="text-dark">{{obProduct.category.parent.parent.name}}</p>
+									{%else%}	
+										<p class="text-dark">{{obProduct.category.parent.name}}</p>
+									{%endif%}	
+									<div class="number-red d-flex">
+										<span class="text-color-border border-text pt-2">{{ price.old_price}}</span>
+										<h4 class="text-danger pl-4">{{price.price}} {{'сум'|_}}</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+				{% endfor %}
+				
+			</div>
+		</div>
+	</section>
+			
+			  
+	<section>
+		<div class="container">
+			<h3 class="pt-5 pb-3">Немного о нас</h3>
+			<div class="row pb-5">
+				<div class="col-md-6">
+					<p class="text-secondary">{{obStore.content|replace({'\n': ' ', '\r': '<br>'})|raw }}</p>	
+				</div>
+				<div class="col-md-6">
+					<p class="text-secondary">{{obStore.description|replace({'\n': ' ', '\r': '<br>'})|raw }}</p>
+				</div>
+			</div>
+		</div>
+	</section>
+{%endif%}
