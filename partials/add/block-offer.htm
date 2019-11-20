@@ -11,7 +11,8 @@
 {%endif%}
 <div class="col-md-12">
 	<h5>{{'Товарные предложения'|_}}</h5>
-	<div class="field-group row">
+	<div></div>
+	<div class="field-group row" rel="0">
 		<div class="col-lg-4 col-md-4">
 			{% for obProperty in obCategory.product_property if obProperty.code == 'size' %}
 				<label for="task" class="text-muted small">{{ obProperty.name }}</label>
@@ -77,8 +78,19 @@
 		<div class="repeatable"></div>
 
 		<div class="form-group my-3" style="text-align:center;">
-			<input type="button" value="{{'Добавить'|_}}" class="btn btn-success add" onclick="addFields(this)" align="center">
+			<input type="button" value="{{'Добавить'|_}}" class="btn btn-success add" align="center">
 		</div>
 
 	</fieldset>
 </div>
+<script>
+    $(document).on('click','.add',function(){
+        var parEnt = $('.field-group:first').html();
+        var index = Number($('.field-group:last').attr('rel'));
+        index++;
+        $('.field-group:last').after('<div class="field-group row" rel="'+ index +'">' + parEnt.replace(/[0]/g, index ) +'</div>');
+    });
+	$(document).on('click','.delete',function(){
+	  $(this).parents('.field-group').remove();
+	});
+</script>
