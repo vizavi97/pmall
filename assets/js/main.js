@@ -169,3 +169,12 @@ function isNumberKey(evt) {
 $(document).on('click','.modal-filter-window-close-item',function(){
   $(document).find('.modal-filter-window').css("z-index","-10000");
 });
+$(document).on('click','.add-product',function(){
+  var parEnt = $('.field-group-add:first').html();
+  var index = Number($('.field-group-add:last').attr('rel'));
+  index++;
+  $('.field-group-add:last').after('<div class="field-group-add row" rel="'+ index +'">' + parEnt.replace(/[0]/g, index ) +'</div>');
+});
+$(document).on('click','.delete-add-product',function(){
+  $(this).parents('.field-group').remove();
+});
