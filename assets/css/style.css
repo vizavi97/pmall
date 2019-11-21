@@ -3452,6 +3452,30 @@ input[type='number']::-webkit-inner-spin-button {
     padding: 10px 2px;
 }
 
-.propertyBlock:first-of-type .col-lg-1:last-of-type {
-    display: none;
+
+.container .py-5 p img {
+    max-width: 100%;
+    width: 100%;
 }
+
+.side-banner {
+    padding-top: 20px;
+}
+
+.ya-metrika {
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+}
+.ya-metrika a {
+    display: flex;
+}
+
+@media screen and (max-width: 768px) {
+    .ya-metrika {
+        margin-top: 20px;
+        padding-bottom: 20px;
+        justify-content: flex-start;
+    }
+}
+
