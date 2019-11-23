@@ -168,7 +168,7 @@ function onStart() {
 					  <a href="{{obStoreProduct.getPageUrl()}}"><img class="card-img-top" src="{{obStoreProduct.preview_image.getThumb(230, 180, {mode: 'crop'})}}" alt="Card image cap"></a>
 					  	<a href="#"><img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
 					  <div class="card-body recommend-block">
-					 	<h5 class=""><a href="{{obStoreProduct.getPageUrl()}}" class="text-dark">{{obStoreProduct.name }}</a></h5>
+						  <a href="{{obStoreProduct.getPageUrl()}}" class="text-dark" title="{{obStoreProduct.name }}"><h5 class="text-overflow">{{obStoreProduct.name }}</h5></a>
 					    <p class="small basket-color-text">{{'Мужские'|_}}</p>
 						<div class="number-red d-flex">
 							<span class="text-color-border pt-2">{{price.old_price_value}}</span>

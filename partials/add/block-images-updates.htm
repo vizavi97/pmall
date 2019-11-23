@@ -1,0 +1,21 @@
+[viewBag]
+==
+<div class="updates-photo-container">
+	<div class="update-photo-add">
+		<fieldset class="product-images">
+			<div class="form-group my-3" style="text-align:center;">
+				<input type="button" value="{{'Добавить'|_}}" class="btn btn-success add-images" align="center">
+			</div>
+		</fieldset>
+	</div>
+	<div class="update-photos-items row">
+		<div class="update-photo col-4" rel="0">
+			<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
+				<input type="file" name="images[]" accept="image/*" onchange="readURL(this);">
+			</label>
+			<div class="form-group my-3" style="text-align:center;">
+				<input type="button" value="{{'Удалить'|_}}" class="delete-images btn">
+			</div>
+		</div>
+	</div>
+</div>

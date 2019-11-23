@@ -1,7 +1,7 @@
 [viewBag]
 ==
 <script  type="text/template" id="product-images">
-<div class="col-md-4 ">
+<div class="col-md-4">
 	{% if obStore.logo.path  %}
 	<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
 		<input type="file" name="images[]" onchange="readURL(this);">

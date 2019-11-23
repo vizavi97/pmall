@@ -117,7 +117,7 @@ function onProperty(){
 												  	<label for="duedate" class="text-muted small">{{'Комиссия'|_}}{{user.store.commission}}%</label>
 												  	<input id="resultPrice" type="text" class="span2 form-control" name="" value="{{obOffer.price - obOffer.price * user.store.commission / 100}}" disabled>
 												</div>
-												<div class="col-lg-2">
+												<div class="col-lg-2 update-buttons">
 													<label for="duedate" class="text-white d-block">III</label>
 												  	<input type="submit" style="font-size: 10px;" class="btn btn-success span-2 delete" value="{{'Изменить'|_}}">
 												  	<a style="font-size: 10px;" class="btn btn-danger span-2 delete" data-request- data-request="onOfferRemove" data-request-data="data: [{{obOffer.id}}]" data-request-confirm="Bы действительно хотите удалить эту предложению?">{{'Удалить'|_}}</a>
@@ -235,21 +235,31 @@ function onProperty(){
 											<input type="file" name="preview_image" value="{{obProduct.preview_image.path}}" onchange="readURL(this);">
 				                        </label>
 									</div>
-									<div class="col-md-7">
+
 										{% if obProduct.images %}
 											{% for image in obProduct.images %}
+									<div class="col-md-4">
 												<label class="file-photo d-inline-block"
-						                            style="background-image: url({{image.path}});width:24%;font-size:7px;padding-bottom:47%;background-position: center center;background-size: cover;background-repeat: no-repeat;">
-						                            <input type="file" name="images[]" onchange="readURL(this);" >
+						                            style="background-image: url({{image.path}});padding-bottom:100%;background-position: center center;background-size: contain;background-repeat: no-repeat;">
+						                            <input type="file" name="images[]" onchange="readURL(this);" accept="image/*">
 						                        </label>
-						                    {%endfor%}
+										<div class="form-group my-3" style="text-align:center;">
+											<input type="button" value="{{'Удалить'|_}}" class="delete-images btn">
+										</div>
+									</div>
+										{%endfor%}
 					                    {%else%}
+										<div class="col-md-4">
 											<label class="file-photo"
-					                            style="background-image: url({{obStore.logo.path}});background-size:100%;font-size:7px;padding-bottom: 47%;background-position: center center;background-size: cover;background-repeat: no-repeat;">
+					                            style="background-image: url({{obStore.logo.path}});background-size:100%;font-size:7px;padding-bottom: 47%;background-position: center center;background-repeat: no-repeat;">
 					                            <input type="file" name="images" onchange="readURL(this);" >
 					                        </label>
+									</div>
 					                    {%endif%}
 									</div>
+								</div>
+								<div class="row">
+									{% partial 'add/block-images-updates' %}
 								</div>
 								<div class="row alienware py-5">
 									<div class="col-md-4">
@@ -272,11 +282,10 @@ function onProperty(){
 	.file-photo{
 		overflow: hidden;
 	    display: block;
-	    background-color: #ebedf1;
-	    padding-bottom: 85%;
+	    padding-bottom: 100%;
 	    position: relative;
 	    -webkit-background-size: cover;
-	    background-size: cover;
+	    background-size: contain;
 	    background-repeat: no-repeat;
 	    background-position: 50% 50%;
 	    border-radius: 4px;

@@ -55,8 +55,9 @@ tumblr = 0
                 		<i class="fal fa-heart" aria-hidden="true" style="font-weight: 500;color: darkgray;font-size:18px;"></i>
                 	</button>
                 {% endif %}
-				
+				{% if price.old_price_value != 0 %}
 				<span class="basket-color-text  pl-4"><s>{{price.old_price_value}} {{'сум'|_}}</s></span>
+				{% endif %}
 			</div>
 			
 			<div class="order_block card-info-block pt-2">

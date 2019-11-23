@@ -43,16 +43,14 @@
 			</label>
 			<input type="text" maxlength="10" class="span2 form-control" name="offers[0][price]"  value="" onkeyup="calcPrice(this)" onkeypress="return isNumberKey(this)" required>
 		</div>
-		<div class="col-lg-2 col-md-4 priceBtnBlock">
-			<div style="display: none;">
+		<div class="col-lg-2 col-md-4 priceBtnBlock" id="sssssss">
+			<div class="closing-div" style="display: none;">
 				<label for="duedate" class="text-muted small">{{'Цена со скидкой'|_}}
 				</label>
-				<input type="text" maxlength="10" onkeypress="return isNumberKey(this)" class="span2 form-control"  value="" onkeyup="calcSale(this)">
+				<input type="text" maxlength="10" onkeypress="return isNumberKey(this)" class="span2 form-control"  value="" >
 				<input type="hidden" name="offers[0][old_price]">
 			</div>
-			<button type="button" 
-					class="btn btn-primary btn-sm" 
-					onclick="addSale(this)">
+			<button type="button" class="sales-button btn btn-primary btn-sm">
 				Доб. скидку
 			</button>
 		</div>
@@ -67,7 +65,7 @@
 			<input type="hidden" class="percent" value="{{user.store.commission}}"/>
 			<input id="resultPrice" type="text" class="span2 form-control calc-value" name="" value="" disabled>
 		</div>
-		<div class="col-lg-1 col-md-2">
+		<div class="col-lg-1 col-md-2 delete-prop">
 			<label for="duedate" class="text-white d-block">{{'III'|_}}</label>
 			<input type="button" style="font-size: 10px;" class="btn btn-danger span-2 delete-add-product" value="--"/>
 		</div>

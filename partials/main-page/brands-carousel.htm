@@ -10,7 +10,7 @@
 		<div class="carousel " data-flickity='{ "wrapAround": true, "autoPlay": true }'>
 			{% for brand in brands %}
 				<div class="carousel-cell-boutiques text-center my-auto">
-					<a class="categories-button" href="http://pmall.uz/list?brandid={{brand.id}}"><img class="" src="{{ brand.preview_image.path }}" alt=""></a>
+					<a class="categories-button" href="http://pmall.uz/list?brandid={{brand.id}}"><img src="{{ brand.preview_image.path }}" alt=""></a>
 				</div>
 			{% endfor %}
 		</div>

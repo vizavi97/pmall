@@ -38,7 +38,7 @@
 							<h5 class="text-danger font-weight-bold">{{ price.price_value}} сум</h5>
 			    			<p class="text-dark small">{{category.name}}</p>
 							<div class="number-red">
-				 				<a href="{{obProduct.getPageUrl()}}"><h6 class="font-weight-bold text-dark text-uppercase mx-title">{{obProduct.name|truncate(14)}}</h6></a>
+				 				<a href="{{obProduct.getPageUrl()}}" title="{{obProduct.name}}"><h6 class="font-weight-bold text-dark text-uppercase mx-title">{{obProduct.name}}</h6></a>
 								
 								{% if price.old_price_value and price.old_price_value > price.price_value %}
 									<span class="text-color-border border-text pt-1">{{ price.old_price_value}}</span>

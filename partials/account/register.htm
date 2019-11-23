@@ -54,7 +54,14 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" placeholder="{{'Password'|_}} *" type="password" name="password">
+			<input class="form-control" placeholder="{{'Password'|_}} *" type="password" name="password" id="pass">
+			<div class="password-changer">
+				<input type="checkbox" id="password-checkbox" checked/>
+				<label for="password-checkbox">
+					<img class="eye" src="{{ 'assets/img/eye.png' | theme }}" alt="password"/>
+					<img class="eye-active" src="{{ 'assets/img/eye-active.png' | theme }}" alt="password"/>
+				</label>
+			</div>
 		</div>
 	</div>
 	
