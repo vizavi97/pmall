@@ -232,7 +232,7 @@ function onProperty(){
 									<div class="col-md-4">
 										<label class="file-photo"
 				                            style="background-image: url({{obProduct.preview_image ? obProduct.preview_image.path : obStore.logo.path}});background-size:100%;font-size: 7px;background-position: center center;background-size: cover;background-repeat: no-repeat;">
-											<input type="file" name="preview_image" value="{{obProduct.preview_image.path}}" onchange="readURL(this);">
+											<input type="file" name="preview_image" accept="image/*" value="{{obProduct.preview_image.path}}" onchange="readURL(this);">
 				                        </label>
 									</div>
 
@@ -252,7 +252,7 @@ function onProperty(){
 										<div class="col-md-4">
 											<label class="file-photo"
 					                            style="background-image: url({{obStore.logo.path}});background-size:100%;font-size:7px;padding-bottom: 47%;background-position: center center;background-repeat: no-repeat;">
-					                            <input type="file" name="images" onchange="readURL(this);" >
+					                            <input type="file" name="images" accept="image/*" onchange="readURL(this);" >
 					                        </label>
 									</div>
 					                    {%endif%}
