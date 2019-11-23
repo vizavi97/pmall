@@ -161,11 +161,11 @@ function onProperty(){
 								<div class="col-md-4">
 									{% if obStore.logo.path  %}
 									<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
-										<input type="file" name="preview_image" onchange="readURL(this);">
+										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% else %}
 									<label class="file-photo" style="background-position: center center;background-size: contain;background-repeat: no-repeat;">
-										<input type="file" name="preview_image" onchange="readURL(this);">
+										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% endif %}
 									<fieldset class="product-images">
