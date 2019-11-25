@@ -3002,6 +3002,11 @@ input[type='range']::-moz-range-thumb:active {
     .bredn > div > div {
         width: 100%;
     }
+    .update-photo-add {
+        display: block;
+        padding-left: 0;
+    }
+
 }
 
 @media screen and (max-width: 992px) {
@@ -3610,4 +3615,21 @@ input[type='number']::-webkit-inner-spin-button {
 
 .update-photo:first-of-type > div {
     display: none !important;
+}
+
+.categories-products-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+.categories-products {
+    display: flex;
+    padding-right: 20px;
+    width: auto!important;
+}
+
+.update-photo-add {
+    display: flex;
+    padding-left: 80px;
 }

@@ -164,7 +164,7 @@ function onProperty(){
 										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% else %}
-									<label class="file-photo" style="background-position: center center;background-size: contain;background-repeat: no-repeat;">
+									<label class="file-photo" style="background-image: url({{'assets/img/add2.png' | theme }});background-position: center center;background-size: contain;background-repeat: no-repeat;">
 										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% endif %}
@@ -201,18 +201,18 @@ function onProperty(){
 <style>
 	.file-photo{
 		overflow: hidden;
-	    display: block;
-	    padding-bottom: 100%;
-	    position: relative;
-	    -webkit-background-size: cover;
-	    background-size: cover;
-	    background-repeat: no-repeat;
-	    background-position: 50% 50%;
-	    border-radius: 4px;
-	    -webkit-border-radius: 4px;
-	    -moz-border-radius: 4px;
-	    cursor: pointer;
-	    margin: 0;
+		display: block;
+		padding-bottom: 100%;
+		position: relative;
+		-webkit-background-size: cover;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: 50% 50%;
+		border-radius: 4px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		cursor: pointer;
+		margin: 0;
 	}
 	.file-photo input{visibility: hidden;}
 

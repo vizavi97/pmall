@@ -10,14 +10,14 @@ tumblr = 0
 	<div class="col-md-5">
 		<div class="main-card-slider d-block d-md-flex">
 			<div id="productCardSlider" class="carousel carousel-main card-carusel-main">
+				<div class="carousel-cell-card w-100">
+					<img src="{{ obProduct.preview_image.path }}" alt="image">
+				</div>
 				{% for image in obProduct.images %}
 					<div class="carousel-cell-card w-100">
 						<img class="mx-product" src="{{ image.path }}" alt="image">
 					</div>
-				{% endfor %}  
-				<div class="carousel-cell-card w-100">
-					<img src="{{ obProduct.preview_image.path }}" alt="image">
-				</div>
+				{% endfor %}
 			</div>
 			
 			<div class="carousel carousel-nav card-carusel" id="productCardSliderDocs" style="max-height: 500px !important; overflow: auto">

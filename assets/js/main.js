@@ -207,8 +207,9 @@ $(document).ready(function () {
     index--;
     $(this).parents('.update-photo').remove();
   });
-  $(document).on('click', '.delete-images', function () {
-    index--;
-    $(this).parents('.col-md-4').remove();
-  });
+});
+
+$(document).on('click','.change-categories',function(){
+    $(document).find('.categories-properties').removeClass('d-none');
+    $(this).parents('.categories-products-container').remove();
 });
