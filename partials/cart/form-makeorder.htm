@@ -137,14 +137,14 @@
 			<div class="main-right-block bg-white px-3">
 				<div class="checkout-block-right">
 					<h4 class="text-danger pt-3">{{'Ваш Заказ'|_}}</h4>
-					<span>{{'Итоги:'|_}} {{ obCartElementList.getTotalPriceValue() }}</span>
+					<span>{{'Итого:'|_}} {{ obCartElementList.getTotalPriceValue() }}</span>
 					<div class="checkout-mol-block">
 					
 						{% for obCartElement in obCartElementList %}
 						{% set obOffer = obCartElement.offer %}
 							<div class="mal-block pb-3 d-flex">
 								<div class="checkout-img">
-									<img class="" src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" width="100">
+									<img src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" width="100">
 								</div>
 								<div class="checkout-text pl-4">
 									<h6 class="p-0 m-0">{{obOffer.product.name}}</h6>
