@@ -3375,6 +3375,7 @@ input[type='checkbox'] {
 .order-item-inner-calc-item {
     width: 250px;
     justify-content: space-between;
+    align-items: flex-end;
     display: flex;
 }
 
@@ -3633,3 +3634,4 @@ input[type='number']::-webkit-inner-spin-button {
     display: flex;
     padding-left: 80px;
 }
+

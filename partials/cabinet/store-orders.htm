@@ -1,202 +1,75 @@
 [viewBag]
 ==
-{% for order in obStore.orders %}
-{% set user = order.user %}
-{% set obOrder = order.order %}
-{% set amount = order.amount %}
-{% set obPosition = order.position %}
-{% set obOffer = obPosition.offer %}
-{% set obProduct = obPosition.offer.product %}
-<div class="col-md-12">
-	<div class="row border pb-3">
-		<div class="col-md-12">
-			<div class="main-basket-katalog d-flex pt-3">
-				<div class="basket-tovar text-center">
-					<p class="name">
-						<span class="text-muted">{{'Клиент'|_}}</span></br>
-					<h6><b>{{ user.name }}</b></h6>
-					<p>
-						<a href=""></a>
-					</p>
-					</p>
-				</div>
-				<div class="basket-info pl-3 pl-5">
-					<p class="name">
-						<span class="text-muted">Номер заказа</span></br>
-					<h6><b>{{ obOrder.order_number }}</b></h6>
-					</p>
-				</div>
-				<div class="basket-info pl-3 pl-5">
-					<p class="name">
-						<span class="text-muted">Сумма заказа</span></br>
-					<h6><b>{{ amount }}</b></h6>
-					</p>
-				</div>
-				<div class="basket-info pl-3 pl-5">
-					<p class="name">
-						<span class="text-muted">O товаре</span></br>
-					<h6><b>{{obProduct.name}}</b></h6>
-					<h6>
-						<string class="small">Kоличества:</string>
-						<b>{{obOffer.quantity}}</b></h6>
-					</p>
-				</div>
-				<div class="basket-info pl-3 pl-5">
-					<p class="name">
-						<span class="text-muted">Статус</span></br>
-					<h6><b>{{obOrder.status.name}}</b></h6>
-					</p>
-				</div>
-				<div class="basket-info pl-3 pl-5">
-					<p class="name">
-						<span class="text-muted">Способ оплаты</span></br>
-					<h6><b>{{obOrder.payment_method.name}}</b></h6>
-					</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-{% endfor %}
 <div class="order-items">
+	{% for order in obStore.orders %}
+	{% if order.order.order_number is not defined or order.order.order_number is null %}
+	{%else%}
 	<div class="order-item">
-		<input id="order-123" type="checkbox" name="order"/>
-		<label class="order-item-button" for="order-123">
+		<input id="order-{{ order.order.order_number }}" type="checkbox" name="order"/>
+		<label class="order-item-button" for="order-{{ order.order.order_number }}">
 			<b>Статус заказа: Доставлено / не доставлено</b>
-			<b>Номер заказа: "2312842"</b>
+			<b>Клиент: {{order.user.name }}</b>
+			<b>Номер заказа: "{{ order.order.order_number }}"</b>
 		</label>
 		<div class="order-item-inner">
 			<ul class="order-item-inner-about">
 				<li class="order-item-inner-about-name">
-					<em>Клиент - </em>
-					<span> Alex</span>
+					<em>Имя покупаеля - </em> <span>{{ order.user.name }}</span>
 				</li>
 				<li class="order-item-inner-about-number">
-					<em>Номер заказа - </em>
-					<span>2312842</span>
+					<em>Номер заказа - </em> <span>{{ order.order.order_number }}</span>
 				</li>
 				<li class="order-item-inner-about-sum">
-					<em>Сумма заказа - </em>
-					<span>3000000 сум</span>
+					<em>Сумма заказа - </em> <span>{{ order.order.amount}} {{ order.currency.symbol }}</span>
 				</li>
 				<li class="order-item-inner-about-count">
-					<em>Дата Регистрации - </em>
-					<span>11.11.2019</span>
+					<em>Дата Регистрации - </em> <span>{{ order.created_at.format(' d.m.Y') }}</span>
 				</li>
 				<li class="order-item-inner-about-status">
-					<em>Статус - </em>
-					<span>Доставлено/ Не доставлено</span>
+					<em>Статус - </em> <span>Доставлено/ Не доставлено</span>
 				</li>
 				<li class="order-item-inner-about-method">
-					<em>Способ оплаты - </em>
-					<span>UzCard / Visa / MasterCard</span>
+					<em>Способ оплаты - </em> <span>{{order.order.payment_method.name}}</span>
 				</li>
 				<li class="order-item-inner-about-phone">
-					<em>Номер телефона - </em>
-					<span> 99899999999</span>
+					<em>Номер телефона - </em> <span>{{order.order.property.phone}}</span>
 				</li>
 				<li class="order-item-inner-about-address">
-					<em>Место доставки - </em>
-					<span>Ташкент, Яккасарайский район, Улица Нукус, Дом 2а, кв 68</span>
+					<em>Место доставки - </em> <span>{{order.order.property.shipping_address1}}</span>
 				</li>
 			</ul>
 			<ul class="order-item-inner-items">
-				<!--Count of cards-->
 				<li class="order-item-inner-item">
 					<div class="order-item-inner-item-card-count">
-						<em>Количество товаров: <span>"nth"</span></em>
+						<em>Количество товаров: <span>"{{order.order.quantity}}"</span></em>
 					</div>
 				</li>
-				<!--cards-->
+				{% for item in order.order.order_position %} {% set products = item.item.product %}
 				<li class="order-item-inner-item">
 					<div class="order-item-inner-item-img">
-						<img src="{{'assets/img/54101783_2.png' | theme }}" alt=""/>
+						<img src="{{products.preview_image.path}}" alt="img">
 					</div>
 					<ul class="order-item-inner-item-info">
-						<li><em> Название товара:</em> <span> Туфли Aldo - summer</span></li>
-						<li><em> Количество: </em><span> 1 шт</span></li>
-						<li><em> Цвет:</em> <span> Серый</span></li>
-						<li><em> Размер: </em><span> 37</span></li>
-						<li><em> Цена: </em><span> 450000 сум</span></li>
+						<li><em> Название товара:</em> <span>{{item.item.product.name}}</span></li>
+						<li><em> Количество: </em><span> {{item.quantity}} шт</span></li>
+						<li><em> Параметры:</em> <span>{{item.item.name}}</span></li>
+						<li><em> Цена: </em><span> {{ item.offer.price }} сум</span></li>
 					</ul>
-				</li>
-				<li class="order-item-inner-item">
-					<div class="order-item-inner-item-img">
-						<img src="{{'assets/img/54101783_2.png' | theme }}" alt=""/>
-					</div>
-					<ul class="order-item-inner-item-info">
-						<li><em> Название товара:</em> <span> Туфли Aldo - summer</span></li>
-						<li><em> Количество: </em><span> 1 шт</span></li>
-						<li><em> Цвет:</em> <span> Серый</span></li>
-						<li><em> Размер: </em><span> 37</span></li>
-						<li><em> Цена: </em><span> 450000 сум</span></li>
-					</ul>
-				</li>
-				<li class="order-item-inner-item">
-					<div class="order-item-inner-item-img">
-						<img src="{{'assets/img/54101783_2.png' | theme }}" alt=""/>
-					</div>
-					<ul class="order-item-inner-item-info">
-						<li><em> Название товара:</em> <span> Туфли Aldo - summer</span></li>
-						<li><em> Количество: </em><span> 1 шт</span></li>
-						<li><em> Цвет:</em> <span> Серый</span></li>
-						<li><em> Размер: </em><span> 37</span></li>
-						<li><em> Цена: </em><span> 450000 сум</span></li>
-					</ul>
-				</li>
-				<li class="order-item-inner-item">
-					<div class="order-item-inner-item-img">
-						<img src="{{'assets/img/54101783_2.png' | theme }}" alt=""/>
-					</div>
-					<ul class="order-item-inner-item-info">
-						<li><em> Название товара:</em> <span> Туфли Aldo - summer</span></li>
-						<li><em> Количество: </em><span> 1 шт</span></li>
-						<li><em> Цвет:</em> <span> Серый</span></li>
-						<li><em> Размер: </em><span> 37</span></li>
-						<li><em> Цена: </em><span> 450000 сум</span></li>
-					</ul>
-				</li>
-				<li class="order-item-inner-item">
-					<div class="order-item-inner-item-img">
-						<img src="{{'assets/img/54101783_2.png' | theme }}" alt=""/>
-					</div>
-					<ul class="order-item-inner-item-info">
-						<li><em> Название товара:</em> <span> Туфли Aldo - summer</span></li>
-						<li><em> Количество: </em><span> 1 шт</span></li>
-						<li><em> Цвет:</em> <span> Серый</span></li>
-						<li><em> Размер: </em><span> 37</span></li>
-						<li><em> Цена: </em><span> 450000 сум</span></li>
-					</ul>
-				</li>
-			</ul>
-			<ul class="order-item-inner-calc">
-				{% for card in cards %}
-				<li class="order-item-inner-calc-item">
-					<em>{{ card.name }}</em><span>25</span>
 				</li>
 				{% endfor %}
+			</ul>
+			<ul class="order-item-inner-calc">
+				{% for item in order.order.order_position %} {% set products = item.item.product %}
 				<li class="order-item-inner-calc-item">
-					<em>Название</em><span>25</span>
+					<em>{{products.name}}</em><span>{{ item.offer.price }}</span>
 				</li>
-				<li class="order-item-inner-calc-item">
-					<em>Название</em><span>35</span>
-				</li>
-				<li class="order-item-inner-calc-item">
-					<em>Название</em><span>45</span>
-				</li>
-				<li class="order-item-inner-calc-item">
-					<em>Название</em><span>55</span>
-				</li>
+				{% endfor %}
 				<li class="order-item-inner-calc-result">
-					<!-- Это макет калькулятора-->
-					{% set values = 0 %}
-					{% set test = ['20', '30', '40', '50'] %}
-					{% for value in test %}
-					{% set values = values + value %}
-					{% endfor %}
-					<em>Итого</em><span>{{values}}</span>
+					<em>Итого</em><span>{{ order.order.total_price_value}}</span>
 				</li>
 			</ul>
 		</div>
 	</div>
+	{%endif%}
+	{%endfor%}
 </div>

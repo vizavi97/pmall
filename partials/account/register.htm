@@ -9,7 +9,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" name="name" placeholder="{{'Имя'|_}} *" type="text">
+			<input class="form-control" name="name" placeholder="{{'Имя'|_}} *" type="text" required>
 		</div>
 	</div>
 	
@@ -18,7 +18,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" name="surname" placeholder="{{'Фамилия'|_}} *" type="text">
+			<input class="form-control" name="surname" placeholder="{{'Фамилия'|_}} *" type="text" required>
 		</div>
 	</div>
 	
@@ -27,7 +27,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="fal fa-mobile-alt"></i></span>
 			</div>
-			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="text">
+			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="text" required>
 		</div>
 	</div>
 	
@@ -36,7 +36,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" placeholder="{{'E-mail'|_}} *" name="email" type="email">
+			<input class="form-control" placeholder="{{'E-mail'|_}} *" name="email" type="email" required>
 		</div>
 	</div>
 	
@@ -45,7 +45,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-location"></i></span>
 			</div>
-			<input class="form-control" placeholder="{{'Address'|_}}" name="user_address" type="text">
+			<input class="form-control" placeholder="{{'Address'|_}}" name="user_address" type="text" required>
 		</div>
 	</div>
 	
@@ -54,7 +54,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" placeholder="{{'Password'|_}} *" type="password" name="password" id="pass">
+			<input class="form-control" placeholder="{{'Password'|_}} *" type="password" name="password" id="pass" required>
 			<div class="password-changer">
 				<input type="checkbox" id="password-checkbox" checked/>
 				<label for="password-checkbox">
@@ -70,7 +70,7 @@ description = "Register"
 			<div class="custom-control custom-control-alternative custom-checkbox">
 				<input class="custom-control-input" id="customCheckRegister" type="checkbox" required>
 				<label class="custom-control-label" for="customCheckRegister">
-					<span class="text-dark">{{'I accept the terms'|_}} <a class="text-danger" target="_blank" href="{{'/publichnaya-oferta'}}"> {{'Публичная оферта'|_}} </a></span>
+					<span class="text-dark">{{'Я соглашаюсь с условиями'|_}} <a class="text-danger" target="_blank" href="{{'/publichnaya-oferta'}}"> {{'Публичной оферты'|_}} </a></span>
 				</label>
 			</div>
 		</div>

@@ -11,22 +11,27 @@ tumblr = 0
 		<div class="main-card-slider d-block d-md-flex">
 			<div id="productCardSlider" class="carousel carousel-main card-carusel-main">
 				<div class="carousel-cell-card w-100">
+					<a href="{{ obProduct.preview_image.path }}" target="_blank">
 					<img src="{{ obProduct.preview_image.path }}" alt="image">
+					</a>
 				</div>
 				{% for image in obProduct.images %}
 					<div class="carousel-cell-card w-100">
-						<img class="mx-product" src="{{ image.path }}" alt="image">
+						<a href="{{ image.path }}" target="_blank">
+							<img class="mx-product" src="{{ image.path }}" alt="image">
+						</a>
 					</div>
 				{% endfor %}
 			</div>
 			
 			<div class="carousel carousel-nav card-carusel" id="productCardSliderDocs" style="max-height: 500px !important; overflow: auto">
+				<div class="carousel-cell-card m-1"><img class="w-100 mx-small-img" src="{{ obProduct.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
+				</div>
 				{% for image in obProduct.images %}
-				  <div class="carousel-cell-card m-1"><img class="w-100 mx-small-img" src="{{ image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
+				  <div class="carousel-cell-card m-1">
+					  <img class="w-100 mx-small-img" src="{{ image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
 				  </div>
 				{% endfor %}
-				<div class="carousel-cell-card m-1"><img class="w-100 mx-small-img" src="{{ obProduct.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" alt="">
-				  </div>
 			</div>
      	</div>
 	</div>

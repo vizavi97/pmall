@@ -11,8 +11,9 @@
 				<div class="main-categoriy-cell-recommend">
 					<div class="categoriy-cell-recommend">
 		  				<div class="card border-0 card-categoriy-mobil">
-			  				<a href="{{obProduct.getPageUrl()}}"><img class="card-img-top" src="{{obProduct.preview_image.getThumb(240, 233, {mode: 'crop'})}}" alt="Card image cap"></a>
-			  				
+<!--			  				<a href="{{obProduct.getPageUrl()}}"><img class="card-img-top" src="{{obProduct.preview_image.getThumb(240, 280, {mode: 'crop'})}}" alt="Card image cap"></a>-->
+			  				<a href="{{obProduct.getPageUrl()}}"><img class="card-img-top" src="{{obProduct.preview_image.getThumb(200, 230, {mode: 'crop'})}}" alt="Card image cap"></a>
+
 			  				{% if obProduct.inWishList() %}
 								<a href="#"
 					        		data-request="ProductData::onRemoveFromWishList" 

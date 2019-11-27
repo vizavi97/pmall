@@ -62,9 +62,13 @@ function onStart ()
 		      </div>
 		  	  <div class="col-md-2  col-sm-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Цена'|_}}</span>
-		  		<h5 class="pt-4">{{ obOffer.old_price_value }}<span class="basket-color-text">{{'сум'|_}}</span></h5>
+			      {% if obOffer.old_price != 0  %}
+		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.old_price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 		  		<h5 class="text-danger">{{'Со скидкой'|_}}</h5>
-		  		<h6>{{ obOffer.price_value }} <span class="basket-color-text">{{'сум'|_}}</span></h6>
+		  		<h6>{{ obOffer.price }} <span class="basket-color-text">{{'сум'|_}}</span></h6>
+			      {% else %}
+			      <h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
+			      {% endif %}
 		  	  </div>
 		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Кол-во'|_}}</span>
@@ -86,7 +90,7 @@ function onStart ()
 		   	  
 		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Сумма'|_}}</span>
-		  		<h5 class="pt-4">{{ obCartElement.price_value }}<span class="basket-color-text">{{'сум'|_}}</span></h5>
+		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obCartElement.price_value }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 		   	  </div>
 		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Удалить'|_}}</span>
@@ -103,10 +107,7 @@ function onStart ()
 	{% endfor %}
 </div>
 <div class="col-md-3">
-	<div class="main-right-block bg-white px-3">
-		<div class="transfer pt-3 pb-5">
-			<a class="text-danger border-transfer" href="">{{'Перечислить'|_}}</a><img class="pl-2" src="{{ 'assets/img/Shape7.png' | theme }}" alt="">	
-		</div>
+	<div class="main-right-block bg-white px-3" style="padding-top: 20px">
 		<div class="summa d-flex border border-right-0 border-top-0 border-left-0 justify-content-between">
 			<h6>{{'Сумма'|_}}</h6>
 			<h6>{{ obCartElementList.getTotalPriceValue() }}<span class="basket-color-text">{{'сум'|_}}</span></h6>
