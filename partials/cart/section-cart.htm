@@ -10,6 +10,7 @@ function onStart ()
 ?>
 ==
 {% set obCartElementList = Cart.get() %}
+{% set withoutDiscount = obCartElementList.getTotalPriceValue() + obCartElementList.getDiscountTotalPrice() %}
 
 <div class="col-md-9">
 	{% for obCartElement in obCartElementList %}
@@ -108,9 +109,33 @@ function onStart ()
 </div>
 <div class="col-md-3">
 	<div class="main-right-block bg-white px-3" style="padding-top: 20px">
+		<ul class="ordering-items">
+			{% for product in obCartElementList %}
+			{% set countSum = product.quantity * product.offer.old_price %}
+			{% set countSumOld = product.quantity * product.offer.price %}
+			<li class="ordering-item">
+				<div class="ordering-item-name">
+					<em>{{product.offer.product.name}}</em>
+				</div>
+				<div class="ordering-item-cost">
+					{% if product.offer.old_price != 0 %}
+					<p>{{countSum}}
+						<span class="basket-color-text" style="padding-left: 10px">{{'сум'|_}}</span>
+					</p>
+					{% else %}
+					<p>{{countSumOld}}
+						<span class="basket-color-text" style="padding-left: 10px">{{'сум'|_}}</span>
+
+					</p>
+					{% endif %}
+				</div>
+			</li>
+			{% endfor %}
+			<div></div>
+		</ul>
 		<div class="summa d-flex border border-right-0 border-top-0 border-left-0 justify-content-between">
 			<h6>{{'Сумма'|_}}</h6>
-			<h6>{{ obCartElementList.getTotalPriceValue() }}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+			<h6>{{ withoutDiscount }}<span class="basket-color-text">{{'сум'|_}}</span></h6>
 		</div>
 		<div class="summa d-flex  justify-content-between pt-3">
 			<h6>{{'Скидка'|_}}</h6>

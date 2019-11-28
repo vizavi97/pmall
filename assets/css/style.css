@@ -2886,7 +2886,7 @@ input[type='range']::-moz-range-thumb:active {
     position: sticky;
     top: 0;
     background: #fafafa;
-    z-index: 1000;
+    z-index: 998;
     padding: 10px 0;
 }
 
@@ -3026,6 +3026,11 @@ input[type='range']::-moz-range-thumb:active {
         padding: 10px 0;
         height: 10px;
     }
+}
+
+.categories-button img {
+    max-width: 100%;
+    padding: 0 10px;
 }
 
 .bredn {
@@ -3638,3 +3643,53 @@ input[type='number']::-webkit-inner-spin-button {
 .summa .basket-color-text {
     padding-left: 10px;
 }
+
+.ordering-items {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+}
+.ordering-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+.ordering-item-name  {
+    padding-right: 15px;
+}
+
+.ordering-item-name em {
+    line-height: 20px;
+}
+
+.ordering-item-cost p {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+}
+
+.cart-side-prices {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.cart-side-price {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.cart-side-price p {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.cart-side-price span {
+    padding-left: 10px;
+}
+
+

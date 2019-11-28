@@ -9,9 +9,12 @@
 		</div>
 		<div class="carousel " data-flickity='{ "wrapAround": true, "autoPlay": true }'>
 			{% for brand in brands %}
-				<div class="carousel-cell-boutiques text-center my-auto">
-					<a class="categories-button" href="http://pmall.uz/list?brandid={{brand.id}}"><img src="{{ brand.preview_image.path }}" alt=""></a>
-				</div>
+			{% if brand.preview_image.path is empty %}
+			{% else %}
+			<div class="carousel-cell-boutiques text-center my-auto">
+				<a class="categories-button" href="http://pmall.uz/list?brandid={{brand.id}}"><img src="{{ brand.preview_image.path }}" alt=""></a>
+			</div>
+			{% endif %}
 			{% endfor %}
 		</div>
 	</div>

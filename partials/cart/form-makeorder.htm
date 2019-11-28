@@ -79,28 +79,9 @@
 						{% endif %}
 						
 					</div>
-					<div>
-						{% if coupons %}
-	                        <p class="name">Использованные купоны:</p>
-	                        {% for coupon in coupons %}
-	                            <p>
-	                                {{ coupon.coupon_group.name }} - {{ coupon.code }}
-	                                <a href="javascript();" 
-	                                    data-request="Cart::onRemoveCoupon" 
-	                                    data-request-data="'coupon': '{{ coupon.code }}'"
-	                                    data-request-update="'blocks/makeOrder': '#makeOrder'">
-	                                    удалить</a>
-	                            </p>
-	                        {% endfor %}
-	                    {% else %}
-	                        <p class="name"><b>У вас есть купоны? Тогда используйте их.</b></p>
-	                    {% endif %}
-	                    <form>
-	                        <input type="text" name="coupon" class="couponValue form-control w-75" placeholder="Введите купон">
-	                        <p id="couponCreateError"></p>
-	                        <button class="btn btn-danger add-coupon" type="button">проверить</button>
-	                    </form>
-					</div>
+				    <div id="coupons">
+					    {% partial 'cart/coupons'%}
+				    </div>
 					<div class="d-inline-block mt-4">
 						<p>{{'Нажимая на кнопку "Оформить заказ", вы приминаете условия'|_}} <a href="/publichnaya-oferta">{{'Публичной оферты'|_}}</a></p>
 					</div>
@@ -134,41 +115,9 @@
 			  </div>
 		  </div>
 		  <div class="col-md-3">
-			<div class="main-right-block bg-white px-3">
-				<div class="checkout-block-right">
-					<h4 class="text-danger pt-3">{{'Ваш Заказ'|_}}</h4>
-					<span>{{'Итого:'|_}} {{ obCartElementList.getTotalPriceValue() }}</span>
-					<div class="checkout-mol-block">
-					
-						{% for obCartElement in obCartElementList %}
-						{% set obOffer = obCartElement.offer %}
-							<div class="mal-block pb-3 d-flex">
-								<div class="checkout-img">
-									<img src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" width="100">
-								</div>
-								<div class="checkout-text pl-4">
-									<h6 class="p-0 m-0">{{obOffer.product.name}}</h6>
-									{% for item in obCartElement.property %}
-					    				<span class="small"><b>{{obOffer.name}}</b> {{item}}</span><br>
-					    			{%endfor%}
-									<span class="text-danger">{{'Цена'|_}}</span><br>
-									<p class="m-0 p-0">{{ obOffer.price_value }} <span class="basket-color-text">{{'сум'|_}}</span></p>
-								</div>
-										
-							</div>
-						{% endfor%}
-						
-						<div class="basket-button py-4 mb-5">
-							{% if user.is_store == 1 %}
-								<b>{{'Покупка товаров допустима только физическим  лицам'|_}}</b>
-							{%else%}
-								<button type="submit" class="btn bg-danger man-btn text-white">{{'Оформить заказ'|_}}<i class="fas fa-chevron-right pl-4"></i></button>
-							{%endif%}	
-						</div>
-							
-					</div>
-				</div>
-			</div>
+			  <div id="cartSide">
+				  {% partial 'cart/order-calc'%}
+			  </div>
 		</div>
 	</div>	
 </form>
@@ -178,18 +127,19 @@
     <script>
         $(document).on('click', '.add-coupon', function () {
             var coupon = $('.couponValue').val();
-            $(this).parent().request('Cart::onAddCoupon', {
-                update: {'cart/form-makeorder': '#form-makeorder'},
+            console.log(coupon);
+            $.request('Cart::onAddCoupon', {
+                update: {'cart/coupons': '#coupons', 'cart/order-calc': '#cartSide'},
                 data: {coupon: coupon},
                 success: function(data) {
                     if (data.message && !data.status) {
-                         $.oc.flashMsg({ text: data.message, class: 'error' })   
+                         $.oc.flashMsg({ text: data.message, class: 'error' })
                     } else {
-                        $('#makeOrder').html(data['blocks/makeOrder']);  
+                        $('#makeOrder').html(data['blocks/makeOrder']);
                     }
                     this.success(data);
                 },
-                
+
             });
         });
     </script>

@@ -1,0 +1,25 @@
+{% set obCartElementList = Cart.get() %}
+{% set coupons = Cart.getAppliedCouponList() %}
+
+<div>
+	{% if coupons %}
+	<p class="name">Использованные купоны:</p>
+	{% for coupon in coupons %}
+	<p>
+		{{ coupon.coupon_group.name }} - {{ coupon.code }}
+		<a href="javascript();"
+		   data-request="Cart::onRemoveCoupon"
+		   data-request-data="'coupon': '{{ coupon.code }}'"
+		   data-request-update="'cart/coupons': '#coupons','cart/order-calc': '#cartSide'">
+			удалить</a>
+	</p>
+	{% endfor %}
+	{% else %}
+	<p class="name"><b>У вас есть купоны? Тогда используйте их.</b></p>
+	{% endif %}
+	<div>
+		<input type="text" name="coupon" class="couponValue form-control w-75" placeholder="Введите купон">
+		<p id="couponCreateError"></p>
+		<button class="btn btn-danger add-coupon" type="button">проверить</button>
+	</div>
+</div>
