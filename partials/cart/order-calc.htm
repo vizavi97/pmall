@@ -3,16 +3,23 @@
 	<div class="checkout-block-right">
 		<h4 class="text-danger pt-3">{{'Ваш Заказ'|_}}</h4>
 		<ul class="cart-side-prices">
-		{% if Cart.getTotalPriceValue() != obCartElementList.getTotalPriceValue() %}
 			<li class="cart-side-price">
-				<em>{{'Без купона:'|_}}</em><p>{{ obCartElementList.getTotalPriceValue() }} <span class="basket-color-text">{{'сум'|_}}</span></p>
+				<em>{{'Стоимость заказа:'|_}}</em><p>{{ obCartElementList.getTotalPriceValue() }} <span class="basket-color-text">{{'сум'|_}}</span></p>
 			</li>
 			<li class="cart-side-price">
-				<em>{{'Итого:'|_}}</em><p>{{Cart.getTotalPriceValue()}} <span class="basket-color-text">{{'сум'|_}}</span></p>
+				<em>{{'Доставка:'|_}}</em><div><p id="deliveryPrice">0</p><span class="basket-color-text">{{'сум'|_}}</span></div>
+			</li>
+		{% if Cart.getTotalPriceValue() != obCartElementList.getTotalPriceValue() %}
+			<li class="cart-side-price">
+				<em>{{'Купон:'|_}}</em><p>{{obCartElementList.getTotalPriceValue()-Cart.getTotalPriceValue()}} <span class="basket-color-text">{{'сум'|_}}</span></p>
+			</li>
+			<li class="cart-side-price">
+				<em><b>{{'Итого:'|_}}</b></em><div>
+				<b><p id="tolal_price">{{Cart.getTotalPriceValue()}}</p></b><span class="basket-color-text">{{'сум'|_}}</span></div>
 			</li>
 		{% else %}
 			<li class="cart-side-price">
-				<em>{{'Итого:'|_}}</em><p>{{ obCartElementList.getTotalPriceValue() }} <span class="basket-color-text">{{'сум'|_}}</span></p>
+				<em><b>{{'Итого:'|_}}</b></em><p><b><span id="tolal_price">{{ obCartElementList.getTotalPriceValue() }}</span></b> <span class="basket-color-text">{{'сум'|_}}</span></p>
 			</li>
 		{% endif %}
 		</ul>
@@ -26,7 +33,7 @@
 					<h6 class="p-0 m-0">{{obOffer.product.name}}</h6>
 					{% for item in obCartElement.property %} <span class="small"><b>{{obOffer.name}}</b> {{item}}</span><br>
 					{%endfor%} <span class="text-danger">{{'Цена'|_}}</span><br>
-					<p class="m-0 p-0">{{ obOffer.price_value }} <span class="basket-color-text">{{'сум'|_}}</span></p>
+					<p class="m-0 p-0">{{ obOffer.price }} <span class="basket-color-text" >{{'сум'|_}}</span></p>
 				</div>
 
 			</div>

@@ -41,12 +41,18 @@
 		</div>
 		{% endfor %}
 	</div>
-
+	{% if BannerBanners %}
+	{% set banner = BannerBanners.load('150x150', false) %}
+	{% set sideBanner = banner[0] %}
 	<div class="side-banner">
-		<img src="{{ 'assets/img/11061458-1422376632-829116copy2.png' | theme }}" alt="banner"/>
-		<p>Здесь будет баннер</p>
+		<a href="{{sideBanner.url}}">
+		<img src="{{ sideBanner.image.path }}" alt="banner"/>
+		</a>
+		<p>{{sideBanner.title|raw}}</p>
 	</div>
+	{% endif %}
 </div>
+
 
 
 <!-- Mobile -->

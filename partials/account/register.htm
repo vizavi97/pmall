@@ -9,7 +9,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-user"></i></span>
 			</div>
-			<input class="form-control" name="name" placeholder="{{'Имя'|_}} *" type="text" required>
+			<input class="form-control" name="name" placeholder="{{'Имя'|_}} *" type="text">
 		</div>
 	</div>
 	
@@ -27,7 +27,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="fal fa-mobile-alt"></i></span>
 			</div>
-			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="text" required>
+			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="tel" onkeydown="return isNumberPhoneKey(event.key)" maxlength="16" required>
 		</div>
 	</div>
 	
@@ -45,7 +45,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span class="input-group-text"><i class="far fa-location"></i></span>
 			</div>
-			<input class="form-control" placeholder="{{'Address'|_}}" name="user_address" type="text" required>
+			<input class="form-control" placeholder="{{'Адресс'|_}}" name="user_address" type="text" required>
 		</div>
 	</div>
 	

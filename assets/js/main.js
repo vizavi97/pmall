@@ -155,6 +155,10 @@ function isNumberKey(evt) {
   if (charCode > 31 && (charCode < 48 || charCode > 57)) return false;
   return true;
 };
+function isNumberPhoneKey(key)  {
+  return (key >= '0' && key <= '9') || key == '+' || key == '(' || key == ')' || key == '-' ||
+    key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
+};
 
 $(document).on('click', '.modal-filter-window-close-item', function () {
   $(document).find('.modal-filter-window').css("z-index", "-10000");

@@ -134,16 +134,16 @@ function onStart ()
 			<div></div>
 		</ul>
 		<div class="summa d-flex border border-right-0 border-top-0 border-left-0 justify-content-between">
-			<h6>{{'Сумма'|_}}</h6>
-			<h6>{{ withoutDiscount }}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+			<h6><b>{{'Сумма'|_}}</b></h6>
+			<h6><b>{{ withoutDiscount }}</b><span class="basket-color-text">{{'сум'|_}}</span></h6>
 		</div>
 		<div class="summa d-flex  justify-content-between pt-3">
 			<h6>{{'Скидка'|_}}</h6>
 			<h6>{{ obCartElementList.getDiscountTotalPrice ()}}<span class="basket-color-text">{{'сум'|_}}</span></h6>
 		</div>
 		<div class="summa d-flex  justify-content-between pt-3">
-			<h6>{{'Итого'|_}}</h6>
-			<h6>{{obCartElementList.getTotalPriceValue()}}<span class="basket-color-text">{{'сум'|_}}</span></h6>
+			<h6><b>{{'Итого'|_}}</b></h6>
+			<h6><b>{{obCartElementList.getTotalPriceValue()}}</b><span class="basket-color-text">{{'сум'|_}}</span></h6>
 		</div>
 		<div class="basket-button py-5 mb-5">
 			{% if obCartElementList.isNotEmpty() and user.is_store == 0 %}

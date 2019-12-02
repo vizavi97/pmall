@@ -1,7 +1,7 @@
 [viewBag]
 ==
 <div class="order-items">
-	{% for order in obStore.orders %}
+	{% for order in obStore.orders|sort|reverse %}
 	{% if order.order.order_number is not defined or order.order.order_number is null %}
 	{%else%}
 	<div class="order-item">
@@ -20,7 +20,7 @@
 					<em>Номер заказа - </em> <span>{{ order.order.order_number }}</span>
 				</li>
 				<li class="order-item-inner-about-sum">
-					<em>Сумма заказа - </em> <span>{{ order.order.amount}} {{ order.currency.symbol }}</span>
+					<em>Сумма заказа - </em> <span>{{ order.order.total_price_value}}</span>
 				</li>
 				<li class="order-item-inner-about-count">
 					<em>Дата Регистрации - </em> <span>{{ order.created_at.format(' d.m.Y') }}</span>
@@ -64,6 +64,16 @@
 					<em>{{products.name}}</em><span>{{ item.offer.price }}</span>
 				</li>
 				{% endfor %}
+				<li class="order-item-inner-calc-result">
+					<em>{{order.order.shipping_type.name}}</em><span>{{order.order.shipping_type.price}}</span>
+				</li>
+				{% set totalDiscount = order.discount_total_price - order.discount_position_total_price  %}
+				{% if totalDiscount  %}
+				<li class="order-item-inner-calc-result">
+					<em>Скидка</em><span>{{totalDiscount}}</span>
+				</li>
+				{%else%}
+				{% endif %}
 				<li class="order-item-inner-calc-result">
 					<em>Итого</em><span>{{ order.order.total_price_value}}</span>
 				</li>
