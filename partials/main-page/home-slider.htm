@@ -1,58 +1,81 @@
 [viewBag]
 ==
 {% if BannerBanners %}
-    {% set banners = BannerBanners.load('1256x350', false) %}
-	<section>
+{% set banners = BannerBanners.load('1256x350', false) %}
+{% set mobileBanners = BannerBanners.load('321x360', false)   %}
+<section class="main-banner-desktop">
 
-		<div class="container">
-			<div class="carousel" data-flickity='{ "autoPlay": true }'>
-				
-				{% for banner in banners %}
-				
-					<div class="carousel-cell">
-						<div class="mx-slider" style="background-image: url({{ banner.image.path }});">
-							<a href="{{banner.url}}" class="btn  recommend-loock  lock-more bg-danger text-white mx-btn"><b>{{banner.pretitle}}</b></a>
-						</div>
-					</div>
-				
-				{% endfor %}
-				
-				
+	<div class="container">
+		<div class="carousel" data-flickity='{ "autoPlay": true }'>
+
+			{% for banner in banners %}
+
+			<div class="carousel-cell">
+				<div class="mx-slider" style="background-image: url({{ banner.image.path }});">
+					<a href="{{banner.url}}" class="btn  recommend-loock  lock-more bg-danger text-white mx-btn"><b>{{banner.pretitle}}</b>
+					</a>
+				</div>
 			</div>
+
+			{% endfor %}
+
+
 		</div>
-	<style>
-		.mx-btn{
+	</div>
+</section>
+<section class="main-banner-mobile">
+	<div class="container">
+		<div class="carousel" data-flickity='{ "autoPlay": true }'>
+			{% for mobileBanner in mobileBanners %}
+			<div class="carousel-cell">
+				<a href="{{mobileBanner.url}}" class="main-banner-mobile-link">
+				<div class="mx-slider" style="background-image: url({{ mobileBanner.image.path }});">
+				</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>
 
 
-			/*background-color: #fff !important;*/
-			/*color: #ae3b39 !important;*/
-		}
-		/*.mx-btn {
-			padding: 17px 25px 17px 25px !important;
-		}*/
-		.mx-btn:hover {
-			color: #fff;
-		}
-		.mx-slider {
-			min-height: 100%;
+<style>
+	.mx-btn {
+
+
+		/*background-color: #fff !important;*/
+		/*color: #ae3b39 !important;*/
+	}
+
+	/*.mx-btn {
+		padding: 17px 25px 17px 25px !important;
+	}*/
+	.mx-btn:hover {
+		color: #fff;
+	}
+
+	.mx-slider {
+		min-height: 100%;
+		width: 100%;
+		position: relative;
+		background-size: cover;
+	}
+
+	.carousel-cell .recommend-loock {
+		position: absolute;
+		bottom: 6px;
+		right: 5px;
+	}
+
+	@media screen and (max-width: 550px) {
+		.banner-header {
 			width: 100%;
-			position: relative;
-			background-size: cover;
+			height: auto;
 		}
-		.carousel-cell .recommend-loock {
-			position: absolute;
-			bottom: 6px;
-			right: 5px;
+
+		.flickity-slider {
+			height: 100%;
 		}
-		@media screen and (max-width:550px) {
-			.banner-header {
-				width: 100%;
-				height: auto;
-			}
-			.flickity-slider {
-				height: 100%;
-			}
-		}
-	</style>
-	</section>
+	}
+</style>
 {% endif %}

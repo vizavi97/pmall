@@ -7,7 +7,7 @@
 	<div class="order-item">
 		<input id="order-{{ order.order.order_number }}" type="checkbox" name="order"/>
 		<label class="order-item-button" for="order-{{ order.order.order_number }}">
-			<b>Статус заказа: Доставлено / не доставлено</b>
+			<b>Статус заказа: {{order.order.status.name}}</b>
 			<b>Клиент: {{order.user.name }}</b>
 			<b>Номер заказа: "{{ order.order.order_number }}"</b>
 		</label>
@@ -26,7 +26,7 @@
 					<em>Дата Регистрации - </em> <span>{{ order.created_at.format(' d.m.Y') }}</span>
 				</li>
 				<li class="order-item-inner-about-status">
-					<em>Статус - </em> <span>Доставлено/ Не доставлено</span>
+					<em>Статус - </em> <span>{{order.order.status.name}}</span>
 				</li>
 				<li class="order-item-inner-about-method">
 					<em>Способ оплаты - </em> <span>{{order.order.payment_method.name}}</span>
@@ -64,16 +64,6 @@
 					<em>{{products.name}}</em><span>{{ item.offer.price }}</span>
 				</li>
 				{% endfor %}
-				<li class="order-item-inner-calc-result">
-					<em>{{order.order.shipping_type.name}}</em><span>{{order.order.shipping_type.price}}</span>
-				</li>
-				{% set totalDiscount = order.discount_total_price - order.discount_position_total_price  %}
-				{% if totalDiscount  %}
-				<li class="order-item-inner-calc-result">
-					<em>Скидка</em><span>{{totalDiscount}}</span>
-				</li>
-				{%else%}
-				{% endif %}
 				<li class="order-item-inner-calc-result">
 					<em>Итого</em><span>{{ order.order.total_price_value}}</span>
 				</li>

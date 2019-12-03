@@ -71,7 +71,7 @@ errorMessage = "Email already exists!"
 				<form name="form-subscribe-andradedev" id="form-subscribe-andradedev" data-request="{{ formSubscribe }}::onAddSubscriber" class="subscribe_form" data-request-update="'{{formSubscribe}}::alert': '#result'">
 					<h5 class="payk pt-4 pb-5">{{'Подписаться'|_}}</h5>
 					<div class="input-group input-header mb-3">
-					  <input type="text" class="form-control from-header ml-4" name="email" placeholder="{{ 'Введите ваш e-mail'|_ }}" aria-label="Username" aria-describedby="basic-addon1">
+					  <input type="email" class="form-control from-header ml-4" name="email" placeholder="{{ 'Введите ваш e-mail'|_ }}" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
 					<div id="result"></div>
 					<button form="form-subscribe-andradedev" type="submit" class="btn btn-outline-danger recommend-loock bg-danger text-white"><b>{{'Отправить'|_}}</b></button>

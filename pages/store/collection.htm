@@ -70,7 +70,7 @@ function onStart() {
 {% set obStoreProductListRecommend = ProductList.make().sort(ProductList.getSorting()).active().store(obStore.id) %}
 
 
-	<section>
+		<section>
 		<div class="container">
 			<div class="categoriy-menu bg-dark d-flex align-items-end flex-column">
 				<div class="categories-img">
@@ -92,8 +92,8 @@ function onStart() {
 								{% if isCategory == obCategory.slug and obCategory.slug != 'magaziny' %}
 									<li class="nav-item">
 										<a class="nav-link {{obCategory.slug == obCategoryParent.slug ? 'text-danger'}}" href="{{'store/collection'|page({store: this.param.store, category: obCategory.slug, slug:''})}}"
-											{#data-request="onFilterStore"
-											data-request-data="store/filter-products: '#filter-result'"#}
+											data-request="onFilterStore"
+											data-request-data="store/filter-products: '#filter-result'"
 											aria-haspopup="true" 
 											aria-expanded="false">{{obCategory.name}}</a>
 									</li>
@@ -101,6 +101,7 @@ function onStart() {
 							{%endfor%}	  	
 						{%endfor%}	  
 					</ul>
+<!--
 					<ul class="nav nav-tabs">
 						{% for obCategory in obCategoryList %}	  
 							{% if obCategory.slug == category %}
@@ -112,48 +113,20 @@ function onStart() {
 							{%endif%}	
 						{%endfor%}	  
 					</ul>
-					{#<form class="container" id="section-products-filter">
-						{% partial 'store/section-products-filter'%}
-					</form>#}
+-->
 				</div>
 			</div>
 			<div class="row pt-4" id="section-list-products">
 				
 				{% partial 'store/filter-products' obStore=obStore obCategoryParent=obCategoryParent obCategory=obCategorySlug%}
 					    
-			</div>	
-			{#<div class="row pt-4">
-				<div class="col-md-4">
-					<div class="mal-block-categoriy">
-						<div class="mal-text-categorie bg-dark">
-							<h4 class="text-danger font-weight-bold">{{'LOOK BOOK'|_}}</h4>
-							<p class=" text-white"><b>{{'Мужской стиль'|_}}</b></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="mal-block-categoriy mal-block-categoriy01">
-						<div class="mal-text-categorie bg-dark">
-							<h4 class="text-danger font-weight-bold">{{'SALE 50%'|_}}</h4>
-							<p class=" text-white"><b>{{'Женская обувь'|_}}</b></p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="mal-block-categoriy mal-block-categoriy02">
-						<div class="mal-text-categorie bg-dark">
-							<h4 class="text-danger font-weight-bold">{{'SALE 50%'|_}}</h4>
-							<p class=" text-white"><b>{{'Женские сумочки'|_}}</b></p>
-						</div>
-					</div>
-				</div>
-			</div>#}
+			</div>
 		</div>
 	</section>
 		<section>
 			<div class="container">
 				<div class="recommend-title d-block d-sm-flex justify-content-between pt-3 pb-3">
-					<h3 class="">{{'Рекомендуем'|_}}</h3>
+					<h3>{{'Рекомендуем'|_}}</h3>
 					<button type="button" class="btn btn-outline-danger recommend-loock"><b>{{'Смотреть все'|_}}</b></button>
 				</div>
 				<div class="carousel"
@@ -165,14 +138,16 @@ function onStart() {
 				
 				  <div class="carousel-cell-recommend">
 				  	<div class="card border-0" style="width: 15rem; margin-right: 10px;">
-					  <a href="{{obStoreProduct.getPageUrl()}}"><img class="card-img-top" src="{{obStoreProduct.preview_image.getThumb(230, 180, {mode: 'crop'})}}" alt="Card image cap"></a>
+					  <a href="{{obStoreProduct.getPageUrl()}}"><img class="card-img-top" src="{{obStoreProduct.preview_image.getThumb(200, 250, {mode: 'crop'})}}" alt="Card image cap"></a>
 					  	<a href="#"><img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
 					  <div class="card-body recommend-block">
 						  <a href="{{obStoreProduct.getPageUrl()}}" class="text-dark" title="{{obStoreProduct.name }}"><h5 class="text-overflow">{{obStoreProduct.name }}</h5></a>
 					    <p class="small basket-color-text">{{'Мужские'|_}}</p>
-						<div class="number-red d-flex">
-							<span class="text-color-border pt-2">{{price.old_price_value}}</span>
-							<h4 class="text-danger pl-4">{{price.price_value}}</h4>
+						<div class="number-red d-flex justify-content-end">
+							{%if price.old_price != 0 %}
+							<span class="text-color-border pt-2">{{price.old_price}}</span>
+							{% endif%}
+							<h4 class="text-danger pl-4">{{price.price}}<span class="basket-color-text" style="padding-left: 10px">{{'сум'|_}}</span></h4>
 						</div>
 					  </div>
 					</div>
@@ -194,4 +169,3 @@ function onStart() {
 				</div>
 			</div>
 		</section>
-	</div>

@@ -100,7 +100,7 @@
 						               data-request-data="shipping_type_id:  {{ obShippingType.id }}"
 						               data-request-update="'cart/order-calc': '#cartSide'"
 						               data-request-success="{$('#tolal_price').html(data.data.total_price.price),$('#deliveryPrice').html(data.data.shipping_price.price);}"
-						               type="radio" name="order[shipping_type_id]" value="{{ obShippingType.id }}">
+						               type="radio" name="order[shipping_type_id]" value="{{ obShippingType.id }}" required>
 						        <span class="form-check-label">{{ obShippingType.name }} {% if obShippingType.price %}-  <span class="badge badge-pill badge-danger bg-color">{{ obShippingType.price }}{{'sum'|_}}</span>{% endif %} </span>
 						        
 						      </label>

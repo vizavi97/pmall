@@ -50,10 +50,14 @@ function onStart() {
 										</ul>
 									</li>
 									<li class="menu-rightSide">
-										<div class="menu-banner d-flex flex-column justify-content-center align-items-center ">
-											<img src="{{'assets/img/11061458-1422376632-829116copy2.png' | theme }}" alt="будущий баннер"/>
-											<b>Здесь будет баннер</b>
+										{%if obChildCategory.preview_image%}
+										<div class="menu-banner d-flex flex-column justify-content-center align-items-center text-center">
+											<a class="add-color"  href="{{obChildCategory.preview_image.description}}">
+												<img class="card-img-top" src="{{obChildCategory.preview_image.getThumb(500, 500, {mode: 'crop'})}}" alt="menu-banner">
+											</a>
+											<p>{{obChildCategory.preview_image.title}}</p>
 										</div>
+										{%endif%}
 									</li>
 								</ul>
 							</li>

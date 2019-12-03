@@ -6,7 +6,7 @@
 	<div class="order-item">
 		<input id="order-{{ order.order_number }}" type="checkbox" name="order"/>
 		<label class="order-item-button" for="order-{{ order.order_number }}">
-			<b>Статус заказа: Доставлено / не доставлено</b> <b>Номер заказа: "{{ order.order_number }}"</b>
+			<b>Статус заказа: {{order.status.name}}</b> <b>Номер заказа: "{{ order.order_number }}"</b>
 		</label>
 		<div class="order-item-inner">
 			<ul class="order-item-inner-about">
@@ -20,7 +20,7 @@
 					<em>Дата Регистрации - </em> <span>{{ order.created_at.format(' d.m.Y') }}</span>
 				</li>
 				<li class="order-item-inner-about-status">
-					<em>Статус - </em> <span>Доставлено/ Не доставлено</span>
+					<em>Статус - </em> <span>{{order.status.name}}</span>
 				</li>
 				<li class="order-item-inner-about-method">
 					<em>Способ оплаты - </em> <span>{{ order.payment_method.name }}</span>

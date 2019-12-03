@@ -38,27 +38,24 @@
 
 			<input type="hidden" value="1" name="offers[0][active]">
 		</div>
-		<div class="col-lg-2 col-md-4">
+		<div class="col-lg-3 col-md-4">
 			<label class="text-muted small">{{'Цена'|_}}
 			</label>
 			<input type="text" maxlength="10" class="span2 form-control" name="offers[0][price]"  value="" onkeyup="calcPrice(this)" onkeypress="return isNumberKey(this)" required>
 		</div>
-		<div class="col-lg-2 col-md-4 priceBtnBlock" id="sssssss">
+		<div class="priceBtnBlock" id="sssssss">
 			<div class="closing-div" style="display: none;">
 				<label for="duedate" class="text-muted small">{{'Цена со скидкой'|_}}
 				</label>
-				<input type="text" maxlength="10" onkeypress="return isNumberKey(this)" class="span2 form-control"  value="" >
+				<input type="hidden" maxlength="10"  onkeypress="return isNumberKey(this)" class="span2 form-control"  value="" >
 				<input type="hidden" name="offers[0][old_price]">
 			</div>
-			<button type="button" class="sales-button btn btn-primary btn-sm">
-				Доб. скидку
-			</button>
 		</div>
 		<div class="col-lg-1 col-md-2">
 			<label for="duedate" class="text-muted small">{{'Кол-во'|_}}</label>
 			<input type="text" maxlength="3" class="span2 form-control quantity" name="offers[0][quantity]" value="" onkeypress="return isNumberKey(this)" required>
 		</div>
-		<div class="col-lg-2 col-md-3">
+		<div class="col-lg-3 col-md-3">
 			<label for="duedate" class="text-muted small">
 				{{'Комиссия'|_}}{{user.store.commission}}%
 			</label>
