@@ -2899,22 +2899,23 @@ input[type='range']::-moz-range-thumb:active {
 
 .modal-filter-window {
     position: fixed;
-    display: flex;
+    display: block;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
     z-index: -100;
     background: white;
+    overflow-y: scroll;
 }
-
 .modal-filter-window-close {
-    position: relative;
-    width: 100%;
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .modal-filter-window-close-item {
-    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3720,4 +3721,30 @@ input[type='number']::-webkit-inner-spin-button {
     .main-banner-mobile {
         display: flex;
     }
+    .hover-block {
+        display: flex!important;
+    }
+    .razmer {
+        width: 100%;
+    }
+    .razmer-text .card-body {
+        width: auto;
+    }
+    .btn-basket {
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px!important;
+
+    }
+    .btn-basket img {
+        margin: 0!important;
+    }
+    .cart-props {
+        flex-wrap: wrap;
+        padding-bottom: 20px;
+    }
+    .cart-props > div {
+        text-align: left!important;
+     }
 }
+

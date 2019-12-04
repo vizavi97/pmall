@@ -61,7 +61,8 @@ function onStart ()
 		  		  </div>
 		 	   </div>
 		      </div>
-		  	  <div class="col-md-2  col-sm-6 text-center bootstrap-pt">
+			    <div class="cart-props d-flex col-md-8">
+		  	        <div class="col-md-3  col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Цена'|_}}</span>
 			      {% if obOffer.old_price != 0  %}
 		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.old_price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
@@ -71,7 +72,7 @@ function onStart ()
 			      <h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 			      {% endif %}
 		  	  </div>
-		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+		  	        <div class="col-md-3 col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Кол-во'|_}}</span>
 			  	<div class="button-basket d-flex justify-content-center pt-4">
 			  		<button class="btn text-danger dobavlenye-tovara mr-2" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 0)">-</button>
@@ -88,12 +89,11 @@ function onStart ()
 			  		<button class="text-danger dobavlenye-tovara ml-2" type="button" onclick="countSpinner($('#productQuantity-{{obOffer.id}}'), 1)">+</button>
 			  	</div>
 		   	  </div>
-		   	  
-		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+				    <div class="col-md-3 col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Сумма'|_}}</span>
 		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obCartElement.price_value }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 		   	  </div>
-		  	  <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
+		  	        <div class="col-md-3 col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Удалить'|_}}</span>
 		  		<div class="basket-udalit pt-4">
 		  		<a  data-request="Cart::onRemove"
@@ -103,6 +103,7 @@ function onStart ()
 		                href="#" class="btn btn-sm btn-link mb-n1"><img src="{{ 'assets/img/Shape8copy3.png' | theme }}" alt=""></a>
 		  		</div>
 		      </div>
+			    </div>
 		  </div>
 		</form>
 	{% endfor %}

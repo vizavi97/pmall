@@ -138,6 +138,15 @@ $(document).on('click', '.filter-button', function () {
 
 $(document).on('click', '.mobile-filter-button', function () {
   $(document).find('.modal-filter-window').css("z-index", "10000");
+  $(document).find('.modal-filter-window-close').css("display","flex");
+  $(document).find('#ajaxFilterForm').removeClass('none');
+  $('body').css("overflow-y","hidden")
+});
+$(document).on('click', '.modal-filter-window-close-item', function () {
+  $(document).find('.modal-filter-window').css("z-index", "-10000000");
+  $(document).find('.modal-filter-window-close').css("display","none");
+  $(document).find('#ajaxFilterForm').addClass('none');
+  $('body').css("overflow-y","scroll")
 });
 
 
@@ -160,9 +169,6 @@ function isNumberPhoneKey(key)  {
     key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';
 };
 
-$(document).on('click', '.modal-filter-window-close-item', function () {
-  $(document).find('.modal-filter-window').css("z-index", "-10000");
-});
 $(document).on('click', '.add-product', function () {
   var parEnt = $('.field-group-add:first').html();
   var index = Number($('.field-group-add:last').attr('rel'));

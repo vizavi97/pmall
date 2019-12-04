@@ -12,7 +12,9 @@
 			<ul class="banner-items row">
 				{% for key, banner in banners if key < 3 %}
 					<li class="banner-item flex-column col-lg-4 col-sm-12">
+						<a href="{{banner.url}}">
 						<img src="{{ banner.image.path }}" alt="img"/>
+						</a>
 						<b>{{banner.pretitle}}</b>
 						<p>{{banner.title|raw}}</p>
 					</li>

@@ -3,6 +3,10 @@
 ==
 {% for order in user.orderList|sort|reverse %}
 <div class="order-items">
+	{% set totalCount = 0 %}
+	{% for item in order.order_position %}
+	{%set totalCount = totalCount + item.quantity %}
+	{%endfor%}
 	<div class="order-item">
 		<input id="order-{{ order.order_number }}" type="checkbox" name="order"/>
 		<label class="order-item-button" for="order-{{ order.order_number }}">
@@ -35,9 +39,10 @@
 			<ul class="order-item-inner-items">
 				<li class="order-item-inner-item">
 					<div class="order-item-inner-item-card-count">
-						<em>Количество товаров: <span>"{{order.quantity}}"</span></em>
+						<em>Количество товаров: <span>"{{totalCount}}"</span></em>
 					</div>
 				</li>
+				{% set ar = 0 %}
 				{% for item in order.order_position %}
 				{% set products = item.item.product %}
 				<li class="order-item-inner-item">
