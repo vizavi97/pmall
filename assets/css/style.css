@@ -3746,5 +3746,8 @@ input[type='number']::-webkit-inner-spin-button {
     .cart-props > div {
         text-align: left!important;
      }
+    .categories-products-container {
+        flex-wrap: wrap;
+    }
 }
 
