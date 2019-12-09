@@ -24,6 +24,7 @@ forceSecure = 0
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta name="google-site-verification" content="3q8E4pvtd5Ryn2K3HrWJmyPsWHnB1J76qhDkXibnGG8" />
 	<title> {{this.theme.site_name}} </title>
 	
 	<link rel="stylesheet" href="{{[
@@ -32,6 +33,7 @@ forceSecure = 0
 		'assets/css/slide-menu.css',
 		'assets/css/flickity.css',
 		'assets/css/rangeslider.css',
+		'assets/css/jquery.fancybox.min.css',
 		'assets/css/style.css',
 	]|theme}}">
 	<link src="{{ 'assets/css/slide-menu.css' | theme }}"></link>  
@@ -44,7 +46,6 @@ forceSecure = 0
     <script src="{{ 'assets/js/js_todo/jquery.repeatable.js' | theme }}"></script>  
 </head>
 <body class="menu-opened">
-	
 	
 	
 	{% partial 'site/header' %}
@@ -76,19 +77,30 @@ forceSecure = 0
 	{% framework extras %}
     {% scripts %}
     
-    <!-- Yandex.Metrika counter -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152936058-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-152936058-1');
+</script>
+    
+<!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
    m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
-   ym(55775977, "init", {
+   ym(56316460, "init", {
         clickmap:true,
         trackLinks:true,
-        accurateTrackBounce:true
+        accurateTrackBounce:true,
+        ecommerce:"dataLayer"
    });
 </script>
-<noscript><div><img src="https://mc.yandex.ru/watch/55775977" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/56316460" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 </body>
 </html>

@@ -69,7 +69,7 @@
 					<em>{{order.shipping_type.name}}</em><span>{{order.shipping_type.price}}</span>
 				</li>
 
-				{% set totalDiscount = order.discount_total_price - order.discount_position_total_price  %}
+				{% set totalDiscount = order.discount_total_price_value - order.discount_position_total_price_value  %}
 				{% if totalDiscount  %}
 				<li class="order-item-inner-calc-result">
 					<em>Скидка</em><span>{{totalDiscount}}</span>

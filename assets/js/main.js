@@ -22,7 +22,7 @@ $('.popular-goods .button--next').on('click', function () {
 
 // product card page
 var $carouselCard = $('#productCardSlider').flickity({
-  prevNextButtons: false
+  prevNextButtons: false,
 });
 
 $('#productCardSliderDocs .carousel-cell-card').on('click', function () {
@@ -173,7 +173,7 @@ $(document).on('click', '.add-product', function () {
   var parEnt = $('.field-group-add:first').html();
   var index = Number($('.field-group-add:last').attr('rel'));
   index++;
-  $('.field-group-add:last').after('<div class="field-group-add row" rel="' + index + '">' + parEnt.replace(/[0]/g, index) + '</div>');
+  $('.field-group-add:last').after('<div class="field-group-add row" rel="' + index + '">' + parEnt.replace(/0(?=])/g, index) + '</div>');
 });
 
 $(document).on('click', '.delete-add-product', function () {

@@ -11,31 +11,26 @@
 {%endif%}
 <div class="col-md-12">
 	<h5>{{'Товарные предложения'|_}}</h5>
-	<div></div>
 	<div class="field-group-add row" rel="0">
 		<div class="col-lg-4 col-md-4">
 			{% for obProperty in obCategory.product_property if obProperty.code == 'size' %}
 				<label for="task" class="text-muted small">{{ obProperty.name }}</label>
 				<select class="form-control" name="offers[0][name]">
 					<option value selected><b>{{obProperty.name}}</b></option>
-					{% for obValue in obProperty.property_value %}     	
-						<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
-					{%endfor%}	
-				</select>	
-			{% else  %}
-				<label for="task" class="text-muted small">{{'Размер'|_}}</label>
-				<select class="form-control" name="offers[0][name]" required>
-					<option value selected>{{'Размер'|_}}</option>
-					{% for obProperty in properties %} 
-						{% for property in obProperty.property_value %} 
-							{% if property.slug != 'bezrazmera' %}
-								<option value="{{property.value}}">{{property.value}}</option>
-							{%endif%} 
-						{% endfor %} 
-					{% endfor %} 
+					{% for obValue in obProperty.property_value %}
+					<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
+					{%endfor%}
 				</select>
 			{% endfor %}
-
+			{% for obProperty in obCategory.product_property if obProperty.code == 'ml' %}
+			<label for="task" class="text-muted small">{{ obProperty.name }}</label>
+			<select class="form-control" name="offers[0][name]">
+				<option value selected><b>{{obProperty.name}}</b></option>
+				{% for obValue in obProperty.property_value %}
+				<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
+				{%endfor%}
+			</select>
+			{% endfor %}
 			<input type="hidden" value="1" name="offers[0][active]">
 		</div>
 		<div class="col-lg-3 col-md-4">

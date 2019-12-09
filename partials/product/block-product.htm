@@ -11,13 +11,14 @@ tumblr = 0
 		<div class="main-card-slider d-block d-md-flex">
 			<div id="productCardSlider" class="carousel carousel-main card-carusel-main">
 				<div class="carousel-cell-card w-100">
-					<a href="{{ obProduct.preview_image.path }}" target="_blank">
+					<a href="{{ obProduct.preview_image.path }}" data-fancybox="images">
 					<img src="{{ obProduct.preview_image.path }}" alt="image">
 					</a>
 				</div>
+
 				{% for image in obProduct.images %}
 					<div class="carousel-cell-card w-100">
-						<a href="{{ image.path }}" target="_blank">
+						<a href="{{ image.path }}" data-fancybox="images">
 							<img class="mx-product" src="{{ image.path }}" alt="image">
 						</a>
 					</div>
@@ -87,7 +88,8 @@ tumblr = 0
 												<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body m-0"
 													data-data="{{{
 													'cart': [
-													{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}">{{obOfferItem.name}}</p>
+													{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}"
+												>{{obOfferItem.name}}</p>
 											{%endfor%}				
 										</div>
 									</div>
@@ -196,3 +198,4 @@ tumblr = 0
 .card-border .order_line{cursor: pointer;}     
 
 </style>
+<script src="{{ 'assets/js/jquery.fancybox.min.js' | theme }}"></script>

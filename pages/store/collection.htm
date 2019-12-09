@@ -92,10 +92,7 @@ function onStart() {
 								{% if isCategory == obCategory.slug and obCategory.slug != 'magaziny' %}
 									<li class="nav-item">
 										<a class="nav-link {{obCategory.slug == obCategoryParent.slug ? 'text-danger'}}" href="{{'store/collection'|page({store: this.param.store, category: obCategory.slug, slug:''})}}"
-											data-request="onFilterStore"
-											data-request-data="store/filter-products: '#filter-result'"
-											aria-haspopup="true" 
-											aria-expanded="false">{{obCategory.name}}</a>
+										>{{obCategory.name}}</a>
 									</li>
 								{%endif%}	
 							{%endfor%}	  	

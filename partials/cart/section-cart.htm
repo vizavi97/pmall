@@ -10,7 +10,7 @@ function onStart ()
 ?>
 ==
 {% set obCartElementList = Cart.get() %}
-{% set withoutDiscount = obCartElementList.getTotalPriceValue() + obCartElementList.getDiscountTotalPrice() %}
+{% set withoutDiscount = obCartElementList.getTotalPriceValue() + obCartElementList.getDiscountTotalPriceValue() %}
 
 <div class="col-md-9">
 	{% for obCartElement in obCartElementList %}
@@ -64,8 +64,8 @@ function onStart ()
 			    <div class="cart-props d-flex col-md-8">
 		  	        <div class="col-md-3  col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Цена'|_}}</span>
-			      {% if obOffer.old_price != 0  %}
-		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.old_price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
+			      {% if obOffer.old_price_value != 0  %}
+		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.old_price_value }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 		  		<h5 class="text-danger">{{'Со скидкой'|_}}</h5>
 		  		<h6>{{ obOffer.price }} <span class="basket-color-text">{{'сум'|_}}</span></h6>
 			      {% else %}
@@ -112,14 +112,14 @@ function onStart ()
 	<div class="main-right-block bg-white px-3" style="padding-top: 20px">
 		<ul class="ordering-items">
 			{% for product in obCartElementList %}
-			{% set countSum = product.quantity * product.offer.old_price %}
-			{% set countSumOld = product.quantity * product.offer.price %}
+			{% set countSum = product.quantity * product.offer.old_price_value %}
+			{% set countSumOld = product.quantity * product.offer.price_value %}
 			<li class="ordering-item">
 				<div class="ordering-item-name">
 					<em>{{product.offer.product.name}}</em>
 				</div>
 				<div class="ordering-item-cost">
-					{% if product.offer.old_price != 0 %}
+					{% if product.offer.old_price_value != 0 %}
 					<p>{{countSum}}
 						<span class="basket-color-text" style="padding-left: 10px">{{'сум'|_}}</span>
 					</p>

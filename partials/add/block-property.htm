@@ -15,7 +15,8 @@
 
 
 <div class="row">
-	{% for obProperty in obCategory.product_property if obProperty.code != 'size' %}
+	{% for obProperty in obCategory.product_property %}
+	{%if obProperty.code != 'size' and obProperty.code != 'ml'  %}
 		<div class="col-md-3 mb-3">
 			<select class="form-control" name="property[{{obProperty.id}}]">
 				<option value selected><b>{{obProperty.name}}</b></option>
@@ -23,6 +24,7 @@
 					<option value="{{obValue.value}}"><b>{{obValue.value}}</b></option>
 				{%endfor%}	
 			</select>
-		</div>	
-	{%endfor%}			
+		</div>
+	{%endif%}
+	{%endfor%}
 </div>
