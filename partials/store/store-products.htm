@@ -57,25 +57,38 @@
 		<nav aria-label="Page navigation example">
 		  {% if obProductList.count > 16%}
 		  	<ul class="pagination">
-		  	<li class="page-item">
-				<a class="page-link" href="?page={{ iPage -1 }}" aria-label="Previous">
-					<span aria-hidden="true">&laquo;</span>
-					<span class="sr-only">Previous</span>
-				</a>
-			</li>
+
 		    {% if arPaginationList is not empty %}
-		        {% for arPagination in arPaginationList %}
-		           
+			    <li class="page-item">
+				    <a class="page-link" href="?page={{arPaginationList|first.value}}" aria-label="First">
+					    <span aria-hidden="true">&laquo;&laquo;</span>
+					    <span class="sr-only">Previous</span>
+				    </a>
+			    </li>
+			    <li class="page-item">
+				    <a class="page-link" href="?page={{ arPaginationList|first.value == iPage ? iPage : iPage -1 }}" aria-label="Previous">
+					    <span aria-hidden="true">&laquo;</span>
+					    <span class="sr-only">Previous</span>
+				    </a>
+			    </li>
+			    {% for arPagination in arPaginationList %}
 		            <li class="page-item"><a href="?page={{ arPagination.value }}" class="{{ arPagination.value == iPage ? 'page-active' }}  {{ arPagination.class }} page-link">{{ arPagination.name }}</a></li>
 		            
 		        {% endfor %}
+			    <li class="page-item">
+				    <a class="page-link" href="?page={{ arPaginationList|last.value == iPage ? iPage : iPage +1 }}" aria-label="Next">
+					    <span aria-hidden="true">&raquo;</span>
+					    <span class="sr-only">Next</span>
+				    </a>
+			    </li>
+			    <li class="page-item">
+				    <a class="page-link" href="?page={{arPaginationList|last.value}}" aria-label="Last">
+					    <span aria-hidden="true">&raquo;&raquo;</span>
+					    <span class="sr-only">Next</span>
+				    </a>
+			    </li>
+
 		    {% endif %}
-		    <li class="page-item">
-				<a class="page-link" href="?page={{ iPage +1}}" aria-label="Next">
-					<span aria-hidden="true">&raquo;</span>
-					<span class="sr-only">Next</span>
-				</a>
-			</li>
 		  </ul>
 		  {%endif%}
 		</nav>

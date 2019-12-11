@@ -62,7 +62,7 @@
 				{% for item in order.order_position %}
 				{% set products = item.item.product %}
 				<li class="order-item-inner-calc-item">
-					<em>{{products.name}}</em><span>{{ item.offer.price }}</span>
+					<em>{{products.name}}</em><span class="white-space">{{ item.offer.price }}</span>
 				</li>
 				{% endfor %}
 				<li class="order-item-inner-calc-result">

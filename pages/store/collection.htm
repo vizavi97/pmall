@@ -139,7 +139,7 @@ function onStart() {
 					  	<a href="#"><img class="like" src="{{ 'assets/img/heartcopy6.png' | theme }}" alt=""></a>
 					  <div class="card-body recommend-block">
 						  <a href="{{obStoreProduct.getPageUrl()}}" class="text-dark" title="{{obStoreProduct.name }}"><h5 class="text-overflow">{{obStoreProduct.name }}</h5></a>
-					    <p class="small basket-color-text">{{'Мужские'|_}}</p>
+						  <p class="small basket-color-text">{{obStoreProduct.category.parent.name}}</p>
 						<div class="number-red d-flex justify-content-end">
 							{%if price.old_price != 0 %}
 							<span class="text-color-border pt-2">{{price.old_price}}</span>
