@@ -65,11 +65,11 @@ function onStart ()
 		  	        <div class="col-md-3  col-sm-6 col-6 text-center bootstrap-pt">
 		  		<span class="basket-color-text">{{'Цена'|_}}</span>
 			      {% if obOffer.old_price_value != 0  %}
-		  		<h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.old_price_value }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
+		  		<h5 class="pt-4 white-space"><b style="padding-right: 10px">{{ obOffer.old_price_value }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 		  		<h5 class="text-danger">{{'Со скидкой'|_}}</h5>
 		  		<h6>{{ obOffer.price }} <span class="basket-color-text">{{'сум'|_}}</span></h6>
 			      {% else %}
-			      <h5 class="pt-4"><b style="padding-right: 10px">{{ obOffer.price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
+			      <h5 class="pt-4 white-space"><b style="padding-right: 10px">{{ obOffer.price }}</b><span class="basket-color-text">{{'сум'|_}}</span></h5>
 			      {% endif %}
 		  	  </div>
 		  	        <div class="col-md-3 col-sm-6 col-6 text-center bootstrap-pt">

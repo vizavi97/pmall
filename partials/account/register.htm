@@ -27,7 +27,7 @@ description = "Register"
 			<div class="input-group-prepend">
 				<span style="width: 40px" class="input-group-text"><i class="fal fa-mobile-alt"></i></span>
 			</div>
-			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="tel" onkeydown="return isNumberPhoneKey(event.key)" maxlength="16" required>
+			<input class="form-control" name="phone" placeholder="{{'Номер телефона'|_}} *" type="tel" onkeydown="return isNumberPhoneKey(event.key)" minlength="13" maxlength="13" required>
 		</div>
 	</div>
 	

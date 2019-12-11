@@ -59,7 +59,7 @@
 					    <div class="input-group-prepend">
 				    		<span class="input-group-text input-css" id="basic-addon1"><i class="far fa-mobile-android-alt"></i></span>
 				   	    </div>
-					  	<input type="number" class="form-control input-css" placeholder="+998()---" aria-label="Username" aria-describedby="basic-addon1" name="user[phone]" value="{{ user.phone }}">
+					  	<input type="text" class="form-control input-css" aria-label="Username" aria-describedby="basic-addon1" name="user[phone]" value='{{ user.phone }}' onkeydown="return isNumberPhoneKey(event.key)" minlength="13" maxlength="13">
 					</div>
 			  	</div>
 			  	<div class="col-md-6">

@@ -3649,7 +3649,9 @@ input[type='number']::-webkit-inner-spin-button {
 .summa .basket-color-text {
     padding-left: 10px;
 }
-
+.white-space {
+    white-space: nowrap;
+}
 .ordering-items {
     display: flex;
     flex-direction: column;

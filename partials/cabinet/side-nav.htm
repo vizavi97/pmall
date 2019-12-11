@@ -17,13 +17,11 @@
 			</a>
 		</div>
 	</div>
-{%endif%}
 
-{% if user.store and user.is_store != 1 %}
-<div class="main-right-block px-3">
-	<div class="custom-block border border-top-0 border-left-0 border-right-0">
-		<a class='sidenav-link' href="{{'cabinet/favorite'|page}}">
-			<div class="sidenav-item">
+	<div class="main-right-block px-3">
+		<div class="custom-block border border-top-0 border-left-0 border-right-0">
+			<a class='sidenav-link' href="{{'cabinet/favorite'|page}}">
+				<div class="sidenav-item">
 				{% if page == "favorite" %}
 				<img src="{{ 'assets/img/Favorite-red.svg' | theme }}" width="35" alt="">
 				{% endif %}
@@ -33,10 +31,11 @@
 				{% endif %}
 				<span class="{{ page == "favorite" ? "text-danger" }}">{{'Избранное'|_}}</span>
 			</div>
-		</a>
+			</a>
+		</div>
 	</div>
-</div>
-{% endif%}
+{%endif%}
+
 {% if user.store and user.is_store == 1 %}
 	<div class="main-right-block px-3">
 		<div class="custom-block border border-top-0 border-left-0 border-right-0">
