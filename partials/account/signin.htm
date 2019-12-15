@@ -26,12 +26,19 @@ description = "signin"
 				</label>
 			</div>
 		</div>
+
+		<p align="right">
+			Или войдите на сайт через ресурсы
+			{% for name, link in social_login_links %}
+			<a href="{{ link }}" class='login {{ name|lower }}'><i class="fa fa-2 fa-{{ name|lower }}"></i></a>
+			{% endfor %}
+		</p>
 	</div>
 	<div class="btn-come">
 			<button type="submit" data-attach-loading class="btn btn-outline-danger login-btn">{{'Войти'|_}}</button>
 	</div>
 
-	<div class="login-pasword">
+	<div class="login-pasword" style="height: auto">
 		<div class="col-md-16 col-25">
 			<a href="{{'auth/restore-password'|page}}" class="login-btn-restore text-dark"><p> {{'Восстановить пароль'|_}} </p></a>
 		</div>
@@ -94,3 +101,4 @@ description = "signin"
 			height: 365px;
 		}
 </style>
+<script src="https://use.fontawesome.com/31927e34fe.js"></script>

@@ -62,12 +62,12 @@ tumblr = 0
                 	</button>
                 {% endif %}
 				{% if price.old_price_value != 0 %}
-				<span class="basket-color-text  pl-4"><s>{{price.old_price_value}} {{'сум'|_}}</s></span>
+				<span class="basket-color-text  pl-4"><s>{{price.old_price_value}}{{'сум'|_}}</s></span>
 				{% endif %}
 			</div>
 			
 			<div class="order_block card-info-block pt-2">
-				<span class="basket-color-text  pl-4 text-danger h5"><a href="#"><img class="" src="{{ 'assets/img/Shape2348.png' | theme }}" alt=""></a><b class="ml-2">{{price.price_value}} {{'сум'|_}}</b></span>
+				<span class="basket-color-text  pl-4 text-danger h5"><a href="#"><img class="" src="{{ 'assets/img/Shape2348.png' | theme }}" alt=""></a><b class="ml-2 change-price">{{price.price_value}} {{'сум'|_}}</b></span>
 				<div class="my-4">
 					<p class="basket-color-text m-0">{{'Ваша цена со всеми скидками'|_}}</p>
 					<p class="m-0 py-2"><span class="basket-color-text">{{'Артикул'|_}}:</span> {{obProduct.code}}</p>
@@ -83,9 +83,9 @@ tumblr = 0
 							<div class="col-md-6">
 								<div class="grams">
 									<div class="accordion" id="accordionExample">
-										<div class="card bg-transparent border-0 mt-1">
+										<div class="card bg-transparent border-0 mt-1" name="sizes-container">
 											{% for obOfferItem in obListOffers %}			
-												<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body m-0"
+												<p rel="{{obOfferItem.id}}" value="{{obOfferItem.price}}" class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body m-0"
 													data-data="{{{
 													'cart': [
 													{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}"

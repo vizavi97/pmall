@@ -222,3 +222,8 @@ $(document).on('click','.change-categories',function(){
     $(document).find('.categories-properties').removeClass('d-none');
     $(this).parents('.categories-products-container').remove();
 });
+
+$(document).on('click','.offer-item-id',function(){
+  let val = $(this).attr('value');
+  let put = $(document).find('.change-price').html(val+'.00 сум');
+});

@@ -2,8 +2,13 @@
 ==
 <div class="order-items">
 	{% for order in obStore.orders|sort|reverse %}
+		
+		{% set positions = order.positionsCollection %}
+		
 	{% if order.order.order_number is not defined or order.order.order_number is null %}
+	
 	{%else%}
+
 	<div class="order-item">
 		<input id="order-{{ order.order.order_number }}" type="checkbox" name="order"/>
 		<label class="order-item-button" for="order-{{ order.order.order_number }}">
@@ -41,10 +46,10 @@
 			<ul class="order-item-inner-items">
 				<li class="order-item-inner-item">
 					<div class="order-item-inner-item-card-count">
-						<em>Количество товаров: <span>"{{order.order.quantity}}"</span></em>
+						<em>Количество товаров: <span>"{{positions|length}}"</span></em>
 					</div>
 				</li>
-				{% for item in order.order.order_position %} {% set products = item.item.product %}
+				{% for item in positions %} {% set products = item.item.product %}
 				<li class="order-item-inner-item">
 					<div class="order-item-inner-item-img">
 						<img src="{{products.preview_image.path}}" alt="img">
@@ -59,13 +64,13 @@
 				{% endfor %}
 			</ul>
 			<ul class="order-item-inner-calc">
-				{% for item in order.order.order_position %} {% set products = item.item.product %}
+				{% for item in positions %} {% set products = item.item.product %}
 				<li class="order-item-inner-calc-item">
 					<em>{{products.name}}</em><span class="white-space">{{ item.offer.price }}</span>
 				</li>
 				{% endfor %}
 				<li class="order-item-inner-calc-result">
-					<em>Итого</em><span>{{ order.order.total_price_value}}</span>
+					<em>Итого</em><span>{{ order.amount}}</span>
 				</li>
 			</ul>
 		</div>

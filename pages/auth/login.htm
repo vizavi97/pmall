@@ -6,6 +6,12 @@ child_of = "mey_no_parent"
 hide_crumb = 0
 remove_crumb_trail = 0
 crumb_disabled = 0
+
+[session]
+security = "guest"
+redirect = "main"
+
+[sociallogin]
 ==
 <div class="container">
     <div class="row">
@@ -18,24 +24,8 @@ crumb_disabled = 0
     				</div>
     				
     				{% partial account ~ '::signin' %}
-    				
-    				
-    				<div class="text-center">
-    				    {% for name, link in social_login_links %}
-                            <a class="btn btn-link" href="{{ link }}">{{ name }}</a>
-                        {% endfor %}
-    				</div>
-    				
     			</div>
     		</div>
-    	<!-- 	<div class="row mt-3">
-    		<div class="col-md-16 col-25">
-    			<a href="{{'auth/restore'|page}}" class="text-dark"><p> {{'Восствновить пароль'|_}} </p></a>
-    		</div>
-    		<div class="col-6 text-right ml-md-2 ml-5">
-    			<a href="{{'auth/register'|page}}" class="text-dark"><p> {{"Регистрация"|_}} </p></a>
-    		</div>
-    	</div> -->
     	</div>
     </div>
 </div>
