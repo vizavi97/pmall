@@ -1,14 +1,15 @@
 [viewBag]
 ==
 <p class="lead">
-    <strong>{{'Забыли пароль'|_}}?</strong> {{'Нет проблем! Введите свой емэил для верификации аккаунта.'|_}}
+    <strong>{{'Забыли пароль'|_}}?</strong>
+    <strong>{{'Введите свой e-mail для верификации аккаунта.'|_}}</strong>
 </p>
 
 <form data-request="resetPassword::onRestorePassword" data-request-update="'resetPassword::reset': '#partialUserResetForm'">
     <div class="form-group">
-        <label for="userRestoreEmail">Email</label>
-        <input name="email" type="email" class="form-control" id="userRestoreEmail" placeholder="{{'Введите емэил здесь'|_}}">
+        <label for="userRestoreEmail"></label>
+        <input name="email" type="email" class="form-control" id="userRestoreEmail" placeholder="{{'Введите e-mail'|_}}">
     </div>
 
-    <button type="submit" class="btn btn-success">{{'Восствновить пароль'|_}}</button>
+    <button type="submit" class="btn btn-success">{{'Восстановить пароль'|_}}</button>
 </form>

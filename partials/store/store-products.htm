@@ -6,7 +6,9 @@
 {# Apply pagination to product collection and get array with product items #}
 {% set arProductList = obProductList.page(iPage, Pagination.getCountPerPage()) %}
 
+
 <div class="products-card-container row">
+
 	{% for obStoreProduct in arProductList %}  
 		{% set productPrice = obStoreProduct.offer.active.sort('new') %}
 		{% set price = (productPrice.count) ? productPrice.first : null %}	

@@ -48,23 +48,23 @@ function onStart(){
 }
 
 function onInit(){
-	 
+
 	$obStore = $this->StorePage->get();
-	
+
 	if(!$obStore){
 		return response('Page not found');
 	}
-	
+
 	//Get active sorting and page number
 	$sActiveSorting = $this->ProductList->getSorting();
-	
+
 	//Get product list with filter by category
 	if (input('querystore')) {
 		$obProductList = $this->ProductList->make()->active()->search(input('querystore'))->sort($sActiveSorting);
 	}else{
 		$obProductList = $this->ProductList->make()->sort($sActiveSorting)->active()->store($obStore->id);
 	}
-	
+
 	$this['obStore'] = $obStore;
 	$this['obProductList'] = $obProductList;
 }

@@ -1343,7 +1343,7 @@ header .dropdown-toggle::after {
 /*popular goods*/
 .carousel-cell-goonds {
     width: 25%;
-    height: 370px;
+    height: 390px;
 }
 
 .carousel-cell-goonds:before {
@@ -2973,7 +2973,7 @@ input[type='range']::-moz-range-thumb:active {
 
     .card-body {
         justify-content: center !important;
-        padding: 10px 0 !important;
+        padding: 10px!important;
     }
 
     .card-body .mb-1 {
@@ -3047,8 +3047,12 @@ input[type='range']::-moz-range-thumb:active {
     width: 100%;
 }
 
+.categories-img {
+    width: 100%;
+}
 
 .categories-img img {
+    width: 100%;
     max-width: 100%;
 }
 
@@ -3181,13 +3185,15 @@ input[type='range']::-moz-range-thumb:active {
 
 .seasons-items {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
+    justify-content: center;
     padding-left: 0;
     padding-right: 25px;
 }
 
 .seasons-item {
     display: inline-flex;
+    padding: 05px;
 }
 
 .seasons-item button {
@@ -3235,6 +3241,13 @@ input[type='range']::-moz-range-thumb:active {
 
     .seasons-year {
         padding-left: 0;
+    }
+    .categoriy-cell-recommend {
+        height: 100%;
+    }
+    .main-categoriy-cell-recommend {
+        height: 100%;
+        padding-bottom: 20px;
     }
 }
 
@@ -3760,4 +3773,63 @@ input[type='number']::-webkit-inner-spin-button {
     text-align: center;
     height: 60vh;
     width: 100%;
+}
+
+.sighIn {
+    padding: 1rem 0;
+}
+
+.register-social {
+    text-align: center;
+}
+.register-social-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.login {
+    width: calc(50% - 10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    border-radius: 18px;
+    border: 1px solid grey;
+    text-decoration: none;
+    position: relative;
+}
+.login:hover {
+    text-decoration: none;
+}
+.login:before {
+    position: absolute;
+    content: '';
+    left: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.login.google {
+    border: 1px solid #3b5998;
+}
+.login.facebook {
+    background: #3b5998;
+    color: white;
+}
+
+.login.google:before {
+    background: url("../img/login-logo-gp.svg") no-repeat left;
+    background-size: contain;
+}
+.login.facebook:before {
+    background: url("../img/login-logo-fb.svg") no-repeat left;
+    background-size: contain;
+}
+
+.btn-come {
+    height: auto!important;
+}
+
+.card-body.register {
+    height: auto!important;
 }

@@ -36,7 +36,7 @@
 			  				
 						</div>
 						<div class="card-body categoriy-block">
-							<h5 class="text-danger font-weight-bold">{{ price.price_value}} сум</h5>
+							<h5 class="text-danger font-weight-bold">{{ price.price}} сум</h5>
 			    			<p class="text-dark small">{{category.name}}</p>
 							<div class="number-red">
 				 				<a href="{{obProduct.getPageUrl()}}" title="{{obProduct.name}}"><h6 class="font-weight-bold text-dark text-uppercase mx-title">{{obProduct.name}}</h6></a>
@@ -54,7 +54,8 @@
 								<div class="razmer pt-3">
 						  			<div class="grams razmer-text">
 						  				{% for obOfferItem in obListOffers %}			
-											<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body"
+											<p class="offer-item-id {{ loop.index == 0 ? 'active' }} card-body price-changer"
+											   value="{{obOfferItem.price}}"
 												data-data="{{{
 												'cart': [
 												{'offer_id': obOfferItem.id, 'quantity': 1 }] }|json_encode() }}">{{obOfferItem.name}}</p>
@@ -78,7 +79,7 @@
 		{% endfor %}
 	{%else%}
 		<div class="col-md-12">
-			<h3 class="text-muted text-center mt-5">{{'Товар не найдено'|_}}</h3>
+			<h3 class="text-muted text-center mt-5">{{'Товары не найдены'|_}}</h3>
 		</div>
 	{%endif%}	
 </div>

@@ -227,3 +227,8 @@ $(document).on('click','.offer-item-id',function(){
   let val = $(this).attr('value');
   let put = $(document).find('.change-price').html(val+'.00 сум');
 });
+
+$(document).on('click','.price-changer',function(){
+  let val = $(this).attr('value');
+  let parent = $(this).parents('.categoriy-block').find('.text-danger ').html(val+' сум');
+});

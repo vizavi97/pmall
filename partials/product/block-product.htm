@@ -101,7 +101,8 @@ tumblr = 0
 				<div class="order_line">
                     {% if user.is_store == 1 %}
                     	<p class="mt-4">{{'Покупка товаров допустима только'|_}} <a href="{{"auth/register"|page}}">{{'физическим лицам'|_}}</a></p>
-                    {%else%}	
+                    {%else%}
+
                     	<a data-attach-loading class="btn btn-outline-danger bg-danger text-white card-btn mt-4"><img class="pr-2" src="{{ 'assets/img/Shape2copy.png' | theme }}" alt="">{{'Добавить в корзину'|_}}
 						</a>
 					{%endif%}	

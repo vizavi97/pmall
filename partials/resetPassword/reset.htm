@@ -9,14 +9,14 @@
 		</span>
 	    <div class="form-group">
 	        <label for="resetCode">{{'Код активации'|_}}</label>
-	        <input name="code" type="text" class="form-control" id="resetCode" placeholder="{{'Введите код активации'|_}}" value="{{ __SELF__.code }}">
+	        <input name="code" type="text" class="form-control" id="resetCode" placeholder="{{'Введите код активации'|_}}" value="{{ __SELF__.code }}" required>
 	    </div>
 	
 	    <div class="form-group">
 	        <label for="resetPassword">{{'новый пароль'|_}}</label>
-	        <input name="password" type="password" class="form-control" id="resetPassword" placeholder="{{'Введите новый пароль'|_}}">
+	        <input name="password" type="password" class="form-control" id="resetPassword" placeholder="{{'Введите новый пароль'|_}}" required>
 	    </div>
 	
-	    <button type="submit" class="btn btn-success">{{'Сброс пароля'|_}}</button>
+	    <button type="submit" class="btn btn-success">{{'Активировать'|_}}</button>
 	</form>	
 </div>

@@ -137,7 +137,7 @@ function onProperty(){
 								<div class="form-group mr-4">
 									<select class="form-control" id="sel1" name="brand_id" value="1">
 										<option value selected>{{'Бренд'|_}}</option>
-										{% for obBrand in brands %}
+										{% for obBrand in brands%}
 										<option value="{{obBrand.id}}">{{obBrand.name}}</option>
 										{% endfor %} </select>
 								</div>

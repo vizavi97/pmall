@@ -79,7 +79,7 @@ function onProperty(){
 							</p>
 							<div class="add-product-number">
 								<div class="form-group row col d-flex ">
-									<div class="col-6 add-product-input checkout-block mb-3">
+									<div class="col-12 add-product-input checkout-block mb-3">
 										<input type="text" name="name" class="form-control input-css" placeholder="{{'Название'|_}}">
 										<div class="input-group-append">
 											<span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
@@ -87,10 +87,7 @@ function onProperty(){
 									</div>
 
 									<div class="col-6 add-product-input checkout-block  mb-3 ">
-										<input type="text" class="form-control input-css" name="code" placeholder="{{'Артикул товара'|_}}" aria-label="Amount (to the nearest dollar)">
-										<div class="input-group-append">
-											<span class="input-group-text  input-css"><i class="fas fa-pencil"></i></span>
-										</div>
+										<input type="hidden" id="randomNumber" class="form-control input-css" name="code" placeholder="{{'Артикул товара'|_}}" aria-label="Amount (to the nearest dollar)">
 									</div>
 								</div>
 							</div>
@@ -301,6 +298,14 @@ function onProperty(){
         e.preventDefault(); $(this).parent('div').remove(); x--;
       })
     });
+
+    function Random(integer) {
+      let rr = Math.floor(Math.random() * integer);
+      let mathResult = integer + rr;
+      return  mathResult;
+    }
+    document.getElementById('randomNumber').value = Random(100000000);
+    document.getElementById('randomNumberId').value = Random(100000000);
 </script>
 
 {%endput%}

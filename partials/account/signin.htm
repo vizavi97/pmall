@@ -26,79 +26,94 @@ description = "signin"
 				</label>
 			</div>
 		</div>
-
-		<p align="right">
-			Или войдите на сайт через ресурсы
-			{% for name, link in social_login_links %}
-			<a href="{{ link }}" class='login {{ name|lower }}'><i class="fa fa-2 fa-{{ name|lower }}"></i></a>
-			{% endfor %}
-		</p>
+		<div class="register-social">
+			<p class="sighIn">
+				Или
+			</p>
+			<div class="register-social-container">
+				{% for name, link in social_login_links %}
+				<a href="{{ link }}" class='login {{ name|lower }}'>{{ name|lower }}</a>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 	<div class="btn-come">
-			<button type="submit" data-attach-loading class="btn btn-outline-danger login-btn">{{'Войти'|_}}</button>
+		<button type="submit" data-attach-loading class="btn btn-outline-danger login-btn">{{'Войти'|_}}</button>
 	</div>
 
 	<div class="login-pasword" style="height: auto">
 		<div class="col-md-16 col-25">
-			<a href="{{'auth/restore-password'|page}}" class="login-btn-restore text-dark"><p> {{'Восстановить пароль'|_}} </p></a>
+			<a href="{{'auth/restore-password'|page}}" class="login-btn-restore text-dark">
+				<p> {{'Восстановить пароль'|_}}</p>
+			</a>
 		</div>
 		<div class="text-right ml-md-2 ml-5">
-			<a href="{{'auth/register'|page}}" class="login-btn-restore text-dark"><p> {{"Регистрация"|_}} </p></a>
+			<a href="{{'auth/register'|page}}" class="login-btn-restore text-dark">
+				<p> {{"Регистрация"|_}}</p>
+			</a>
 		</div>
-	</div>	
+	</div>
 </form>
 <style>
 	.input-group-text {
 		background: none;
 	}
+
 	.form-control {
-		    border: 1px solid #ced4da;
+		border: 1px solid #ced4da;
 	}
+
 	.login-btn {
-		    background-color: #fff;
-    border-radius: 40px;
-    padding: 10px 25px 10px 25px;
-    color: #ae3b39;
-    width: 50%;
-  
-    margin: 0 auto;
-    display: block;
-    margin-bottom:10px;
+		background-color: #fff;
+		border-radius: 40px;
+		padding: 10px 25px 10px 25px;
+		color: #ae3b39;
+		width: 50%;
+
+		margin: 0 auto;
+		display: block;
+		margin-bottom: 10px;
 	}
+
 	.login-pasword {
 		display: flex;
-		    justify-content: space-between;
-		        align-items: flex-end;
-    height: 55px;
+		justify-content: space-between;
+		align-items: flex-end;
+		height: 55px;
 	}
+
 	.login-btn-restore {
-		   background-color: #fff;
-    border-radius: 40px;
-    padding: 1px 5px 1px 5px;
-    color: #ae3b39;
-    border: none;
-    margin: 0 auto;
-    display: block;
+		background-color: #fff;
+		border-radius: 40px;
+		padding: 1px 5px 1px 5px;
+		color: #ae3b39;
+		border: none;
+		margin: 0 auto;
+		display: block;
 	}
+
 	.hover {
-		    background-color: #fff;
-    border-radius: 40px;
-    padding: 5px 5px 5px 5px;
-    color: #ae3b39;
-    border: none;
-    margin: 0 auto;
+		background-color: #fff;
+		border-radius: 40px;
+		padding: 5px 5px 5px 5px;
+		color: #ae3b39;
+		border: none;
+		margin: 0 auto;
 	}
+
 	.btn-come {
-		  align-items: flex-end;
-		  height: 100px;
-		  display: flex;
+		align-items: flex-end;
+		height: 100px;
+		display: flex;
 	}
-		.login-btn-restore  p {
-			margin: 0;
-			padding: 0;
-		}
-		.card-body {
-			height: 365px;
-		}
+
+	.login-btn-restore p {
+		margin: 0;
+		padding: 0;
+	}
+
+	.card-body {
+		height: 365px;
+	}
 </style>
 <script src="https://use.fontawesome.com/31927e34fe.js"></script>

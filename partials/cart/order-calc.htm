@@ -24,7 +24,8 @@
 		{% endif %}
 		</ul>
 		<div class="checkout-mol-block">
-			{% for obCartElement in obCartElementList %} {% set obOffer = obCartElement.offer %}
+			{% for obCartElement in obCartElementList %}
+			{% set obOffer = obCartElement.offer %}
 			<div class="mal-block pb-3 d-flex">
 				<div class="checkout-img">
 					<img src="{{ obOffer.product.preview_image.getThumb(100, 100, {mode: 'crop'}) }}" width="100">
