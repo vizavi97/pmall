@@ -96,7 +96,6 @@ function onInit(){
 						<div class="row">
 							<div class="col-md-12" id="cabinet-wishlist">
 								<div id="products-ajaxList">
-									
 									{% if user.is_store == true and this.param.slug != 'default' %}
 										{% partial 'store/store-products' obProductList=obProductList %}
 									{%endif%}	

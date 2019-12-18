@@ -232,3 +232,7 @@ $(document).on('click','.price-changer',function(){
   let val = $(this).attr('value');
   let parent = $(this).parents('.categoriy-block').find('.text-danger ').html(val+' сум');
 });
+
+
+
+

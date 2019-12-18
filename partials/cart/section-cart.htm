@@ -147,8 +147,9 @@ function onStart ()
 		</div>
 		<div class="basket-button py-5 mb-5">
 			{% if obCartElementList.isNotEmpty() and user.is_store == 0 %}
-				<a href="{{ register == null ? 'my-cart/purchase'|page : '/register'}}" class="btn btn-outline-danger man-btn bg-danger text-white">{{'Оформить заказ'|_}} <i class="fas fa-chevron-right pl-4"></i></a>
-			{%else%}	
+				<a href="{{ register == null ? 'my-cart/purchase'|page : '/login'}}" class="btn btn-outline-danger man-btn bg-danger text-white">{{'Оформить заказ'|_}} <i class="fas fa-chevron-right pl-4"></i></a>
+			{%else%}
+
 				<b>{{'Покупка товаров допустима только физическим  лицам'|_}}</b>
 			{%endif%}	
 		</div>
