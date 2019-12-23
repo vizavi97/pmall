@@ -6,7 +6,6 @@
 	{% set productPrice = obProduct.offer.active.sort('new') %}
 	{% set price = (productPrice.count) ? productPrice.first : null %}		
 	{% set obPropertyList = obProduct.property %}
-
 	<div class="row border pb-3 border-top-0 border-left-0 border-right-0">
 		<div class="col-md-6">
 	 		<a href="{{ obProduct.getPageUrl() }}"><span class="basket-color-text">{{obProduct.name}}</span></a>
@@ -21,24 +20,24 @@
 		  			<a href="{{ obProduct.getPageUrl() }}"><h5><b>{{obProduct.name}}</b></h5></a>
 		  			<a href="#demo-{{loop.index}}" class="parametri text-danger" data-toggle="collapse">{{'Параметры'|_}} <i class="fas fa-chevron-down pl-2"></i></a>
 				  	<div id="demo-{{loop.index}}" class="collapse">
-				  		
+
 			  		{% set obListOffers = obProduct.offer.sort('price|asc') %}
                     {% set obOffer = obProduct.offer.sort('price|asc').first() %}
 				  		{% for obProperty in obOffer.product.property %}
 				    		<p class="basket-color-text"><b>{{obProperty.name}} :</b> {{obProperty.property_value.getValueString()}}</p>
-				    	{%endfor%}	
+				    	{%endfor%}
 				    	<div class="collapse-text d-flex py-4">
 				    		<span>{{"Размер"|_}}</span>
-				    		
+
 				    		{% for obOfferItem in obListOffers %}
 	                        {% set obProperty = obOfferItem.property.getByCode('size') %}
-	                        
+
 		                        {% if obProperty.property_value.getValueString() %}
 						    		<div class="collapse-block ml-4">
 						    			{{obProperty.property_value.getValueString()}}
 						    		</div>
 							    {% endif %}
-							{%endfor%}	    
+							{%endfor%}
 				    	</div>
 					</div>
 		  		</div>
@@ -46,16 +45,18 @@
 	    </div>
 	    <div class="col-md-2  col-sm-6 text-center bootstrap-pt">
 	  		<span class="basket-color-text">{{'Цена'|_}}</span>
-	  		<h5 class="pt-4"><b>{{ price.old_price_value }}</b><span class="basket-color-text">сум</span></h5>
+		    {%if price.old_price != 0 %}
+	  		<h5 class="pt-4"><b>{{ price.old_price }}</b><span class="basket-color-text">сум</span></h5>
 	  		<h5 class="text-danger">Со скидкой</h5>
-	  		<h6>{{ price.price_value }} <span class="basket-color-text"> {{'сум'|_}}</span></h6>
+		    {%endif%}
+	  		<h6 class="{{ price.old_price == 0 ? 'pt-4' }}" >{{ price.price }} <span class="basket-color-text"> {{'сум'|_}}</span></h6>
 	    </div>
-	    
+
 	    <div class="col-md-2 col-sm-6 text-center bootstrap-pt">
 	  		<span class="basket-color-text">{{'Удалить'|_}}</span>
 	  		<div class="basket-udalit pt-4">
-	  			<a data-request="ProductData::onRemoveFromWishList" 
-	               data-request-data="product_id:{{ obProduct.id }}" 
+	  			<a data-request="ProductData::onRemoveFromWishList"
+	               data-request-data="product_id:{{ obProduct.id }}"
 	               data-request-update="'cabinet/my-favorites': '#cabinet-wishlist'"
                    data-request-success="toastr.info('Товар удален из избранных')"
 	                href="#" class="btn btn-sm btn-link mb-n1"><img src="{{ 'assets/img/Shape8copy3.png' | theme }}" alt="">

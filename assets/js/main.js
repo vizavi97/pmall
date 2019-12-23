@@ -225,7 +225,7 @@ $(document).on('click','.change-categories',function(){
 
 $(document).on('click','.offer-item-id',function(){
   let val = $(this).attr('value');
-  let put = $(document).find('.change-price').html(val+'.00 сум');
+  let put = $(document).find('.change-price').html(val+' сум');
 });
 
 $(document).on('click','.price-changer',function(){
