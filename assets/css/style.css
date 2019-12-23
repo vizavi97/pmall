@@ -1455,6 +1455,7 @@ header .dropdown-toggle::after {
 .our-boutique-section {
     background-image: url('../img/bagkground.png');
     background-repeat: no-repeat;
+    background-size: cover;
     padding: 50px 0 50px 0;
 }
 
@@ -3156,6 +3157,10 @@ input[type='range']::-moz-range-thumb:active {
     width: 100%;
 }
 
+.seasons {
+    padding: 50px 0;
+}
+
 .seasons-container {
     background: #efefef;
 }
@@ -3832,4 +3837,10 @@ input[type='number']::-webkit-inner-spin-button {
 
 .card-body.register {
     height: auto!important;
+}
+
+.product-image a {
+    display: block;
+    height: 100%;
+
 }

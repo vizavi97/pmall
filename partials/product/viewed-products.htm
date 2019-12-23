@@ -46,7 +46,9 @@ function onStart() {
 					<p class="text-dark">{{obProduct.category.parent.name}}</p>
 				{%endif%}	
 				<div class="number-red d-flex">
+					{%if price.old_price != 0 %}
 					<span class="text-color-border border-text pt-2">{{ price.old_price}}</span>
+					{%endif%}
 					<h4 class="text-danger pl-4">{{price.price}} {{'сум'|_}}</h4>
 				</div>
 			</div>

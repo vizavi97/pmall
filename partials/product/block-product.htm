@@ -10,14 +10,14 @@ tumblr = 0
 	<div class="col-md-5">
 		<div class="main-card-slider d-block d-md-flex">
 			<div id="productCardSlider" class="carousel carousel-main card-carusel-main">
-				<div class="carousel-cell-card w-100">
+				<div class="carousel-cell-card w-100 product-image">
 					<a href="{{ obProduct.preview_image.path }}" data-fancybox="images">
 					<img src="{{ obProduct.preview_image.path }}" alt="image">
 					</a>
 				</div>
 
 				{% for image in obProduct.images %}
-					<div class="carousel-cell-card w-100">
+					<div class="carousel-cell-card w-100 product-image">
 						<a href="{{ image.path }}" data-fancybox="images">
 							<img class="mx-product" src="{{ image.path }}" alt="image">
 						</a>
@@ -67,7 +67,7 @@ tumblr = 0
 			</div>
 			
 			<div class="order_block card-info-block pt-2">
-				<span class="basket-color-text  pl-4 text-danger h5"><a href="#"><img class="" src="{{ 'assets/img/Shape2348.png' | theme }}" alt=""></a><b class="ml-2 change-price">{{price.price_value}} {{'сум'|_}}</b></span>
+				<span class="basket-color-text  pl-4 text-danger h5"><a href="#"><img class="" src="{{ 'assets/img/Shape2348.png' | theme }}" alt=""></a><b class="ml-2 change-price">{{price.price}} {{'сум'|_}}</b></span>
 				<div class="my-4">
 					<p class="basket-color-text m-0">{{'Ваша цена со всеми скидками'|_}}</p>
 					<p class="m-0 py-2"><span class="basket-color-text">{{'Артикул'|_}}:</span> {{obProduct.code}}</p>
@@ -100,7 +100,7 @@ tumblr = 0
 				</div>
 				<div class="order_line">
                     {% if user.is_store == 1 %}
-                    	<p class="mt-4">{{'Покупка товаров допустима только'|_}} <a href="{{"auth/register"|page}}">{{'физическим лицам'|_}}</a></p>
+                    	<p class="mt-4">{{'Покупка товаров допустима только'|_}} <a href="{{"auth/login"|page}}">{{'физическим лицам'|_}}</a></p>
                     {%else%}
 
                     	<a data-attach-loading class="btn btn-outline-danger bg-danger text-white card-btn mt-4"><img class="pr-2" src="{{ 'assets/img/Shape2copy.png' | theme }}" alt="">{{'Добавить в корзину'|_}}
@@ -166,7 +166,7 @@ tumblr = 0
 			        {% endif %}
 			
 			        {% if googleplus %}
-			        <a class="btn btn-default btn-xs" target="_blank" title="On Google Plus" href="https://telegram.me/share/url?url={{url}}">
+			        <a class="btn btn-default btn-xs" target="_blank" title="On Telegram" href="https://telegram.me/share/url?url={{url}}">
 			            <img src="{{ 'assets/img/Shape10.png' | theme }}" alt="">
 			        </a>
 			        {% endif %}
@@ -196,7 +196,10 @@ tumblr = 0
     font-size: 14px;
     color: #737373;
     cursor: pointer;}
-.card-border .order_line{cursor: pointer;}     
+.card-border .order_line{cursor: pointer;}
+.flickity-viewport {
+		min-height: 350px;
+	}
 
 </style>
 <script src="{{ 'assets/js/jquery.fancybox.min.js' | theme }}"></script>
