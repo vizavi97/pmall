@@ -12,9 +12,13 @@
 		<div class="card categoriy-collapse">
 			<div class="card-header" id="heading{{loop.index}}">
 				<h5 class="mb-0">
+					{%if obChildCategory.name == 'Новинки'%}
+					<b class="side-menu-text"><a class="text-dark" href="{{'categorie' | page({category: obCategory.slug, slug: obChildCategory.slug})}}">{{obChildCategory.name}}</a></b><span class="basket-color-text pl-3 " style="font-size: 1rem;">{{obChildCategory.product_count}}</span>
+					{%else%}
 					<button class="btn btn-link text-dark" style="text-align: left"  data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
 						<b>{{obChildCategory.name}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
 					</button>
+					{%endif%}
 				</h5>
 			</div>
 			<div id="collapse{{loop.index}}" class="collapse {{obChildCategory.slug == obCategory.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.parent.slug ? 'show'}} {{ loop.first == true ? 'show':''}}" aria-labelledby="heading{{key}}" data-parent="#accordion">

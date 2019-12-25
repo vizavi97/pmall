@@ -41,7 +41,14 @@ forceSecure = 0
 	<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet">
 	<link rel="shortcut icon" href="{{ this.theme.settings_favicon|media }}" type="image/x-icon">        
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152936058-1"></script>
+	<script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-152936058-1');
+	</script>
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
     <script src="{{ 'assets/js/js_todo/jquery.repeatable.js' | theme }}"></script>  
 </head>
@@ -78,15 +85,6 @@ forceSecure = 0
     {% scripts %}
     
     <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-152936058-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-152936058-1');
-</script>
-    
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript" >
    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};

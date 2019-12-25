@@ -21,7 +21,14 @@
 				{%endfor%}
 			</select>
 		</div>
-		
+<!--		<div class="col-md-3 col-sm-12">
+			<select class="browser-default custom-select categoriy-select mt-1" name="brand" >
+				<option value selected>{{'Магазины'|_}}</option>
+				{% for store in stores %}
+				<option value="{{store.slug}}">{{store.name}}</option>
+				{%endfor%}
+			</select>
+		</div>-->
 		{% if obProductPropertyList.isNotEmpty == true %}
 		    {% for obProeprty in obProductPropertyList %}
 		    

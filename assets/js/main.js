@@ -233,6 +233,14 @@ $(document).on('click','.price-changer',function(){
   let parent = $(this).parents('.categoriy-block').find('.text-danger ').html(val+' сум');
 });
 
-
-
-
+$(document).on('click','.reviews-open',function(){
+  let input = $(document).find('#reviews-open');
+  if (input.prop("checked")) {
+    $(document).find('.reviews-form-hidden').fadeIn();
+    $('.reviews-open').find('span').text('Скрыть форму');
+  }
+  else {
+    $(document).find('.reviews-form-hidden').fadeOut();
+    $('.reviews-open').find('span').text('Оставить отзыв');
+  }
+});

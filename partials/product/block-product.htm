@@ -35,6 +35,25 @@ tumblr = 0
 				{% endfor %}
 			</div>
      	</div>
+		<div class="reviews-container">
+			{% set obReviewList = obProduct.review %}
+			{% if obReviewList.isNotEmpty() == true %}
+			<h4>Отзывы</h4>
+			<ul class="reviews-items">
+				{% for obReview in obReviewList %}
+				<li class="reviews-item">
+					<div class="reviews-item-top">
+						<b>{{obReview.name}}</b>
+						<em>{{ obReview.created_at.format('d.m.Y') }}</em>
+					</div>
+					<div class="reviews-item-bottom">
+						<p>{{ obReview.comment }}</p>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</div>
 	</div>
 	<div class="col-md-3">
 	    <div class="card-border">
@@ -119,26 +138,36 @@ tumblr = 0
 			
 			{#update: {'product/block-product': '#reviewsTab'}        #}
 			{{ form_ajax('MakeReview::onCreate', {
-                    data: {product_id: product.id}
+                    data: {product_id: product.id},
               }) }}
-              
-				 <div class="rating-stars mb-3 float-left">
-	                 <input type="hidden" name="rating" value="5">
-	                 
-	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 1 ? 'text-warning'}}"></i></a>
-	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 2 ? 'text-warning'}}"></i></a>
-	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 3 ? 'text-warning'}}"></i></a>
-	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 4 ? 'text-warning'}}"></i></a>
-	                 <a href="#"><i class="fa fa-star {{product.rating|round >= 5 ? 'text-warning'}}"></i></a>
-	             </div>
-	             <div>
-	             	<input type="hidden" name="product_id" value="{{product.id}}">                     
-                     <button class="btn btn-danger bg-color hover p-0 ml-2" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
-                     <span class="badge badge-pill badge-light card-badge">{{product.rating}}</span>
-                 </div>
-	        
-	        {{ form_close() }}     
-             
+			<div class="reviews-form">
+					<div class="reviews-rating">
+						<div class="rating-stars mb-3 float-left">
+							<input type="hidden" name="rating" value="5">
+
+							<a href="#"><i class="fa fa-star {{product.rating|round >= 1 ? 'text-warning'}}"></i></a>
+							<a href="#"><i class="fa fa-star {{product.rating|round >= 2 ? 'text-warning'}}"></i></a>
+							<a href="#"><i class="fa fa-star {{product.rating|round >= 3 ? 'text-warning'}}"></i></a>
+							<a href="#"><i class="fa fa-star {{product.rating|round >= 4 ? 'text-warning'}}"></i></a>
+							<a href="#"><i class="fa fa-star {{product.rating|round >= 5 ? 'text-warning'}}"></i></a>
+						</div>
+						<input type="hidden" name="product_id" value="{{product.id}}">
+                        <span class="badge badge-pill badge-light card-badge">{{product.rating}}</span>
+                    </div>
+					<div class="reviews-open">
+						<input id="reviews-open" type="checkbox"/>
+						<label for="reviews-open">
+							<span>Оставить отзыв</span>
+						</label>
+					</div>
+					<div class="reviews-form-hidden">
+						<input type="text" name="name" placeholder="Имя..." required minlength="4"/>
+						<input type="email" name="email" placeholder="email--" required/>
+						<textarea name="comment" cols="30" rows="10" placeholder="Ваши впечатления" minlength="10"></textarea>
+						<button class="btn btn-danger bg-color hover p-0 ml-2" type="submit"><span>Отправить</span><i class="fa fa-check" aria-hidden="true"></i></button>
+					</div>
+			</div>
+	        {{ form_close() }}
 	    {% endif %}
 	    <div style="clear: both;"></div>
 	   	<div class="card-info-block">

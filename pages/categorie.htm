@@ -51,8 +51,19 @@ sorting = "no"
 [BrandList]
 
 [CategoryList]
+
+[StorePage]
+page = "{{ :slug }}"
 ==
 <?php
+
+use Shohabbos\Stores\Models\Store;
+
+function onStart() {
+	$stores = Store::get();
+	$this['stores'] = $stores;
+}
+
 function onInit()
 {
     //Get category object
@@ -77,6 +88,7 @@ function onInit()
     $obBrandList = $this->BrandList->make()->sort()->active()->category($obCategory->id);
 
     $bSaleFilter = (bool) input('sale');
+
 
     //Get filter by brand from request
     $arFilterBrandList = explode('|', input('brand'));

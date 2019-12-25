@@ -42,6 +42,8 @@ function onStart(){
 	$productId = $this->ProductPage->get();
 	$obProduct = ProductModel::where('id', $productId->id)->first();
 	$this['productStore'] = $obProduct->store;
+	$reviews = Review::get();
+	$this['reviews'] = $reviews;
 }
 function onPropertyValue() {
 	$this['property'] = Input::only('property');
@@ -69,7 +71,7 @@ function onPropertyValue() {
 	</section>
 	<section>
 		<div class="container">
-			{% set obProductList = ProductList.make().sort('new').active().take(11)%}
+			{% set obProductList = ProductList.make().sort('new').active().take(7)%}
 			
 			{% partial 'product/section-recomended' obProductList=obProductList %}
 			
