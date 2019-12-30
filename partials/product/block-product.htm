@@ -39,7 +39,7 @@ tumblr = 0
 			{% set obReviewList = obProduct.review %}
 			{% if obReviewList.isNotEmpty() == true %}
 			<h4>Отзывы</h4>
-			<ul class="reviews-items">
+			<ul class="reviews-items" id="reviews-items">
 				{% for obReview in obReviewList %}
 				<li class="reviews-item">
 					<div class="reviews-item-top">
@@ -139,7 +139,8 @@ tumblr = 0
 			{#update: {'product/block-product': '#reviewsTab'}        #}
 			{{ form_ajax('MakeReview::onCreate', {
                     data: {product_id: product.id},
-              }) }}
+			})
+		}}
 			<div class="reviews-form">
 					<div class="reviews-rating">
 						<div class="rating-stars mb-3 float-left">
