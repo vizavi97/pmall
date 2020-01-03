@@ -17,7 +17,7 @@
 			<select class="browser-default custom-select categoriy-select mt-1" name="brand" >
 				<option value selected>{{'Бренд'|_}}</option>
 				{% for obBrand in obBrandList %}
-					<option value="{{obBrand.slug}}">{{obBrand.name}}</option>
+					<option value="{{obBrand.slug}}">{{obBrand.name|_}}</option>
 				{%endfor%}
 			</select>
 		</div>
@@ -41,10 +41,10 @@
 		        	{% if obPropertyValueList.isNotEmpty() %}
 						<div class="col-md-3 col-sm-12">
 							<select class="browser-default custom-select categoriy-select mt-1"  name="property[{{obProeprty.id}}]">
-								<option value selected>{{obProeprty.name}}</option>
+								<option value selected>{{obProeprty.name|_}}</option>
 								
 								{% for obValue in obPropertyValueList %}
-									<option value="{{ obValue.slug }}">{{ obValue.value }}</option>  
+									<option value="{{ obValue.slug }}">{{ obValue.value|_ }}</option>
 								{% endfor %}  
 								
 							</select>

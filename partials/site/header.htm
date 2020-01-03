@@ -46,9 +46,10 @@ function onStart() {
 					<div class="languages d-flex">
 						<ul class="navbar-nav mobil-ul-menu">
 							
-							{% for code, name in locales %}
+							{% for code, name in locales|reverse %}
 					            <li class="nav-item">
-					            	<a class="nav-link {{ code == activeLocale ? 'text-danger' }}" value="{{ code }}" href="{{''|app}}{{ '/' ~ code ~ localeLinks[code] }}">{{ code }}</a>
+					            	<a class="nav-link {{ code == activeLocale ? 'text-danger' }}" value="{{ code }}" href="#" data-request="onSwitchLocale"
+						               data-request-data="locale: '{{ code }}'">{{ code }}</a>
 								</li>
 					        {% endfor %}
 					        
@@ -124,7 +125,7 @@ function onStart() {
 							
 						{% for obCategory in obCategoryList %}	
 							<li class="nav-item main-activ-link">
-								<a class="nav-link text-dark {{ parentCategory == obCategory.slug ? 'active'}} {{ this.page.url == '/store-list' and obCategory.slug == 'magaziny' ? 'active'}}" href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{  obCategory.name }}
+								<a class="nav-link text-dark {{ parentCategory == obCategory.slug ? 'active'}} {{ this.page.url == '/store-list' and obCategory.slug == 'magaziny' ? 'active'}}" href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{  obCategory.name|_ }}
 									<span class="sr-only">(current)</span>
 								</a>
 							</li>

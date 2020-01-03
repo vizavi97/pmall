@@ -36,7 +36,7 @@ function onStart() {
 								   id="dropdownMenuButton"
 								   aria-haspopup="true"
 								   aria-expanded="false">
-									<span>{{obChildCategory.name}}</span>
+									<span>{{obChildCategory.name|_}}</span>
 								</a>
 								<ul class="dropdown-menu-brend transition3">
 									<li class="menu-leftSide">
@@ -44,7 +44,7 @@ function onStart() {
 											{% for children_id_list in obChildCategory.children %}
 											<li class="block-one">
 												<em class="add-collapse-block-bg mr-1"></em>
-												<a class="add-color text-overflow" href="{{'categorie' | page({category: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name}}</b></a>
+												<a class="add-color text-overflow" href="{{'categorie' | page({category: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name|_}}</b></a>
 											</li>
 											{% endfor %}
 										</ul>
@@ -55,7 +55,7 @@ function onStart() {
 											<a class="add-color"  href="{{obChildCategory.preview_image.description}}">
 												<img class="card-img-top" src="{{obChildCategory.preview_image.getThumb(500, 500, {mode: 'crop'})}}" alt="menu-banner">
 											</a>
-											<p>{{obChildCategory.preview_image.title}}</p>
+											<p>{{obChildCategory.preview_image.title|_}}</p>
 										</div>
 										{%endif%}
 									</li>
@@ -72,7 +72,7 @@ function onStart() {
 							   id="dropdownMenuButton"
 							   aria-haspopup="true"
 							   aria-expanded="false">
-								<span>{{obChildCategory.name}}</span>
+								<span>{{obChildCategory.name|_}}</span>
 							</a>
 										<ul class="dropdown-menu-brend transition3">
 								            <li class="menu-leftSide">
@@ -80,7 +80,7 @@ function onStart() {
 										{% for children_id_list in obChildCategory.children %}
 													<li class="block-one">
 														<em class="add-collapse-block-bg mr-1"></em>
-														<a class="add-color text-overflow" href="{{'categorie' | page({parent: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name}}</b></a>
+														<a class="add-color text-overflow" href="{{'categorie' | page({parent: obCategory.slug, slug: children_id_list.slug})}}"><b>{{children_id_list.name|_}}</b></a>
 													</li>
 										{% endfor %}
 												</ul>

@@ -10,7 +10,13 @@
 	<div class="order-item">
 		<input id="order-{{ order.order_number }}" type="checkbox" name="order"/>
 		<label class="order-item-button" for="order-{{ order.order_number }}">
+			<div class="order-item-headlines">
 			<b>Статус заказа: {{order.status.name}}</b> <b>Номер заказа: "{{ order.order_number }}"</b>
+			</div>
+			{%if order.status.code == 'confirmed' %}
+			<div class="order-item-pay">
+				<a href="https://pmall.uz/pay/{{order.id}}" target="_blank">Оплатить</a></div>
+			{%endif%}
 		</label>
 		<div class="order-item-inner">
 			<ul class="order-item-inner-about">

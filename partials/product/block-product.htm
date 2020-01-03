@@ -205,6 +205,25 @@ tumblr = 0
 			</div>
 			<div>{{'Перейти в магазин'|_}} &nbsp;&nbsp;<a href="{{'store/index'|page({slug: productStore.slug})}}"> {{productStore.name}}</a></div>
 	    </div>
+		<div class="reviews-container mobile">
+			{% set obReviewList = obProduct.review %}
+			{% if obReviewList.isNotEmpty() == true %}
+			<h4>Отзывы</h4>
+			<ul class="reviews-items" id="reviews-items">
+				{% for obReview in obReviewList %}
+				<li class="reviews-item">
+					<div class="reviews-item-top">
+						<b>{{obReview.name}}</b>
+						<em>{{ obReview.created_at.format('d.m.Y') }}</em>
+					</div>
+					<div class="reviews-item-bottom">
+						<p>{{ obReview.comment }}</p>
+					</div>
+				</li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+		</div>
 	</div>
 
 </div>
