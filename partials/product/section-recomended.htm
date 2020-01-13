@@ -1,7 +1,7 @@
 [viewBag]
 ==
-<div class="row d-block d-sm-flex">
-	<div class="col-md-3 p-2">
+<div class="row d-sm-flex">
+	<div class="col-md-3 col-12 p-2">
 		<div class="bg-white p-3" style="height: 100%">
 			<img class="py-5" src="http://primus-mall.itmaker.uz/themes/primusmall/assets/img/logocopy.png" alt="">
 			<h5 class="text-danger text-uppercase font-weight-bold py-3">{{'Вам могут понравиться'|_}}</h5>
@@ -13,7 +13,7 @@
 	{% set productPrice = obProduct.offer.active.sort('new') %}
 	{% set price = (productPrice.count) ? productPrice.first : null %}
 	{% set obReviewList = obProduct.review %}
-		<div class="col-md-3 p-2"small basket-color-text>
+		<div class="col-md-3 col-6 col-xs-6 p-2 small basket-color-text">
 			<div class="card-main bg-white px-3">
 				<a href="{{obProduct.getPageUrl()}}"><p class="py-3 text-dark text-overflow">{{obProduct.name}}</p></a>
 				<div class="">
