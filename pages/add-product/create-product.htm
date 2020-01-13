@@ -154,15 +154,16 @@ function onProperty(){
 									</div>
 								</div>
 							</div>
-							<h5 class="py-5"><b>{{'Добавляем фото'|_}}</b></h5>
+							<h5 class="py-2"><b>{{'Добавляем фото'|_}}</b></h5>
 							<div class="add-container-image row repeatable-image">
+								<p class="pl-3">При добавлении фото, размер загружаемой картинки не должен превышать 1mb (рекомендованный формат png, jpg)</p>
 								<div class="col-md-4">
 									{% if obStore.logo.path  %}
-									<label class="file-photo" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
+									<label class="file-photo" onchange="imgSize(this)" style="background-image: url({{obStore.logo.path}});background-position: center center;background-size: cover;background-repeat: no-repeat;">
 										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% else %}
-									<label class="file-photo" style="background-image: url({{'assets/img/add2.png' | theme }});background-position: center center;background-size: contain;background-repeat: no-repeat;">
+									<label class="file-photo" onchange="imgSize(this)" style="background-image: url({{'assets/img/add2.png' | theme }});background-position: center center;background-size: contain;background-repeat: no-repeat;">
 										<input type="file" name="preview_image" accept="image/*" onchange="readURL(this);">
 									</label>
 									{% endif %}

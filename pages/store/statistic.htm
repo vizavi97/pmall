@@ -1,0 +1,199 @@
+title = "Statistic"
+url = "/statistic/:slug"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[session]
+security = "user"
+redirect = "main"
+
+[StorePage]
+page = "{{ :slug }}"
+==
+<?php
+function onStart() {
+	$this['storeSlug'] = $this->param('slug');
+}
+?>
+==
+{% set obStore = StorePage.get() %}
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+
+					{% partial 'cabinet/side-nav'  page='customer'%}
+
+				</div>
+				<div class="col-md-9">
+					<div class="statistic">
+						<ul class="statistic-items">
+							<li class="statistic-item">
+								<input type="checkbox" id="statisticMonth"/>
+								<label for="statisticMonth">
+									<div class="statistic-headline">
+										<h5>Статистика за месяц</h5>
+									</div>
+								</label>
+								<div class="statistic-content">
+									<ul class="statistic-circles">
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+											<b>Чеков</b>
+										</li>
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+											<b>Продаж</b>
+										</li>
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+											<b>Кол-во просмотров страниц</b>
+										</li>
+									</ul>
+									<div class="statistic-check">
+										<div class="statistic-check-selling">
+											<em>Продажа</em>
+											<p><strong>100 000</strong> <span> Сум</span></p>
+										</div>
+										<div class="statistic-check-revenue">
+											<em>Скидка</em>
+											<p><strong>100 000</strong> <span> Сум</span></p>
+										</div>
+										<div class="statistic-check-commission">
+											<em>Комиссия</em>
+											<p><storng>100 000</storng><span> Сум</span></p>
+										</div>
+										<div class="statistic-check-total">
+											<em>Итого</em>
+											<p><strong>100 000</strong><span> Сум</span></p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="statistic-item">
+								<input type="checkbox" id="statisticHalfYear"/>
+								<label for="statisticHalfYear">
+									<div class="statistic-headline">
+										<h5>Статистика за полугодие</h5>
+									</div>
+								</label>
+								<div class="statistic-content">
+									<ul class="statistic-circles">
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+											<b>Чеков</b>
+										</li>
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+											<b>Продаж</b>
+										</li>
+										<li class="statistic-circle col-md-4 col-12">
+											<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+											<b>Кол-во просмотров страниц</b>
+										</li>
+									</ul>
+									<div class="statistic-check">
+										<div class="statistic-check-selling">
+											<em>Продажа</em>
+											<p><strong>100 000</strong> <span> Сум</span></p>
+										</div>
+										<div class="statistic-check-revenue">
+											<em>Скидка</em>
+											<p><strong>100 000</strong> <span> Сум</span></p>
+										</div>
+										<div class="statistic-check-commission">
+											<em>Комиссия</em>
+											<p><storng>100 000</storng><span> Сум</span></p>
+										</div>
+										<div class="statistic-check-total">
+											<em>Итого</em>
+											<p><strong>100 000</strong><span> Сум</span></p>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="statistic-item">
+								<input type="checkbox" id="statisticYear"/>
+								<label for="statisticYear">
+									<div class="statistic-headline">
+										<h5>Статистика за год</h5>
+									</div>
+								</label>
+								<div class="statistic-content flex-column justify-content-center">
+
+									<div class="statistic-content-top d-flex ">
+										<ul class="statistic-circles">
+											<li class="statistic-circle col-md-4 col-12">
+												<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+												<b>Чеков</b>
+											</li>
+											<li class="statistic-circle col-md-4 col-12">
+												<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+												<b>Продаж</b>
+											</li>
+											<li class="statistic-circle col-md-4 col-12">
+												<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+												<b>Кол-во просмотров страниц</b>
+											</li>
+										</ul>
+										<div class="statistic-check">
+											<div class="statistic-check-selling">
+												<em>Продажа</em>
+												<p><strong>100 000</strong> <span> Сум</span></p>
+											</div>
+											<div class="statistic-check-revenue">
+												<em>Скидка</em>
+												<p><strong>100 000</strong> <span> Сум</span></p>
+											</div>
+											<div class="statistic-check-commission">
+												<em>Комиссия</em>
+												<p><storng>100 000</storng><span> Сум</span></p>
+											</div>
+											<div class="statistic-check-total">
+												<em>Итого</em>
+												<p><strong>100 000</strong><span> Сум</span></p>
+											</div>
+										</div>
+									</div>
+									<div class="statistic-content-bottom d-flex flex-row justify-content-center align-items-center w-100">
+										<div id="stackedAreaChart"></div>
+										<script>
+                                          var chart = bb.generate({
+                                            data: {
+                                              columns: [
+                                                ["data1", 300, 350, 300, 0, 0, 120],
+                                                ["data2", 130, 100, 140, 200, 150, 50]
+                                              ],
+                                              types: {
+                                                data1: "area-spline",
+                                                data2: "area-spline"
+                                              },
+                                              groups: [
+                                                [
+                                                  "data1",
+                                                  "data2"
+                                                ]
+                                              ]
+                                            },
+                                            bindto: "#stackedAreaChart"
+                                          });
+										</script>
+									</div>
+								</div>
+							</li>
+
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</div>
+{%put scripts%}
+<script src="{{ 'assets/js/jquery.knob.min.js' | theme }}"></script>
+{%endput%}

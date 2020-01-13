@@ -244,3 +244,33 @@ $(document).on('click','.reviews-open',function(){
     $('.reviews-open').find('span').text('Оставить отзыв');
   }
 });
+
+
+
+
+/*$Knob for statstic page*/
+$(function() {
+  $(".checks").knob({
+    'width': 100,
+    'height': 100,
+    'min':0,
+    'max':50,
+  });
+});
+$(function() {
+  $(".sell").knob({
+    'width': 150,
+    'height': 150,
+    'min':0,
+    'max':50
+  });
+});
+$(function() {
+  $(".views").knob({
+    'width': 100,
+    'height': 150,
+    'min':0,
+    'max':50
+  });
+});
+/*End*/
