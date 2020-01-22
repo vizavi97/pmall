@@ -13,19 +13,21 @@
 			<div class="card-header" id="heading{{loop.index}}">
 				<h5 class="mb-0">
 					{%if obChildCategory.name == 'Новинки'%}
-					<b class="side-menu-text"><a class="text-dark" href="{{'categorie' | page({category: obCategory.slug, slug: obChildCategory.slug})}}">{{obChildCategory.name|_}}</a></b><span class="basket-color-text pl-3 " style="font-size: 1rem;">{{obChildCategory.product_count}}</span>
+					<b class="side-menu-text"><a class="text-dark" href="{{'categorie' | page({category: obCategory.slug, slug: obChildCategory.slug})}}">{{obChildCategory.name}}</a></b><span class="basket-color-text pl-3 " style="font-size: 1rem;">{{obChildCategory.product_count}}</span>
 					{%else%}
+					
 					<button class="btn btn-link text-dark" style="text-align: left"  data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
-						<b>{{obChildCategory.name|_}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
+						<b>{{obChildCategory.name}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
 					</button>
 					{%endif%}
 				</h5>
 			</div>
+			
 			<div id="collapse{{loop.index}}" class="collapse {{obChildCategory.slug == obCategory.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.slug ? 'show'}} {{obChildCategory.slug == obCategory.parent.parent.slug ? 'show'}} {{ loop.first == true ? 'show':''}}" aria-labelledby="heading{{key}}" data-parent="#accordion">
 
 				{% for obChildreen in obChildCategory.children %}
 				<div class="btn-kategorie">
-					<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name|_}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
+					<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
 					</a>
 				</div>
 
@@ -33,7 +35,7 @@
 					<ul class="mx-padding">
 						{% for obChild in obChildreen.children %}
 						<li class="p-0">
-							<a class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}">{{obChild.name|_}}<span class="basket-color-text"> {{obChild.product_count}}</span>
+							<a class="text-dark small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}">{{obChild.name}}<span class="basket-color-text"> {{obChild.product_count}}</span>
 							</a>
 						</li>
 						{% endfor %}
@@ -73,7 +75,7 @@
 	<!-- Navbar links -->
 	<div class="collapse navbar-collapse" id="collapsibleNavbarCategory">
 
-		<P class="text-white"><b>{{obCategory.name|_}}</b></P>
+		<P class="text-white"><b>{{obCategory.name}}</b></P>
 		<div id="">
 
 			{% for obChildCategory in obCategoryParent.children %}
@@ -81,7 +83,7 @@
 			    	<div class="card-header" id="heading{{loop.index}}">
 				      <h5 class="mb-0">
 				        <button class="btn btn-link text-dark" data-toggle="collapse" data-target="#collapse{{loop.index}}" aria-expanded="false" aria-controls="collapse{{loop.index}}">
-				           <b class="text-white">{{obChildCategory.name|_}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
+				           <b class="text-white">{{obChildCategory.name}}</b><span class="basket-color-text pl-3">{{obChildCategory.product_count}}</span>
 				        </button>
 				      </h5>
 			    	</div>
@@ -89,7 +91,7 @@
 
 						{% for obChildreen in obChildCategory.children %}
 							<div class="btn-kategorie">
-								<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name|_}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
+								<a onclick="$('.accordion-{{loop.index}}').toggleClass('d-block');" class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChildreen.slug})}}">{{obChildreen.name}}<span class="basket-color-text"> {{obChildreen.product_count}}</span>
 								</a>
 							</div>
 
@@ -97,7 +99,7 @@
 							  	<ul class="mx-padding">
 									{% for obChild in obChildreen.children %}
 										<li class="p-0">
-											<a class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}">{{obChild.name|_}}<span class="basket-color-text"> {{obChild.product_count}}</span>
+											<a class="text-white small" href="{{'categorie' | page({category: obCategory.slug, slug: obChild.slug})}}"> {{obChild.name}} <span class="basket-color-text"> {{obChild.product_count}} </span>
 											</a>
 										</li>
 									{% endfor %}

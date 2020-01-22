@@ -26,25 +26,49 @@ redirect_on = 1
 slug = "{{ :category }}"
 slug_required = 0
 smart_url_check = 0
+has_wildcard = 0
+skip_error = 0
 
 [CategoryPage ParentCategoryPage]
 slug = "{{ :parent }}"
 slug_required = 1
 smart_url_check = 0
+has_wildcard = 0
+skip_error = 0
 
 [ProductPage]
 slug = "{{ :slug }}"
 slug_required = 1
 smart_url_check = 0
+skip_error = 0
 ==
 <?php
 use Lovata\Shopaholic\Models\Product as ProductModel;
 
+use Shohabbos\Stores\Models\Statistic;
+
 function onStart(){
 	$productId = $this->ProductPage->get();
-	$obProduct = ProductModel::where('id', $productId->id)->first();
-	$this['productStore'] = $obProduct->store;
+	
+	if ($productId) {
+		$obProduct = ProductModel::where('id', $productId->id)->first();
+		
+		if ($obProduct->store) {
+			$obProduct->store->stats()->create([
+				'type' => 'product_view'
+			]);
+		}
+		
+		
+	} else {
+		return \Redirect::to('404');
+	}
+	
+	if ($obProduct) {
+		$this['productStore'] = $obProduct->store;	
+	}
 }
+
 function onPropertyValue() {
 	$this['property'] = Input::only('property');
 }
@@ -71,7 +95,7 @@ function onPropertyValue() {
 	</section>
 	<section>
 		<div class="container">
-			{% set obProductList = ProductList.make().sort('new').active().take(7)%}
+			{% set obProductList = ProductList.make().category(obProduct.category.id).sort('new').active().take(7)%}
 			
 			{% partial 'product/section-recomended' obProductList=obProductList %}
 			

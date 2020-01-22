@@ -13,6 +13,9 @@ redirect = "main"
 
 [StorePage]
 page = "{{ :slug }}"
+
+[StoreStatistics]
+page = "{{ :slug }}"
 ==
 <?php
 function onStart() {
@@ -43,15 +46,15 @@ function onStart() {
 								<div class="statistic-content">
 									<ul class="statistic-circles">
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+											<input type="text" value="{{monthAgoSalesCount}}" class="checksMonth" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
 											<b>Чеков</b>
 										</li>
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+											<input type="text" value="{{monthAgoStoreOrders}}" class="sellMonth" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
 											<b>Продаж</b>
 										</li>
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+											<input type="text" value="{{allMonthViews}}" class="viewsMonth" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
 											<b>Кол-во просмотров страниц</b>
 										</li>
 									</ul>
@@ -85,15 +88,15 @@ function onStart() {
 								<div class="statistic-content">
 									<ul class="statistic-circles">
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+											<input type="text" value="{{halfYearSalesCount}}" class="checksHalfYear" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
 											<b>Чеков</b>
 										</li>
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+											<input type="text" value="{{halfYearStoreOrders}}" class="sellHalfYear" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
 											<b>Продаж</b>
 										</li>
 										<li class="statistic-circle col-md-4 col-12">
-											<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+											<input type="text" value="{{allHalfYearViews}}" class="viewsHalfYear" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
 											<b>Кол-во просмотров страниц</b>
 										</li>
 									</ul>
@@ -129,15 +132,15 @@ function onStart() {
 									<div class="statistic-content-top d-flex ">
 										<ul class="statistic-circles">
 											<li class="statistic-circle col-md-4 col-12">
-												<input type="text" value="25" class="checks" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
+												<input type="text" value="{{yearSalesCount}}" class="checksYear" data-readOnly="true"  data-linecap="round" data-thickness="0.05" data-fgColor="#ffa001">
 												<b>Чеков</b>
 											</li>
 											<li class="statistic-circle col-md-4 col-12">
-												<input type="text" value="25" class="sell" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
+												<input type="text" value="{{yearStoreOrders}}" class="sellYear" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#4ec77d">
 												<b>Продаж</b>
 											</li>
 											<li class="statistic-circle col-md-4 col-12">
-												<input type="text" value="25" class="views" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
+												<input type="text" value="{{allYearViews}}" class="viewsYear" data-readOnly="true" data-linecap="round" data-thickness="0.05" data-fgColor="#66c2d1">
 												<b>Кол-во просмотров страниц</b>
 											</li>
 										</ul>
@@ -166,17 +169,14 @@ function onStart() {
                                           var chart = bb.generate({
                                             data: {
                                               columns: [
-                                                ["data1", 300, 350, 300, 0, 0, 120],
-                                                ["data2", 130, 100, 140, 200, 150, 50]
+                                                ["Продаж на сумму", 150000, 2000000, 30000000, 0, 3000000, 120, 0, 0, 0, 0,  0, 0, 0],
                                               ],
                                               types: {
                                                 data1: "area-spline",
-                                                data2: "area-spline"
                                               },
                                               groups: [
                                                 [
-                                                  "data1",
-                                                  "data2"
+                                                  "Продаж на",
                                                 ]
                                               ]
                                             },
@@ -197,3 +197,4 @@ function onStart() {
 {%put scripts%}
 <script src="{{ 'assets/js/jquery.knob.min.js' | theme }}"></script>
 {%endput%}
+

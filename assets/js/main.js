@@ -249,8 +249,12 @@ $(document).on('click','.reviews-open',function(){
 
 
 /*$Knob for statstic page*/
+
+
+
+/*Month*/
 $(function() {
-  $(".checks").knob({
+  $(".checksMonth").knob({
     'width': 100,
     'height': 100,
     'min':0,
@@ -258,19 +262,70 @@ $(function() {
   });
 });
 $(function() {
-  $(".sell").knob({
+  $(".sellMonth").knob({
     'width': 150,
     'height': 150,
     'min':0,
-    'max':50
+    'max':50000000
   });
 });
 $(function() {
-  $(".views").knob({
+  $(".viewsMonth").knob({
     'width': 100,
     'height': 150,
     'min':0,
     'max':50
   });
 });
+/*HalfYear*/
+$(function() {
+  $(".checksHalfYear").knob({
+    'width': 100,
+    'height': 100,
+    'min':0,
+    'max':50,
+  });
+});
+$(function() {
+  $(".sellHalfYear").knob({
+    'width': 150,
+    'height': 150,
+    'min':0,
+    'max':50000000
+  });
+});
+$(function() {
+  $(".viewsHalfYear").knob({
+    'width': 100,
+    'height': 150,
+    'min':0,
+    'max':50
+  });
+});
+/*Year*/
+$(function() {
+  $(".checksYear").knob({
+    'width': 100,
+    'height': 100,
+    'min':0,
+    'max':50,
+  });
+});
+$(function() {
+  $(".sellYear").knob({
+    'width': 150,
+    'height': 150,
+    'min':0,
+    'max':50000000
+  });
+});
+$(function() {
+  $(".viewsYear").knob({
+    'width': 100,
+    'height': 150,
+    'min':0,
+    'max':50
+  });
+});
+
 /*End*/
