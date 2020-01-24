@@ -75,6 +75,21 @@
 			</a>
 		</div>
 	</div>
+<div class="main-right-block px-3">
+	<div class="custom-block border border-top-0 border-left-0 border-right-0">
+		<a class='sidenav-link' href="{{'store/statistic'|page({slug: user.store.slug})}}">
+			<div class="sidenav-item">
+				{% if page == "/statistic" %}
+				<img src="{{ 'assets/img/card.svg' | theme }}" alt="">
+				{% endif %}
+				{% if page != "/statistic" %}
+				<img src="{{ 'assets/img/card.svg' | theme }}" alt="">
+				{% endif %}
+				<span class=" {{ page == "statistic" ? "text-danger" }}">{{'Статистика'|_}}</span>
+			</div>
+		</a>
+	</div>
+</div>
 	<div class="main-right-block px-3">
 		<div class="custom-block border border-top-0 border-left-0 border-right-0">
 			<a class='sidenav-link' href="{{'add-product/create-product'|page}}">

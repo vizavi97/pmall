@@ -129,7 +129,12 @@ function onStart() {
 									<span class="sr-only">(current)</span>
 								</a>
 							</li>
-						{% endfor %}	
+						{% endfor %}
+							<li class="nav-item main-activ-link">
+								<a class="nav-link text-dark {{ this.page.url == '/store-list' ? 'active'}}" href="/store-list">{{  "Магазины"|_ }}
+									<span class="sr-only">(current)</span>
+								</a>
+							</li>
 						
 						</ul>
 					</div>
