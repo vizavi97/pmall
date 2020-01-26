@@ -4135,3 +4135,14 @@ input[type="checkbox"]:checked + label + .statistic-content {
         flex-direction: column;
     }
 }
+.loyalty {
+    padding-bottom: 30px;
+}
+.loyalty-voucher-img img {
+    max-width: 100%;
+    height: auto;
+}
+.loyalty-voucher-text {
+    text-align: center;
+    justify-content: center;
+}

@@ -222,7 +222,10 @@ function onStart() {
 						{{ not parentCategory and this.page.url == '/store-list' and obCategory.slug == 'magaziny' ? 'active'}} " 
 						href="{{ obCategory.slug == 'magaziny' ? 'store/store-list'|page : 'categorie' | page({parent: obCategory.slug, slug: ''}) }}">{{  obCategory.name }}</a>
 				
-				{% endfor %}	
+				{% endfor %}
+
+				<a class="nav-link text-dark {{ this.page.url == '/store-list' ? 'active'}}" href="/store-list">{{"Магазины"|_}}</a>
+
 			</div>
 		</div>
 	</div>

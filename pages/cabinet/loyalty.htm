@@ -1,0 +1,55 @@
+title = "loyalty"
+url = "/loyalty"
+layout = "main"
+is_hidden = 0
+child_of = "mey_no_parent"
+hide_crumb = 0
+remove_crumb_trail = 0
+crumb_disabled = 0
+
+[session]
+security = "all"
+==
+<div class="wrapper">
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					{% partial 'cabinet/side-nav'  page='loyality'%}
+				</div>
+				<div class="col-md-9">	
+					<h2 class="pb-3"><b>{{'Мои предложения и бонусы'|_}}</b></h2>
+					<div class="row">
+						<div class="col-md-12" id="cabinet-wishlist">
+							{{dump(user.spented_balance)}}
+							<div class="loyalty row">
+								<div class="loyalty-voucher col">
+									<div class="loyalty-voucher-img">
+										<img  src="{{ 'assets/img/flower.jpg' | theme }}" alt="img"/>
+									</div>
+									<div class="loyalty-voucher-text">
+										<p>Бонус</p>
+										<b>Ваш БОНУС ждет вас</b>
+										<div class="loyalty-voucher-number">
+											<b></b>
+										</div>
+									</div>
+								</div>
+								<div class="loyalty-info col text-right">
+									<p>Каждый зарегестрированный становиться участником программ лояльности PRIMUS MALL
+										За каждые 900 000 сум (покупки совершенные за весь период) мы вам дарим 30 000 сум! Бонусы отображаются через 30 дней.
+										Получить промо код на сумму 30 000 сум вы можете по почте. Указанный у вас в аккаунте, либо на этой странице
+									</p>
+									<br/> <br/>
+									<p>Ваше участие будет обновляться ежегодно.
+										Набранные баллы обнуляются при каждом обновлении
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>	
+		</div>	
+	</section>
+</div>
