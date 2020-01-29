@@ -1,4 +1,4 @@
-title = "loyalty"
+title = "Loyalty"
 url = "/loyalty"
 layout = "main"
 is_hidden = 0
@@ -9,31 +9,47 @@ crumb_disabled = 0
 
 [session]
 security = "all"
+
+[PromoBlockList]
+sorting = "default"
+
+[UserCoupons]
+==
+<?php
+function onStart() {
+	$user = Auth::getUser();
+}
+?>
 ==
 <div class="wrapper">
 	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3">
-					{% partial 'cabinet/side-nav'  page='loyality'%}
+					{% partial 'cabinet/side-nav'  page='loyalty'%}
 				</div>
+				
 				<div class="col-md-9">	
 					<h2 class="pb-3"><b>{{'Мои предложения и бонусы'|_}}</b></h2>
 					<div class="row">
 						<div class="col-md-12" id="cabinet-wishlist">
-							{{dump(user.spented_balance)}}
 							<div class="loyalty row">
 								<div class="loyalty-voucher col">
 									<div class="loyalty-voucher-img">
-										<img  src="{{ 'assets/img/flower.jpg' | theme }}" alt="img"/>
+										<img  src="{{ 'assets/img/flower.png' | theme }}" alt="img"/>
 									</div>
+									
+									{% if user.spented_balance >= 900000 %}
 									<div class="loyalty-voucher-text">
 										<p>Бонус</p>
 										<b>Ваш БОНУС ждет вас</b>
+										{%for coupon in user.coupons %}
 										<div class="loyalty-voucher-number">
-											<b></b>
+											<b>{{coupon.code}}</b>
 										</div>
+										{%endfor%}
 									</div>
+									{%endif%}
 								</div>
 								<div class="loyalty-info col text-right">
 									<p>Каждый зарегестрированный становиться участником программ лояльности PRIMUS MALL
